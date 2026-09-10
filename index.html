@@ -31,6 +31,11 @@
   --trait:rgba(26,26,26,.12);
   --trait-fin:rgba(26,26,26,.07);
 
+  /* Regle des couleurs :
+     BLEU  = confiance et donnees. Taux, chiffres, liens, bouton principal,
+             et le titre du hero (il porte l'identite, pas une fonction).
+     VERT  = progression. Numeros d'etapes, economies, coches, filets de
+             section, survols. Signale que quelque chose avance pour le client. */
   --titre:"Archivo","Helvetica Neue",Arial,sans-serif;
   --texte:"Source Sans 3","Segoe UI",Roboto,Arial,sans-serif;
 
@@ -59,7 +64,7 @@ h1,h2,h3{
   margin:0;
   text-wrap:balance;
 }
-h1{font-size:clamp(2.4rem,6.2vw,4rem)}
+h1{font-size:clamp(2.2rem,5.4vw,3.5rem)}
 h2{font-size:clamp(1.85rem,4vw,2.7rem)}
 h3{font-size:1.09rem;font-weight:700;letter-spacing:-.01em;line-height:1.3}
 p{margin:0}
@@ -121,6 +126,16 @@ a{color:var(--bleu)}
   max-width:var(--large);margin:0 auto;
   flex-wrap:wrap;
 }
+.identite{display:flex;align-items:center;gap:15px}
+
+/* Les deux logos sont alignes sur la meme hauteur : c'est ainsi qu'on
+   equilibre des logos de proportions differentes. */
+.identite__logos{
+  display:flex;align-items:center;gap:11px;
+  padding-right:15px;border-right:1px solid var(--trait);
+}
+.identite__logos img{height:34px;width:auto;flex:none}
+
 .marque{
   font-family:var(--titre);font-weight:800;font-size:1.06rem;
   letter-spacing:-.02em;text-decoration:none;color:var(--encre);
@@ -130,37 +145,92 @@ a{color:var(--bleu)}
   display:block;font-family:var(--texte);font-weight:400;
   font-size:.76rem;letter-spacing:0;color:var(--gris);
 }
-.entete__nav{display:flex;gap:20px;margin-left:auto;align-items:center;flex-wrap:wrap}
-.entete__lien{
-  text-decoration:none;color:var(--encre);font-size:.95rem;
-  padding-bottom:2px;border-bottom:2px solid transparent;
+.entete__droite{
+  display:flex;align-items:center;gap:22px;margin-left:auto;
 }
-.entete__lien:hover{color:var(--bleu);border-bottom-color:var(--vert)}
-.entete__nav .bouton{padding:11px 20px;font-size:.94rem;color:var(--blanc)}
+.entete__nav .bouton,.entete__droite .bouton{
+  padding:11px 20px;font-size:.94rem;color:var(--blanc);
+}
 
-.entete__coord{
-  display:flex;gap:16px;align-items:center;flex-wrap:wrap;
-  padding-left:20px;border-left:1px solid var(--trait);
-}
+/* --- Coordonnees --- */
+.entete__coord{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
 .entete__coord a{
   display:inline-flex;align-items:center;gap:7px;
   text-decoration:none;color:var(--encre);font-size:.93rem;
-  font-variant-numeric:tabular-nums;
+  font-variant-numeric:tabular-nums;white-space:nowrap;
 }
 .entete__coord svg{flex:none;color:var(--vert)}
 .entete__coord a:hover{color:var(--bleu)}
+
+/* --- Menu deroulant --- */
+.menu{position:relative;flex:none}
+.menu summary{
+  list-style:none;cursor:pointer;
+  display:flex;align-items:center;gap:9px;
+  padding:11px 15px;border-radius:10px;
+  border:1px solid var(--trait);
+  font-family:var(--titre);font-weight:700;font-size:.92rem;
+  letter-spacing:-.01em;color:var(--encre);
+  transition:border-color .18s ease,background .18s ease;
+}
+.menu summary::-webkit-details-marker,
+.menu summary::marker{display:none;content:""}
+/* Neutralise le "+" herite du style de la foire aux questions */
+.menu summary::after{display:none;content:none}
+.menu summary:hover{border-color:var(--vert);background:var(--brume)}
+
+/* Icone : trois barres qui deviennent une croix a l'ouverture */
+.menu__barres{
+  position:relative;width:16px;height:11px;flex:none;
+}
+.menu__barres::before,
+.menu__barres::after{
+  content:"";position:absolute;left:0;width:100%;height:2px;
+  border-radius:2px;background:var(--encre);
+  transition:transform .2s ease,top .2s ease;
+}
+.menu__barres::before{top:0}
+.menu__barres::after{top:9px}
+.menu__barres{
+  background:
+    linear-gradient(var(--encre),var(--encre)) left 50%/100% 2px no-repeat;
+  transition:background-size .2s ease;
+}
+.menu[open] .menu__barres{background-size:0 2px}
+.menu[open] .menu__barres::before{top:5px;transform:rotate(45deg)}
+.menu[open] .menu__barres::after{top:5px;transform:rotate(-45deg)}
+
+.menu__panneau{
+  position:absolute;right:0;top:calc(100% + 10px);
+  min-width:232px;
+  display:flex;flex-direction:column;
+  padding:8px;
+  background:var(--blanc);
+  border:1px solid var(--trait);
+  border-radius:12px;
+  box-shadow:0 12px 32px rgba(26,26,26,.13);
+  z-index:60;
+}
+.menu__panneau a{
+  padding:11px 14px;border-radius:8px;
+  text-decoration:none;color:var(--encre);font-size:.96rem;
+  border-left:3px solid transparent;
+}
+.menu__panneau a:hover{
+  background:var(--brume);border-left-color:var(--vert);color:var(--bleu);
+}
 
 /* ---------- Hero ---------- */
 .hero{
   display:grid;
   grid-template-columns:1.06fr .94fr;
   align-items:stretch;
-  min-height:clamp(540px,68vh,700px);
+  min-height:clamp(430px,54vh,570px);
 }
 .hero__texte{
   background:var(--brume);
   display:flex;flex-direction:column;justify-content:center;
-  padding:76px clamp(28px,5vw,72px);
+  padding:52px clamp(28px,5vw,72px);
 }
 .hero__interieur{max-width:560px;margin-left:auto;width:100%}
 .hero h1 .tournant{color:var(--bleu);display:block}
@@ -185,8 +255,11 @@ a{color:var(--bleu)}
 .carte-perso__role{font-size:.9rem;color:var(--gris);line-height:1.4}
 
 .hero__portrait{position:relative;background:var(--brume);overflow:hidden}
+/* L'image est sortie du flux : sinon ses proportions (960x1220) imposaient
+   la hauteur de tout le hero, d'ou l'espace excessif au-dessus du texte. */
 .hero__portrait img{
-  width:100%;height:100%;object-fit:cover;object-position:50% 62%;
+  position:absolute;inset:0;
+  width:100%;height:100%;object-fit:cover;object-position:50% 55%;
 }
 
 /* ---------- Taux ---------- */
@@ -259,8 +332,25 @@ tr.vedette td{background:rgba(76,176,127,.075)}
   white-space:nowrap;
 }
 .taux__note{
-  margin-top:24px;max-width:52ch;font-size:1.02rem;color:rgba(26,26,26,.78);
+  margin-top:24px;padding-top:20px;
+  border-top:1px solid var(--trait);
+  display:flex;align-items:center;justify-content:space-between;
+  gap:24px;flex-wrap:wrap;
+  font-size:1.02rem;color:rgba(26,26,26,.78);
 }
+.taux__note a{
+  display:inline-flex;align-items:center;gap:9px;
+  flex:none;
+  font-family:var(--titre);font-weight:700;font-size:1.06rem;
+  letter-spacing:-.01em;color:var(--bleu);text-decoration:none;
+  padding:11px 20px;border-radius:10px;
+  background:var(--brume);
+  border-bottom:3px solid var(--vert);
+  font-variant-numeric:tabular-nums;
+  transition:background .18s ease;
+}
+.taux__note a:hover{background:#e3ebe6}
+.taux__note a svg{flex:none;color:var(--vert)}
 
 /* Filet de sécurité : widget officiel Dominion */
 .cadre-taux{
@@ -345,27 +435,47 @@ details p{padding:0 8px 23px 0;color:rgba(26,26,26,.78);max-width:60ch}
   padding:44px 0;font-size:.88rem;color:var(--gris);
   border-top:1px solid var(--trait-fin);
 }
-.pied__rang{display:flex;gap:26px;justify-content:space-between;flex-wrap:wrap}
+.pied__rang{display:flex;gap:26px;justify-content:space-between;flex-wrap:wrap;align-items:center}
+.pied__identite{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.pied__identite img{height:30px;width:auto;flex:none;opacity:.92}
+
+.pied__coord{
+  display:flex;align-items:center;gap:20px;flex-wrap:wrap;
+}
+.pied__coord a{
+  display:inline-flex;align-items:center;gap:8px;
+  color:var(--encre);text-decoration:none;font-size:.92rem;
+  font-variant-numeric:tabular-nums;
+}
+.pied__coord a svg{flex:none;color:var(--vert)}
+.pied__coord a:hover{color:var(--bleu)}
+.pied__zone{color:var(--gris)}
+
 .pied a{color:var(--gris)}
 
 /* ---------- Adaptations ---------- */
 @media (max-width:900px){
   .hero{grid-template-columns:1fr;min-height:0}
-  .hero__portrait{order:-1;height:min(56vh,420px)}
+  .hero__portrait{order:-1;height:min(42vh,320px)}
   .hero__portrait img{object-position:50% 66%}
   .hero__interieur{margin-left:0;max-width:none}
   .hero__texte{padding:52px 24px 60px}
   .approche,.questions{grid-template-columns:1fr}
   .bloc{padding:66px 0}
 }
+@media (max-width:760px){
+  .entete__droite{gap:12px}
+  .entete__coord a:last-child{display:none}
+  .entete__coord a{font-size:.9rem}
+  .menu__mot{display:none}
+  .menu summary{padding:10px 12px}
+  .entete__droite .bouton{
+    padding:10px 14px;font-size:.88rem;white-space:nowrap;
+  }
+  .menu__panneau{min-width:214px}
+}
 @media (max-width:600px){
   body{font-size:16px}
-  .entete__lien{display:none}
-  .entete__coord{
-    padding-left:0;border-left:none;gap:12px;order:-1;
-  }
-  .entete__coord a{font-size:.88rem}
-  .entete__coord a:last-child{display:none}
   .grille-taux th,.grille-taux td{padding-left:14px;padding-right:14px}
   .grille-taux th:first-child,.grille-taux td:first-child{padding-left:16px}
   .grille-taux th{font-size:.8rem;padding-top:13px;padding-bottom:13px}
@@ -383,6 +493,12 @@ details p{padding:0 8px 23px 0;color:rgba(26,26,26,.78);max-width:60ch}
     font-size:.7rem;
   }
   .etape{grid-template-columns:72px minmax(0,1fr);gap:14px;padding:24px 0}
+  .pied__rang{gap:20px}
+  .pied__coord{gap:12px;flex-direction:column;align-items:flex-start}
+  .identite__logos{gap:9px;padding-right:12px}
+  .identite__logos img{height:28px}
+  .identite{gap:12px}
+  .pied__identite img{height:26px}
   .etape__rang{font-size:2.9rem;letter-spacing:-.05em}
   .etape p{font-size:1.02rem}
 }
@@ -396,14 +512,18 @@ html{scroll-behavior:smooth}
 
 <header class="entete">
   <div class="entete__rang">
-    <a class="marque" href="#">Margot Marion
-      <span>Courtière hypothécaire stagiaire</span>
-    </a>
-    <nav class="entete__nav">
-      <a class="entete__lien" href="#taux">Taux</a>
-      <a class="entete__lien" href="#approche">Approche</a>
-      <a class="entete__lien" href="#methode">Méthode</a>
-      <a class="entete__lien" href="#questions">Questions</a>
+    <div class="identite">
+      <span class="identite__logos">
+        <img src="img/logo-xperto.png" alt="Xperto Équipe Héritage"
+             width="440" height="244">
+        <img src="img/logo-dominion.png" alt="Centres hypothécaires Dominion National"
+             width="300" height="205">
+      </span>
+      <a class="marque" href="#">Margot Marion
+        <span>Courtière hypothécaire stagiaire</span>
+      </a>
+    </div>
+    <div class="entete__droite">
       <span class="entete__coord">
         <a href="tel:+15142484361">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.9.36 1.8.7 2.65a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.43-1.27a2 2 0 0 1 2.11-.45c.85.34 1.75.57 2.65.7A2 2 0 0 1 22 16.92z"/></svg>
@@ -414,12 +534,28 @@ html{scroll-behavior:smooth}
           mmarion@xperto.ca
         </a>
       </span>
+
       <a class="bouton js-conversion" href="tel:+15142484361">Comparer mes options</a>
-    </nav>
+
+      <details class="menu">
+        <summary aria-label="Ouvrir le menu">
+          <span class="menu__barres" aria-hidden="true"></span>
+          <span class="menu__mot">Menu</span>
+        </summary>
+        <nav class="menu__panneau">
+          <a href="#taux">Les taux d'aujourd'hui</a>
+          <a href="#approche">Mon approche</a>
+          <a href="#methode">Ma méthode</a>
+          <a href="#questions">Foire aux questions</a>
+          <a href="#contact">Me joindre</a>
+        </nav>
+      </details>
+    </div>
   </div>
 </header>
 
 <main>
+
 
   <!-- ============ Hero ============ -->
   <section class="hero">
@@ -433,8 +569,8 @@ html{scroll-behavior:smooth}
           </div>
         </div>
 
-        <h1>Les hypothèques, ça vous semble compliqué&nbsp;?
-          <span class="tournant">Pas pour moi.</span>
+        <h1><span class="tournant">À vos côtés</span>
+          à chaque étape de votre projet
         </h1>
 
         <p class="hero__soutien">
@@ -501,8 +637,14 @@ html{scroll-behavior:smooth}
           height="375" width="100%" scrolling="no" loading="lazy"></iframe>
       </div>
 
-      <p class="taux__note">Votre taux réel dépend de votre situation. Un appel
-         de 15&nbsp;minutes suffit pour savoir ce à quoi vous avez droit.</p>
+      <p class="taux__note">
+        <span>Votre taux réel dépend de votre situation. Un appel de
+          15&nbsp;minutes suffit pour savoir ce à quoi vous avez droit.</span>
+        <a href="tel:+15142484361">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.9.36 1.8.7 2.65a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.43-1.27a2 2 0 0 1 2.11-.45c.85.34 1.75.57 2.65.7A2 2 0 0 1 22 16.92z"/></svg>
+          514-248-4361
+        </a>
+      </p>
     </div>
   </section>
 
@@ -585,9 +727,9 @@ html{scroll-behavior:smooth}
   <section class="bloc" id="questions">
     <div class="enveloppe questions">
       <div>
-        <h2>Vos questions, sans détour</h2>
+        <h2>La foire aux questions</h2>
         <p style="margin-top:14px;color:var(--gris);max-width:34ch">
-          Ce qu'il faut savoir avant même le premier appel.
+          Les réponses aux questions qu'on me pose le plus souvent.
         </p>
       </div>
 
@@ -598,7 +740,7 @@ html{scroll-behavior:smooth}
              l'institution financière une fois le prêt conclu.</p>
         </details>
         <details>
-          <summary>Pourquoi de meilleures conditions qu'une banque directement&nbsp;?</summary>
+          <summary>Pourquoi passer par une courtière plutôt que par ma banque directement&nbsp;?</summary>
           <p>Parce que l'équipe négocie des volumes avec plusieurs institutions.
              Ça donne accès à des conditions préférentielles qu'un client seul
              n'obtient pas en cognant à une seule porte.</p>
@@ -640,8 +782,25 @@ html{scroll-behavior:smooth}
 
 <footer class="pied">
   <div class="enveloppe pied__rang">
-    <div>Margot Marion, courtière hypothécaire stagiaire &middot; Xperto Héritage, Groupe Dominion Lending</div>
-    <div>Service offert partout au Québec</div>
+    <div class="pied__identite">
+      <img class="pied__xperto" src="img/logo-xperto.png"
+           alt="Xperto Équipe Héritage" width="440" height="244" loading="lazy">
+      <img class="pied__dominion" src="img/logo-dominion.png"
+           alt="Centres hypothécaires Dominion National" width="300" height="205" loading="lazy">
+      <span>Margot Marion, courtière hypothécaire stagiaire</span>
+    </div>
+
+    <div class="pied__coord">
+      <a href="tel:+15142484361">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.9.36 1.8.7 2.65a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.43-1.27a2 2 0 0 1 2.11-.45c.85.34 1.75.57 2.65.7A2 2 0 0 1 22 16.92z"/></svg>
+        514-248-4361
+      </a>
+      <a href="mailto:mmarion@xperto.ca">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+        mmarion@xperto.ca
+      </a>
+      <span class="pied__zone">Service offert partout au Québec</span>
+    </div>
   </div>
 </footer>
 
@@ -695,11 +854,16 @@ var LIEN_FORMULAIRE = "";
     return [];
   }
 
+  /* Cherche une variable en respectant l'ordre de preference des noms.
+     Important : l'API liste les variables anglaises avant les francaises,
+     donc il faut parcourir les noms demandes, pas le tableau. */
   function reglage(vars, noms) {
-    for (var i = 0; i < vars.length; i++) {
-      if (noms.indexOf(champ(vars[i], "Name", "Nom")) !== -1) {
-        var v = champ(vars[i], "Value", "Valeur");
-        if (v) return v;
+    for (var n = 0; n < noms.length; n++) {
+      for (var i = 0; i < vars.length; i++) {
+        if (champ(vars[i], "Name", "Nom") === noms[n]) {
+          var v = champ(vars[i], "Value", "Valeur");
+          if (v) return v;
+        }
       }
     }
     return null;
@@ -721,6 +885,19 @@ var LIEN_FORMULAIRE = "";
   function pourcent(v) {
     var n = chiffre(v);
     return n === null ? "\u2014" : n.toFixed(2).replace(".", ",") + " %";
+  }
+
+  /* Normalise les termes : "3 Ans" devient "3 ans", "1 Annee" devient "1 an".
+     Les majuscules faisaient croire a Chrome que "Ans" etait de l'anglais,
+     et il le traduisait automatiquement par "reponses". */
+  function terme(s) {
+    var t = lisible(s);
+    if (!t) return "";
+    t = t.replace(/Ann\u00e9es|Ann\u00e9e/g, "an");
+    t = t.replace(/Ans/g, "ans");
+    t = t.replace(/Mois/g, "mois");
+    t = t.replace(/^1 ans$/, "1 an");
+    return t;
   }
 
   function secours() {
@@ -771,7 +948,7 @@ var LIEN_FORMULAIRE = "";
 
       var c1 = document.createElement("td");
       c1.className = "cellule-terme";
-      c1.textContent = lisible(champ(l, "TermsFr", "Terms", "Term"));
+      c1.textContent = terme(champ(l, "TermsFr", "Terms", "Term"));
       if (l === meilleur) {
         var f = document.createElement("span");
         f.className = "fanion";
@@ -799,13 +976,27 @@ var LIEN_FORMULAIRE = "";
       corps.appendChild(tr);
     }
 
-    var conditions = reglage(vars, ["ConditionsFr", "Conditions"]);
-    var date = reglage(vars, ["ChangeDateFr", "ChangeDate"]);
+    /* Ne prendre que la version francaise des conditions. L'API renvoie
+       ConditionsFr vide, et la version anglaise ne va pas sur une page
+       francaise : on utilise alors la traduction officielle equivalente. */
+    var conditions = reglage(vars, ["ConditionsFr"]);
     var texte = conditions
       ? lisible(conditions)
-      : "Certaines conditions peuvent s'appliquer. Les taux peuvent changer " +
-        "sans pr\u00e9avis. Sur approbation de cr\u00e9dit. Sauf erreur ou omission.";
-    if (date) texte += " Taux en vigueur le " + date + ".";
+      : "Certaines conditions peuvent s'appliquer. Les taux varient d'une " +
+        "province \u00e0 l'autre et peuvent changer sans pr\u00e9avis. " +
+        "Sur approbation de cr\u00e9dit. Sauf erreur ou omission.";
+
+    var date = reglage(vars, ["ChangeDateFr", "ChangeDate"]);
+    if (date) {
+      var mois = ["janvier","f\u00e9vrier","mars","avril","mai","juin",
+                  "juillet","ao\u00fbt","septembre","octobre","novembre",
+                  "d\u00e9cembre"];
+      var m = String(date).match(/^(\d{4})-(\d{2})-(\d{2})/);
+      var lisible_date = m
+        ? (parseInt(m[3], 10) + " " + mois[parseInt(m[2], 10) - 1] + " " + m[1])
+        : date;
+      texte += " Taux en vigueur le " + lisible_date + ".";
+    }
     texte += " Propuls\u00e9 par Centres hypoth\u00e9caires Dominion.";
     id("mentions-taux").textContent = texte;
 
@@ -823,6 +1014,38 @@ var LIEN_FORMULAIRE = "";
   r.onerror = secours;
   r.ontimeout = secours;
   r.send();
+})();
+
+/* ===========================================================
+   3. Menu deroulant
+   -----------------------------------------------------------
+   Le panneau se ferme quand on choisit une destination, quand
+   on clique ailleurs, ou avec la touche Echap.
+   =========================================================== */
+(function () {
+  var menu = document.querySelector(".menu");
+  if (!menu) return;
+
+  var liens = menu.querySelectorAll(".menu__panneau a");
+  for (var i = 0; i < liens.length; i++) {
+    liens[i].addEventListener("click", function () {
+      menu.removeAttribute("open");
+    });
+  }
+
+  document.addEventListener("click", function (e) {
+    if (menu.hasAttribute("open") && !menu.contains(e.target)) {
+      menu.removeAttribute("open");
+    }
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && menu.hasAttribute("open")) {
+      menu.removeAttribute("open");
+      var s = menu.querySelector("summary");
+      if (s) s.focus();
+    }
+  });
 })();
 
 </script>
