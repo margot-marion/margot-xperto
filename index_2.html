@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Margot Marion, courtière hypothécaire stagiaire au Québec | Xperto Héritage, Groupe Dominion Lending</title>
+<meta name="description" content="Vos options hypothécaires expliquées clairement, avec accès à des conditions préférentielles grâce à Xperto Héritage, Groupe Dominion Lending. Accompagnement complet, partout au Québec.">
+<meta name="theme-color" content="#0066CC">
+<link rel="canonical" href="https://margot-marion.pages.dev/">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_CA">
+<meta property="og:title" content="Margot Marion, courtière hypothécaire stagiaire au Québec">
+<meta property="og:description" content="Vos options hypothécaires expliquées clairement. Accompagnement complet, partout au Québec.">
+<meta property="og:image" content="img/famille-projet.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bleu:#0066CC;
+  --bleu-nuit:#003D7A;
+  --vert:#4CB07F;
+  --brume:#F0F4F1;
+  --encre:#1A1A1A;
+  --blanc:#FFFFFF;
+
+  --gris:rgba(26,26,26,.62);
+  --trait:rgba(26,26,26,.12);
+  --trait-fin:rgba(26,26,26,.07);
+
+  /* Regle des couleurs :
+     BLEU  = confiance et donnees. Taux, chiffres, liens, bouton principal,
+             et le titre du hero (il porte l'identite, pas une fonction).
+     VERT  = progression. Numeros d'etapes, economies, coches, filets de
+             section, survols. Signale que quelque chose avance pour le client. */
+  --titre:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --texte:"Source Sans 3","Segoe UI",Roboto,Arial,sans-serif;
+
+  --large:1120px;
+  --etroit:660px;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--blanc);
+  color:var(--encre);
+  font-family:var(--texte);
+  font-size:17px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+
+h1,h2,h3{
+  font-family:var(--titre);
+  font-weight:800;
+  letter-spacing:-.025em;
+  line-height:1.06;
+  margin:0;
+  text-wrap:balance;
+}
+h1{font-size:clamp(2.2rem,5.4vw,3.5rem)}
+h2{font-size:clamp(1.85rem,4vw,2.7rem)}
+h3{font-size:1.09rem;font-weight:700;letter-spacing:-.01em;line-height:1.3}
+p{margin:0}
+
+a{color:var(--bleu)}
+:focus-visible{outline:3px solid var(--bleu);outline-offset:3px;border-radius:3px}
+
+.enveloppe{width:100%;max-width:var(--large);margin:0 auto;padding:0 24px}
+.bloc{padding:88px 0}
+.bloc--brume{background:var(--brume)}
+
+/* ---------- Bouton ---------- */
+.bouton{
+  display:inline-block;
+  font-family:var(--titre);
+  font-weight:700;
+  font-size:1.02rem;
+  letter-spacing:-.01em;
+  text-decoration:none;
+  padding:17px 30px;
+  border-radius:10px;
+  background:var(--bleu);
+  color:var(--blanc);
+  box-shadow:inset 0 -3px 0 rgba(0,0,0,.16);
+  transition:background .18s ease,box-shadow .18s ease;
+}
+.bouton:hover{
+  background:var(--bleu-nuit);
+  box-shadow:inset 0 -3px 0 var(--vert);
+}
+.bouton--clair{background:var(--blanc);color:var(--bleu);box-shadow:none}
+.bouton--clair:hover{
+  background:var(--blanc);color:var(--bleu-nuit);
+  box-shadow:inset 0 -3px 0 var(--vert);
+}
+
+.assurance{
+  margin-top:15px;
+  font-size:.92rem;
+  color:var(--gris);
+  display:flex;
+  align-items:center;
+  gap:9px;
+}
+.assurance svg{flex:none;color:var(--blanc);background:var(--vert);
+  border-radius:50%;padding:3px;box-sizing:content-box;}
+
+/* ---------- En-tête ---------- */
+.entete{
+  position:sticky;top:0;z-index:40;
+  background:rgba(255,255,255,.94);
+  backdrop-filter:saturate(1.6) blur(9px);
+  border-bottom:1px solid var(--trait-fin);
+}
+.entete__rang{
+  display:flex;align-items:center;gap:24px;
+  min-height:70px;
+  padding:10px 24px;
+  max-width:var(--large);margin:0 auto;
+  flex-wrap:wrap;
+}
+.identite{display:flex;align-items:center;gap:15px}
+
+/* Les deux logos sont alignes sur la meme hauteur : c'est ainsi qu'on
+   equilibre des logos de proportions differentes. */
+.identite__logos{
+  display:flex;align-items:center;gap:11px;
+  padding-right:15px;border-right:1px solid var(--trait);
+}
+.identite__logos img{height:34px;width:auto;flex:none}
+
+.marque{
+  font-family:var(--titre);font-weight:800;font-size:1.06rem;
+  letter-spacing:-.02em;text-decoration:none;color:var(--encre);
+  line-height:1.15;
+}
+.marque span{
+  display:block;font-family:var(--texte);font-weight:400;
+  font-size:.76rem;letter-spacing:0;color:var(--gris);
+}
+.entete__droite{
+  display:flex;align-items:center;gap:22px;margin-left:auto;
+}
+.entete__nav .bouton,.entete__droite .bouton{
+  padding:11px 20px;font-size:.94rem;color:var(--blanc);
+}
+
+/* --- Coordonnees --- */
+.entete__coord{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.entete__coord a{
+  display:inline-flex;align-items:center;gap:7px;
+  text-decoration:none;color:var(--encre);font-size:.93rem;
+  font-variant-numeric:tabular-nums;white-space:nowrap;
+}
+.entete__coord svg{flex:none;color:var(--vert)}
+.entete__coord a:hover{color:var(--bleu)}
+
+/* --- Menu deroulant --- */
+.menu{position:relative;flex:none}
+.menu summary{
+  list-style:none;cursor:pointer;
+  display:flex;align-items:center;gap:9px;
+  padding:11px 15px;border-radius:10px;
+  border:1px solid var(--trait);
+  font-family:var(--titre);font-weight:700;font-size:.92rem;
+  letter-spacing:-.01em;color:var(--encre);
+  transition:border-color .18s ease,background .18s ease;
+}
+.menu summary::-webkit-details-marker,
+.menu summary::marker{display:none;content:""}
+/* Neutralise le "+" herite du style de la foire aux questions */
+.menu summary::after{display:none;content:none}
+.menu summary:hover{border-color:var(--vert);background:var(--brume)}
+
+/* Icone : trois barres qui deviennent une croix a l'ouverture */
+.menu__barres{
+  position:relative;width:16px;height:11px;flex:none;
+}
+.menu__barres::before,
+.menu__barres::after{
+  content:"";position:absolute;left:0;width:100%;height:2px;
+  border-radius:2px;background:var(--encre);
+  transition:transform .2s ease,top .2s ease;
+}
+.menu__barres::before{top:0}
+.menu__barres::after{top:9px}
+.menu__barres{
+  background:
+    linear-gradient(var(--encre),var(--encre)) left 50%/100% 2px no-repeat;
+  transition:background-size .2s ease;
+}
+.menu[open] .menu__barres{background-size:0 2px}
+.menu[open] .menu__barres::before{top:5px;transform:rotate(45deg)}
+.menu[open] .menu__barres::after{top:5px;transform:rotate(-45deg)}
+
+.menu__panneau{
+  position:absolute;right:0;top:calc(100% + 10px);
+  min-width:232px;
+  display:flex;flex-direction:column;
+  padding:8px;
+  background:var(--blanc);
+  border:1px solid var(--trait);
+  border-radius:12px;
+  box-shadow:0 12px 32px rgba(26,26,26,.13);
+  z-index:60;
+}
+.menu__panneau a{
+  padding:11px 14px;border-radius:8px;
+  text-decoration:none;color:var(--encre);font-size:.96rem;
+  border-left:3px solid transparent;
+}
+.menu__panneau a:hover{
+  background:var(--brume);border-left-color:var(--vert);color:var(--bleu);
+}
+
+/* ---------- Hero ---------- */
+.hero{
+  display:grid;
+  grid-template-columns:1.06fr .94fr;
+  align-items:stretch;
+  min-height:clamp(430px,54vh,570px);
+}
+.hero__texte{
+  background:var(--brume);
+  display:flex;flex-direction:column;justify-content:center;
+  padding:52px clamp(28px,5vw,72px);
+}
+.hero__interieur{max-width:560px;margin-left:auto;width:100%}
+.hero h1 .tournant{color:var(--bleu);display:block}
+.hero__soutien{
+  margin-top:26px;
+  font-size:1.11rem;
+  max-width:52ch;
+  color:rgba(26,26,26,.82);
+}
+.hero__actions{margin-top:34px}
+
+.carte-perso{
+  display:flex;align-items:center;gap:15px;
+  margin-bottom:34px;
+}
+.carte-perso img{
+  width:86px;height:86px;border-radius:50%;
+  object-fit:cover;object-position:50% 20%;
+  border:3px solid var(--blanc);
+}
+.carte-perso__nom{font-family:var(--titre);font-weight:700;font-size:1.04rem;letter-spacing:-.01em}
+.carte-perso__role{font-size:.9rem;color:var(--gris);line-height:1.4}
+
+.hero__portrait{position:relative;background:var(--brume);overflow:hidden}
+/* L'image est sortie du flux : sinon ses proportions (960x1220) imposaient
+   la hauteur de tout le hero, d'ou l'espace excessif au-dessus du texte. */
+.hero__portrait img{
+  position:absolute;inset:0;
+  width:100%;height:100%;object-fit:cover;object-position:50% 55%;
+}
+
+/* ---------- Taux ---------- */
+.bloc > .enveloppe > h2::before,
+.bloc > .enveloppe > div > h2::before,
+.approche__intro h2::before,
+.taux__entete h2::before{
+  content:"";display:block;
+  width:44px;height:4px;border-radius:4px;
+  background:var(--vert);
+  margin-bottom:18px;
+}
+.bloc.invitation > .enveloppe > h2::before{display:none}
+
+.taux__entete{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  gap:32px;flex-wrap:wrap;margin-bottom:36px;
+}
+.taux__entete p{max-width:46ch;color:rgba(26,26,26,.78);margin-top:14px}
+
+.sommaire{display:flex;gap:14px;flex-wrap:wrap}
+.sommaire__bloc{
+  background:var(--brume);border:1px solid var(--trait);
+  border-radius:12px;padding:15px 22px;min-width:158px;
+  border-top:4px solid var(--vert);
+}
+.sommaire__etiquette{font-size:.85rem;color:var(--gris);display:block}
+.sommaire__valeur{
+  font-family:var(--titre);font-weight:800;font-size:1.85rem;
+  letter-spacing:-.03em;color:var(--bleu);display:block;line-height:1.15;
+}
+
+#etat-taux{padding:30px 0;color:var(--gris);font-size:.98rem}
+
+.grille-taux{
+  width:100%;border-collapse:collapse;background:var(--blanc);
+  border:1px solid var(--trait);border-radius:14px;overflow:hidden;
+}
+.grille-taux caption{
+  caption-side:bottom;text-align:left;font-size:.79rem;line-height:1.55;
+  color:var(--gris);padding:16px 4px 0;
+}
+.grille-taux th{
+  text-align:left;font-family:var(--texte);font-weight:600;font-size:.87rem;
+  color:var(--gris);padding:16px 22px;background:var(--brume);
+  border-bottom:1px solid var(--trait);
+}
+.grille-taux th small{display:block;font-weight:400;font-size:.79rem;opacity:.75}
+.grille-taux th:last-child,.grille-taux td:last-child{text-align:right}
+.grille-taux td{
+  padding:15px 22px;border-bottom:1px solid var(--trait-fin);
+  font-variant-numeric:tabular-nums;
+}
+.grille-taux tr:last-child td{border-bottom:none}
+.cellule-terme{font-weight:600}
+.cellule-banque{color:var(--gris)}
+.cellule-nous{
+  font-family:var(--titre);font-weight:700;font-size:1.09rem;
+  color:var(--bleu);letter-spacing:-.02em;white-space:nowrap;
+}
+.epargne{
+  display:block;font-family:var(--texte);font-weight:600;font-size:.79rem;
+  color:var(--vert);letter-spacing:0;margin-top:1px;
+}
+tr.vedette td{background:rgba(76,176,127,.075)}
+.fanion{
+  display:inline-block;margin-left:9px;padding:2px 8px;border-radius:20px;
+  background:var(--vert);color:var(--blanc);font-family:var(--texte);
+  font-size:.68rem;font-weight:600;letter-spacing:.02em;vertical-align:2px;
+  white-space:nowrap;
+}
+.taux__note{
+  margin-top:24px;padding-top:20px;
+  border-top:1px solid var(--trait);
+  display:flex;align-items:center;justify-content:space-between;
+  gap:24px;flex-wrap:wrap;
+  font-size:1.02rem;color:rgba(26,26,26,.78);
+}
+.taux__note a{
+  display:inline-flex;align-items:center;gap:9px;
+  flex:none;
+  font-family:var(--titre);font-weight:700;font-size:1.06rem;
+  letter-spacing:-.01em;color:var(--bleu);text-decoration:none;
+  padding:11px 20px;border-radius:10px;
+  background:var(--brume);
+  border-bottom:3px solid var(--vert);
+  font-variant-numeric:tabular-nums;
+  transition:background .18s ease;
+}
+.taux__note a:hover{background:#e3ebe6}
+.taux__note a svg{flex:none;color:var(--vert)}
+
+/* Filet de sécurité : widget officiel Dominion */
+.cadre-taux{
+  background:var(--blanc);border:1px solid var(--trait);border-radius:14px;
+  padding:12px;width:-moz-fit-content;width:fit-content;max-width:100%;
+  overflow:hidden;
+}
+.cadre-taux iframe{display:block;width:540px;height:375px;border:0}
+
+/* ---------- Approche ---------- */
+.approche{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:clamp(38px,6vw,80px);align-items:start;
+}
+.approche__intro p+p{margin-top:18px}
+.approche__intro strong{font-weight:600}
+
+.atouts{display:grid;gap:14px}
+.atout{
+  background:var(--blanc);border-radius:14px;
+  padding:24px 26px 24px 30px;
+  border-left:4px solid var(--vert);
+}
+.atout h3{margin-bottom:8px}
+.atout p{font-size:.99rem;color:rgba(26,26,26,.75)}
+
+/* ---------- Méthode ---------- */
+.methode{display:grid;gap:0;margin-top:14px}
+.etape{
+  display:grid;grid-template-columns:clamp(88px,9vw,124px) minmax(0,1fr);
+  gap:clamp(18px,3vw,32px);align-items:center;
+  padding:30px 0;border-bottom:1px solid var(--trait-fin);
+}
+.etape:last-of-type{border-bottom:none}
+.etape__rang{
+  font-family:var(--titre);font-weight:800;
+  font-size:clamp(3.4rem,6vw,4.6rem);
+  letter-spacing:-.055em;line-height:.85;
+  color:var(--vert);
+}
+.etape p{font-size:1.11rem;max-width:56ch}
+
+/* ---------- Questions ---------- */
+.questions{display:grid;grid-template-columns:minmax(0,.72fr) minmax(0,1fr);gap:clamp(34px,6vw,74px);align-items:start}
+.questions__liste{border-top:1px solid var(--trait)}
+details{border-bottom:1px solid var(--trait)}
+summary{
+  cursor:pointer;list-style:none;
+  padding:21px 44px 21px 0;position:relative;
+  font-family:var(--titre);font-weight:700;font-size:1.04rem;
+  letter-spacing:-.01em;
+}
+summary::-webkit-details-marker{display:none}
+summary::after{
+  content:"";position:absolute;right:10px;top:50%;
+  width:14px;height:14px;margin-top:-7px;
+  background:
+    linear-gradient(var(--vert),var(--vert)) center/14px 2.5px no-repeat,
+    linear-gradient(var(--vert),var(--vert)) center/2.5px 14px no-repeat;
+  transition:transform .2s ease;
+}
+details[open] summary::after{transform:rotate(45deg)}
+details p{padding:0 8px 23px 0;color:rgba(26,26,26,.78);max-width:60ch}
+
+/* ---------- Invitation ---------- */
+.invitation{background:var(--bleu);color:var(--blanc);text-align:center}
+.invitation h2{max-width:22ch;margin:0 auto}
+.invitation p{margin:20px auto 32px;max-width:44ch;color:rgba(255,255,255,.9);font-size:1.09rem}
+.invitation__coord{
+  margin-top:34px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;
+}
+.invitation__coord a{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:13px 22px;border-radius:10px;
+  border:1px solid rgba(255,255,255,.42);
+  color:var(--blanc);text-decoration:none;font-size:1rem;
+}
+.invitation__coord a:hover{background:rgba(255,255,255,.12)}
+
+/* ---------- Pied ---------- */
+.pied{
+  padding:44px 0;font-size:.88rem;color:var(--gris);
+  border-top:1px solid var(--trait-fin);
+}
+.pied__rang{display:flex;gap:26px;justify-content:space-between;flex-wrap:wrap;align-items:center}
+.pied__identite{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.pied__identite img{height:30px;width:auto;flex:none;opacity:.92}
+
+.pied__coord{
+  display:flex;align-items:center;gap:20px;flex-wrap:wrap;
+}
+.pied__coord a{
+  display:inline-flex;align-items:center;gap:8px;
+  color:var(--encre);text-decoration:none;font-size:.92rem;
+  font-variant-numeric:tabular-nums;
+}
+.pied__coord a svg{flex:none;color:var(--vert)}
+.pied__coord a:hover{color:var(--bleu)}
+.pied__zone{color:var(--gris)}
+
+.pied a{color:var(--gris)}
+
+/* ---------- Adaptations ---------- */
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr;min-height:0}
+  .hero__portrait{order:-1;height:min(42vh,320px)}
+  .hero__portrait img{object-position:50% 66%}
+  .hero__interieur{margin-left:0;max-width:none}
+  .hero__texte{padding:52px 24px 60px}
+  .approche,.questions{grid-template-columns:1fr}
+  .bloc{padding:66px 0}
+}
+@media (max-width:760px){
+  .entete__droite{gap:12px}
+  .entete__coord a:last-child{display:none}
+  .entete__coord a{font-size:.9rem}
+  .menu__mot{display:none}
+  .menu summary{padding:10px 12px}
+  .entete__droite .bouton{
+    padding:10px 14px;font-size:.88rem;white-space:nowrap;
+  }
+  .menu__panneau{min-width:214px}
+}
+@media (max-width:600px){
+  body{font-size:16px}
+  .grille-taux th,.grille-taux td{padding-left:14px;padding-right:14px}
+  .grille-taux th:first-child,.grille-taux td:first-child{padding-left:16px}
+  .grille-taux th{font-size:.8rem;padding-top:13px;padding-bottom:13px}
+  .grille-taux th small{display:none}
+  .epargne{font-size:.75rem}
+  .sommaire__bloc{flex:1 1 138px;min-width:0;padding:13px 17px}
+  .sommaire__valeur{font-size:1.6rem}
+  .cadre-taux{padding:8px}
+  .cadre-taux iframe{
+    transform:scale(.615);transform-origin:top left;
+    margin-right:-208px;margin-bottom:-145px;
+  }
+  .fanion{
+    margin-left:6px;padding:0;background:none;color:var(--vert);
+    font-size:.7rem;
+  }
+  .etape{grid-template-columns:72px minmax(0,1fr);gap:14px;padding:24px 0}
+  .pied__rang{gap:20px}
+  .pied__coord{gap:12px;flex-direction:column;align-items:flex-start}
+  .identite__logos{gap:9px;padding-right:12px}
+  .identite__logos img{height:28px}
+  .identite{gap:12px}
+  .pied__identite img{height:26px}
+  .etape__rang{font-size:2.9rem;letter-spacing:-.05em}
+  .etape p{font-size:1.02rem}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important;scroll-behavior:auto!important}
+}
+html{scroll-behavior:smooth}
+</style>
+</head>
+<body>
+
+<header class="entete">
+  <div class="entete__rang">
+    <div class="identite">
+      <span class="identite__logos">
+        <img src="img/logo-xperto.png" alt="Xperto Équipe Héritage"
+             width="440" height="244">
+        <img src="img/logo-dominion.png" alt="Centres hypothécaires Dominion National"
+             width="300" height="205">
+      </span>
+      <a class="marque" href="#">Margot Marion
+        <span>Courtière hypothécaire stagiaire</span>
+      </a>
+    </div>
+    <div class="entete__droite">
+      <span class="entete__coord">
+        <a href="tel:+15142484361">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.9.36 1.8.7 2.65a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.43-1.27a2 2 0 0 1 2.11-.45c.85.34 1.75.57 2.65.7A2 2 0 0 1 22 16.92z"/></svg>
+          514-248-4361
+        </a>
+        <a href="mailto:mmarion@xperto.ca">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+          mmarion@xperto.ca
+        </a>
+      </span>
+
+      <a class="bouton js-conversion" href="tel:+15142484361">Comparer mes options</a>
+
+      <details class="menu">
+        <summary aria-label="Ouvrir le menu">
+          <span class="menu__barres" aria-hidden="true"></span>
+          <span class="menu__mot">Menu</span>
+        </summary>
+        <nav class="menu__panneau">
+          <a href="#taux">Les taux d'aujourd'hui</a>
+          <a href="#approche">Mon approche</a>
+          <a href="#methode">Ma méthode</a>
+          <a href="#questions">Foire aux questions</a>
+          <a href="#contact">Me joindre</a>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+
+<main>
+
+
+  <!-- ============ Hero ============ -->
+  <section class="hero">
+    <div class="hero__texte">
+      <div class="hero__interieur">
+        <div class="carte-perso">
+          <img src="img/margot-marion.png" alt="Portrait de Margot Marion" width="86" height="86">
+          <div>
+            <div class="carte-perso__nom">Margot Marion</div>
+            <div class="carte-perso__role">Courtière hypothécaire stagiaire<br>Xperto Héritage, Groupe Dominion Lending</div>
+          </div>
+        </div>
+
+        <h1><span class="tournant">À vos côtés</span>
+          à chaque étape de votre projet
+        </h1>
+
+        <p class="hero__soutien">
+          Achat, refinancement ou renouvellement&nbsp;: vos options vous sont
+          expliquées simplement, et les meilleures conditions sont négociées
+          pour vous. Je m'occupe personnellement de votre dossier, du premier
+          appel jusqu'à la signature, partout au Québec.
+        </p>
+
+        <div class="hero__actions">
+          <a class="bouton js-conversion" href="tel:+15142484361">Comparer mes options de financement</a>
+          <p class="assurance">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            Service gratuit &middot; Premier appel dans les 24&nbsp;h
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero__portrait">
+      <img src="img/famille-projet.jpg" alt="Une famille regarde une maquette de maison dans un bureau, accompagnée de sa courtière" fetchpriority="high">
+    </div>
+  </section>
+
+  <!-- ============ Taux ============ -->
+  <section class="bloc" id="taux">
+    <div class="enveloppe">
+      <div class="taux__entete">
+        <div>
+          <h2>Les taux d'aujourd'hui</h2>
+          <p>Comparez le taux affiché par les banques et celui obtenu par
+             notre réseau de prêteurs.</p>
+        </div>
+        <div class="sommaire" id="sommaire-taux">
+          <div class="sommaire__bloc">
+            <span class="sommaire__etiquette">Taux variable</span>
+            <span class="sommaire__valeur" id="taux-variable">&mdash;</span>
+          </div>
+          <div class="sommaire__bloc">
+            <span class="sommaire__etiquette">Taux préférentiel</span>
+            <span class="sommaire__valeur" id="taux-prime">&mdash;</span>
+          </div>
+        </div>
+      </div>
+
+      <p id="etat-taux">Chargement des taux…</p>
+
+      <table class="grille-taux" id="grille-taux" hidden>
+        <caption id="mentions-taux"></caption>
+        <thead>
+          <tr>
+            <th scope="col">Terme</th>
+            <th scope="col">Taux affiché <small>par les banques</small></th>
+            <th scope="col">Notre taux</th>
+          </tr>
+        </thead>
+        <tbody id="corps-taux"></tbody>
+      </table>
+
+      <div class="cadre-taux" id="cadre-secours" hidden>
+        <iframe
+          src="https://centralhost.dominionlending.ca/websites/current-rates/rates/fr_large.php"
+          title="Taux hypothécaires courants — Centres hypothécaires Dominion"
+          height="375" width="100%" scrolling="no" loading="lazy"></iframe>
+      </div>
+
+      <p class="taux__note">
+        <span>Votre taux réel dépend de votre situation. Un appel de
+          15&nbsp;minutes suffit pour savoir ce à quoi vous avez droit.</span>
+        <a href="tel:+15142484361">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.9.36 1.8.7 2.65a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.43-1.27a2 2 0 0 1 2.11-.45c.85.34 1.75.57 2.65.7A2 2 0 0 1 22 16.92z"/></svg>
+          514-248-4361
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ Approche ============ -->
+  <section class="bloc bloc--brume" id="approche">
+    <div class="enveloppe approche">
+      <div class="approche__intro">
+        <h2>Une approche centrée sur la transparence et l'accompagnement</h2>
+        <p style="margin-top:22px">
+          Taux fixe ou variable, admissibilité, mise de fonds, pénalités de
+          bris&nbsp;: le vocabulaire hypothécaire est complexe. Chaque étape vous
+          est expliquée clairement, pour déterminer ce qui convient réellement à
+          votre situation.
+        </p>
+        <p>
+          Membre de l'équipe Xperto Héritage, Groupe Dominion Lending, j'ai accès
+          à des conditions préférentielles qu'il est difficile d'obtenir seule,
+          en cognant à une seule porte.
+        </p>
+      </div>
+
+      <div class="atouts">
+        <article class="atout">
+          <h3>Une négociation sur mesure pour vous</h3>
+          <p>Votre projet, vos besoins et vos critères sont pris en compte pour
+             négocier les conditions les plus avantageuses pour vous.</p>
+        </article>
+        <article class="atout">
+          <h3>Un accompagnement partout au Québec</h3>
+          <p>Où que vous soyez dans la province, je vous accompagne du premier
+             appel jusqu'à la signature.</p>
+        </article>
+        <article class="atout">
+          <h3>Une explication claire à chaque étape</h3>
+          <p>Vous comprenez chaque option, ses avantages et ses limites, pour
+             prendre les bonnes décisions en toute confiance.</p>
+        </article>
+        <article class="atout">
+          <h3>Un accès privilégié aux meilleurs taux</h3>
+          <p>Un client seul obtient le taux affiché par sa banque. Le volume de
+             dossiers que nous présentons aux prêteurs nous permet de négocier
+             mieux pour vous.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Méthode ============ -->
+  <section class="bloc" id="methode">
+    <div class="enveloppe" style="max-width:900px">
+      <h2>Une méthode en quatre étapes</h2>
+      <p style="margin-top:14px;color:var(--gris);max-width:46ch">
+        Un parcours clair, du premier échange jusqu'à la signature.
+      </p>
+
+      <div class="methode">
+        <div class="etape">
+          <div class="etape__rang" aria-hidden="true">01</div>
+          <p>Votre situation est analysée en profondeur.</p>
+        </div>
+        <div class="etape">
+          <div class="etape__rang" aria-hidden="true">02</div>
+          <p>Vos options vous sont expliquées clairement, pour que vous
+             compreniez ce que vous signez.</p>
+        </div>
+        <div class="etape">
+          <div class="etape__rang" aria-hidden="true">03</div>
+          <p>Les meilleures conditions disponibles sont négociées pour vous.</p>
+        </div>
+        <div class="etape">
+          <div class="etape__rang" aria-hidden="true">04</div>
+          <p>L'accompagnement se poursuit jusqu'à la signature, sans jamais
+             vous laisser seul avec vos questions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Questions ============ -->
+  <section class="bloc" id="questions">
+    <div class="enveloppe questions">
+      <div>
+        <h2>La foire aux questions</h2>
+        <p style="margin-top:14px;color:var(--gris);max-width:34ch">
+          Les réponses aux questions qu'on me pose le plus souvent.
+        </p>
+      </div>
+
+      <div class="questions__liste">
+        <details>
+          <summary>Est-ce que ça coûte quelque chose&nbsp;?</summary>
+          <p>Non, le service est gratuit pour vous. La rémunération vient de
+             l'institution financière une fois le prêt conclu.</p>
+        </details>
+        <details>
+          <summary>Pourquoi passer par une courtière plutôt que par ma banque directement&nbsp;?</summary>
+          <p>Parce que l'équipe négocie des volumes avec plusieurs institutions.
+             Ça donne accès à des conditions préférentielles qu'un client seul
+             n'obtient pas en cognant à une seule porte.</p>
+        </details>
+        <details>
+          <summary>Combien de temps avant d'avoir une réponse&nbsp;?</summary>
+          <p>Un premier appel dans les 24&nbsp;h suivant votre demande.</p>
+        </details>
+        <details>
+          <summary>Est-ce que ma région est couverte&nbsp;?</summary>
+          <p>Oui, l'accompagnement se fait partout au Québec.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Invitation ============ -->
+  <section class="bloc invitation" id="contact">
+    <div class="enveloppe">
+      <h2>Prêt à voir ce qui est possible pour vous&nbsp;?</h2>
+      <p>Un appel de 15&nbsp;minutes pour évaluer votre situation et connaître
+         vos options.</p>
+      <a class="bouton bouton--clair js-conversion" href="tel:+15142484361">Comparer mes options de financement</a>
+
+      <div class="invitation__coord">
+        <a href="tel:+15142484361">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.9.36 1.8.7 2.65a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.43-1.27a2 2 0 0 1 2.11-.45c.85.34 1.75.57 2.65.7A2 2 0 0 1 22 16.92z"/></svg>
+          514-248-4361
+        </a>
+        <a href="mailto:mmarion@xperto.ca">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+          mmarion@xperto.ca
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="pied">
+  <div class="enveloppe pied__rang">
+    <div class="pied__identite">
+      <img class="pied__xperto" src="img/logo-xperto.png"
+           alt="Xperto Équipe Héritage" width="440" height="244" loading="lazy">
+      <img class="pied__dominion" src="img/logo-dominion.png"
+           alt="Centres hypothécaires Dominion National" width="300" height="205" loading="lazy">
+      <span>Margot Marion, courtière hypothécaire stagiaire</span>
+    </div>
+
+    <div class="pied__coord">
+      <a href="tel:+15142484361">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.9.36 1.8.7 2.65a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.43-1.27a2 2 0 0 1 2.11-.45c.85.34 1.75.57 2.65.7A2 2 0 0 1 22 16.92z"/></svg>
+        514-248-4361
+      </a>
+      <a href="mailto:mmarion@xperto.ca">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+        mmarion@xperto.ca
+      </a>
+      <span class="pied__zone">Service offert partout au Québec</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ===========================================================
+   1. Destination des boutons de conversion
+   -----------------------------------------------------------
+   Colle ici le lien de ton formulaire Typeform, entre les
+   guillemets. Tant que la ligne reste vide, les boutons
+   lancent un appel téléphonique.
+   =========================================================== */
+var LIEN_FORMULAIRE = "";
+
+(function () {
+  if (!LIEN_FORMULAIRE) return;
+  var boutons = document.querySelectorAll(".js-conversion");
+  for (var i = 0; i < boutons.length; i++) {
+    boutons[i].setAttribute("href", LIEN_FORMULAIRE);
+    boutons[i].setAttribute("target", "_blank");
+    boutons[i].setAttribute("rel", "noopener");
+  }
+})();
+
+/* ===========================================================
+   2. Tableau des taux
+   -----------------------------------------------------------
+   Les donnees arrivent par /api/rates, une fonction qui tourne
+   sur les serveurs de Cloudflare. La cle API n'apparait jamais
+   dans cette page.
+
+   Si la fonction n'est pas disponible, le widget officiel de
+   Dominion s'affiche a la place.
+   =========================================================== */
+(function () {
+  function id(n) { return document.getElementById(n); }
+
+  function champ(o) {
+    for (var i = 1; i < arguments.length; i++) {
+      var v = o ? o[arguments[i]] : null;
+      if (v !== undefined && v !== null && v !== "") return v;
+    }
+    return null;
+  }
+
+  function liste(d) {
+    for (var i = 1; i < arguments.length; i++) {
+      if (Object.prototype.toString.call(d[arguments[i]]) === "[object Array]") {
+        return d[arguments[i]];
+      }
+    }
+    return [];
+  }
+
+  /* Cherche une variable en respectant l'ordre de preference des noms.
+     Important : l'API liste les variables anglaises avant les francaises,
+     donc il faut parcourir les noms demandes, pas le tableau. */
+  function reglage(vars, noms) {
+    for (var n = 0; n < noms.length; n++) {
+      for (var i = 0; i < vars.length; i++) {
+        if (champ(vars[i], "Name", "Nom") === noms[n]) {
+          var v = champ(vars[i], "Value", "Valeur");
+          if (v) return v;
+        }
+      }
+    }
+    return null;
+  }
+
+  function chiffre(s) {
+    if (!s) return null;
+    var n = parseFloat(String(s).replace(",", "."));
+    return isNaN(n) ? null : n;
+  }
+
+  function lisible(s) {
+    if (!s) return "";
+    var z = document.createElement("textarea");
+    z.innerHTML = String(s).replace(/&\u00e9;/g, "&eacute;");
+    return z.value;
+  }
+
+  function pourcent(v) {
+    var n = chiffre(v);
+    return n === null ? "\u2014" : n.toFixed(2).replace(".", ",") + " %";
+  }
+
+  /* Normalise les termes : "3 Ans" devient "3 ans", "1 Annee" devient "1 an".
+     Les majuscules faisaient croire a Chrome que "Ans" etait de l'anglais,
+     et il le traduisait automatiquement par "reponses". */
+  function terme(s) {
+    var t = lisible(s);
+    if (!t) return "";
+    t = t.replace(/Ann\u00e9es|Ann\u00e9e/g, "an");
+    t = t.replace(/Ans/g, "ans");
+    t = t.replace(/Mois/g, "mois");
+    t = t.replace(/^1 ans$/, "1 an");
+    return t;
+  }
+
+  function secours() {
+    id("etat-taux").hidden = true;
+    id("grille-taux").hidden = true;
+    var s = id("sommaire-taux");
+    if (s) s.hidden = true;
+    id("cadre-secours").hidden = false;
+  }
+
+  function afficher(data) {
+    var taux = liste(data, "Rates", "Tarifs");
+    var vars = liste(data, "RatesVariables", "RateVariables", "Variables de taux");
+
+    var lignes = [];
+    for (var i = 0; i < taux.length; i++) {
+      var mois = chiffre(champ(taux[i], "TermsMonth", "TermsMonths", "TermsMois"));
+      var nous = chiffre(champ(taux[i], "OurRate", "NotreTaux"));
+      if (mois && mois > 0 && nous) lignes.push(taux[i]);
+    }
+    if (!lignes.length) { secours(); return; }
+
+    lignes.sort(function (a, b) {
+      return chiffre(champ(a, "TermsMonth", "TermsMonths", "TermsMois")) -
+             chiffre(champ(b, "TermsMonth", "TermsMonths", "TermsMois"));
+    });
+
+    var meilleur = lignes[0];
+    for (var j = 1; j < lignes.length; j++) {
+      if (chiffre(champ(lignes[j], "OurRate", "NotreTaux")) <
+          chiffre(champ(meilleur, "OurRate", "NotreTaux"))) {
+        meilleur = lignes[j];
+      }
+    }
+
+    var variable = reglage(vars, ["VariableRateFr", "VariableRate"]);
+    var prime    = reglage(vars, ["PrimeRateFr", "PrimeRate"]);
+    if (variable) id("taux-variable").textContent = pourcent(variable);
+    if (prime)    id("taux-prime").textContent    = pourcent(prime);
+
+    var corps = id("corps-taux");
+    corps.innerHTML = "";
+
+    for (var k = 0; k < lignes.length; k++) {
+      var l = lignes[k];
+      var tr = document.createElement("tr");
+      if (l === meilleur) tr.className = "vedette";
+
+      var c1 = document.createElement("td");
+      c1.className = "cellule-terme";
+      c1.textContent = terme(champ(l, "TermsFr", "Terms", "Term"));
+      if (l === meilleur) {
+        var f = document.createElement("span");
+        f.className = "fanion";
+        f.textContent = "Meilleur taux";
+        c1.appendChild(f);
+      }
+
+      var c2 = document.createElement("td");
+      c2.className = "cellule-banque";
+      c2.textContent = pourcent(champ(l, "BankRate"));
+
+      var c3 = document.createElement("td");
+      c3.className = "cellule-nous";
+      c3.textContent = pourcent(champ(l, "OurRate", "NotreTaux"));
+
+      var eco = chiffre(champ(l, "Savings", "\u00c9conomies"));
+      if (eco && eco > 0) {
+        var s = document.createElement("span");
+        s.className = "epargne";
+        s.textContent = "\u2212 " + eco.toFixed(0) + " $ par mois";
+        c3.appendChild(s);
+      }
+
+      tr.appendChild(c1); tr.appendChild(c2); tr.appendChild(c3);
+      corps.appendChild(tr);
+    }
+
+    /* Ne prendre que la version francaise des conditions. L'API renvoie
+       ConditionsFr vide, et la version anglaise ne va pas sur une page
+       francaise : on utilise alors la traduction officielle equivalente. */
+    var conditions = reglage(vars, ["ConditionsFr"]);
+    var texte = conditions
+      ? lisible(conditions)
+      : "Certaines conditions peuvent s'appliquer. Les taux varient d'une " +
+        "province \u00e0 l'autre et peuvent changer sans pr\u00e9avis. " +
+        "Sur approbation de cr\u00e9dit. Sauf erreur ou omission.";
+
+    var date = reglage(vars, ["ChangeDateFr", "ChangeDate"]);
+    if (date) {
+      var mois = ["janvier","f\u00e9vrier","mars","avril","mai","juin",
+                  "juillet","ao\u00fbt","septembre","octobre","novembre",
+                  "d\u00e9cembre"];
+      var m = String(date).match(/^(\d{4})-(\d{2})-(\d{2})/);
+      var lisible_date = m
+        ? (parseInt(m[3], 10) + " " + mois[parseInt(m[2], 10) - 1] + " " + m[1])
+        : date;
+      texte += " Taux en vigueur le " + lisible_date + ".";
+    }
+    texte += " Propuls\u00e9 par Centres hypoth\u00e9caires Dominion.";
+    id("mentions-taux").textContent = texte;
+
+    id("etat-taux").hidden = true;
+    id("grille-taux").hidden = false;
+  }
+
+  var r = new XMLHttpRequest();
+  r.open("GET", "/api/rates", true);
+  r.timeout = 12000;
+  r.onload = function () {
+    if (r.status < 200 || r.status >= 300) { secours(); return; }
+    try { afficher(JSON.parse(r.responseText)); } catch (e) { secours(); }
+  };
+  r.onerror = secours;
+  r.ontimeout = secours;
+  r.send();
+})();
+
+/* ===========================================================
+   3. Menu deroulant
+   -----------------------------------------------------------
+   Le panneau se ferme quand on choisit une destination, quand
+   on clique ailleurs, ou avec la touche Echap.
+   =========================================================== */
+(function () {
+  var menu = document.querySelector(".menu");
+  if (!menu) return;
+
+  var liens = menu.querySelectorAll(".menu__panneau a");
+  for (var i = 0; i < liens.length; i++) {
+    liens[i].addEventListener("click", function () {
+      menu.removeAttribute("open");
+    });
+  }
+
+  document.addEventListener("click", function (e) {
+    if (menu.hasAttribute("open") && !menu.contains(e.target)) {
+      menu.removeAttribute("open");
+    }
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && menu.hasAttribute("open")) {
+      menu.removeAttribute("open");
+      var s = menu.querySelector("summary");
+      if (s) s.focus();
+    }
+  });
+})();
+
+</script>
+
+</body>
+</html>
