@@ -681,19 +681,19 @@ var LIEN_FORMULAIRE = "";
 
   function afficher(data) {
     var taux = liste(data, "Rates", "Tarifs");
-    var vars = liste(data, "RateVariables", "Variables de taux");
+    var vars = liste(data, "RatesVariables", "RateVariables", "Variables de taux");
 
     var lignes = [];
     for (var i = 0; i < taux.length; i++) {
-      var mois = chiffre(champ(taux[i], "TermsMonths", "TermsMois"));
+      var mois = chiffre(champ(taux[i], "TermsMonth", "TermsMonths", "TermsMois"));
       var nous = chiffre(champ(taux[i], "OurRate", "NotreTaux"));
       if (mois && mois > 0 && nous) lignes.push(taux[i]);
     }
     if (!lignes.length) { secours(); return; }
 
     lignes.sort(function (a, b) {
-      return chiffre(champ(a, "TermsMonths", "TermsMois")) -
-             chiffre(champ(b, "TermsMonths", "TermsMois"));
+      return chiffre(champ(a, "TermsMonth", "TermsMonths", "TermsMois")) -
+             chiffre(champ(b, "TermsMonth", "TermsMonths", "TermsMois"));
     });
 
     var meilleur = lignes[0];
@@ -719,7 +719,7 @@ var LIEN_FORMULAIRE = "";
 
       var c1 = document.createElement("td");
       c1.className = "cellule-terme";
-      c1.textContent = lisible(champ(l, "TermsFr", "Term"));
+      c1.textContent = lisible(champ(l, "TermsFr", "Terms", "Term"));
       if (l === meilleur) {
         var f = document.createElement("span");
         f.className = "fanion";
