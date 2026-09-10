@@ -203,6 +203,9 @@ a{color:var(--bleu)}
 
 .enveloppe{width:100%;max-width:var(--large);margin:0 auto;padding:0 24px}
 .bloc{padding:88px 0}
+/* L'en-tete est collant : sans cette marge, les ancres du menu
+   amenaient le haut des sections sous l'en-tete. */
+section[id]{scroll-margin-top:104px}
 .bloc--brume{background:var(--brume)}
 
 /* ---------- Bouton ---------- */
@@ -506,8 +509,169 @@ tr.vedette td{background:rgba(76,176,127,.075)}
 .atout h3{margin-bottom:8px}
 .atout p{font-size:.99rem;color:rgba(26,26,26,.75)}
 
+/* ---------- Chiffres clés ---------- */
+.chiffres{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(26px,4vw,56px);
+  margin-top:clamp(44px,5vw,64px);
+  padding-top:clamp(34px,4vw,44px);
+  border-top:1px solid var(--trait);
+}
+.chiffre__valeur{
+  display:block;
+  font-family:var(--titre);font-weight:800;
+  font-size:clamp(2.5rem,4.4vw,3.4rem);
+  letter-spacing:-.045em;line-height:1;
+  color:var(--bleu);
+  margin-bottom:14px;
+}
+/* Le vert signale ce que le client gagne, conformement a la regle
+   des couleurs definie en haut du fichier. */
+.chiffre__valeur--vert{color:var(--vert)}
+.chiffre p{
+  font-size:.98rem;line-height:1.5;max-width:30ch;
+  color:rgba(26,26,26,.72);
+}
+.chiffres__source{
+  margin-top:26px;font-size:.79rem;line-height:1.5;
+  color:var(--gris);max-width:74ch;
+}
+
+/* ---------- Calculatrices ---------- */
+.calc__intro{
+  margin-top:14px;max-width:52ch;color:rgba(26,26,26,.75);
+}
+.calc{
+  margin-top:clamp(30px,4vw,42px);
+  background:var(--blanc);
+  border:1px solid var(--trait);
+  border-radius:16px;
+  overflow:hidden;
+}
+
+/* --- Onglets --- */
+.calc__onglets{
+  display:flex;flex-wrap:wrap;gap:2px;
+  padding:8px;
+  background:var(--brume);
+  border-bottom:1px solid var(--trait);
+}
+.calc__onglet{
+  flex:1 1 auto;
+  appearance:none;border:0;cursor:pointer;
+  padding:12px 16px;border-radius:9px;
+  background:transparent;
+  font-family:var(--titre);font-weight:700;font-size:.92rem;
+  letter-spacing:-.01em;color:rgba(26,26,26,.6);
+  transition:background .16s ease,color .16s ease;
+}
+.calc__onglet:hover{color:var(--bleu)}
+.calc__onglet.est-actif{
+  background:var(--blanc);color:var(--bleu);
+  box-shadow:inset 0 -3px 0 var(--vert);
+}
+
+/* --- Panneaux --- */
+.calc__panneau{padding:clamp(22px,3vw,34px)}
+.calc__grille{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.85fr);
+  gap:clamp(26px,3.5vw,44px);align-items:start;
+}
+.calc__champs{display:grid;gap:18px}
+
+/* --- Champs --- */
+.champ{display:block}
+.champ > span{
+  display:block;margin-bottom:7px;
+  font-size:.92rem;font-weight:600;color:var(--encre);
+}
+.champ > span small{
+  display:block;font-weight:400;font-size:.82rem;
+  color:var(--gris);margin-top:1px;
+}
+.champ__boite{
+  display:flex;align-items:center;gap:2px;
+  border:1px solid var(--trait);border-radius:10px;
+  background:var(--blanc);
+  padding:0 14px;
+  transition:border-color .16s ease,box-shadow .16s ease;
+}
+.champ__boite:focus-within{
+  border-color:var(--bleu);
+  box-shadow:0 0 0 3px rgba(0,102,204,.13);
+}
+.champ__unite{
+  flex:none;color:var(--gris);font-size:1rem;
+}
+.champ input,.champ select{
+  flex:1;width:100%;min-width:0;
+  appearance:none;border:0;outline:none;background:transparent;
+  padding:13px 0;
+  font-family:var(--texte);font-size:1.05rem;color:var(--encre);
+  font-variant-numeric:tabular-nums;
+}
+.champ select{cursor:pointer;padding-right:22px}
+.champ__boite:has(select){
+  background:
+    linear-gradient(45deg,transparent 50%,var(--gris) 50%) calc(100% - 15px) 55%/6px 6px no-repeat,
+    linear-gradient(135deg,var(--gris) 50%,transparent 50%) calc(100% - 9px) 55%/6px 6px no-repeat,
+    var(--blanc);
+}
+.champ input::-webkit-outer-spin-button,
+.champ input::-webkit-inner-spin-button{appearance:none;margin:0}
+.champ input[type=number]{-moz-appearance:textfield}
+
+/* --- Resultat --- */
+.calc__resultat{
+  background:var(--brume);
+  border-radius:14px;
+  padding:clamp(22px,2.6vw,28px);
+  border-top:4px solid var(--vert);
+}
+.calc__etiquette{
+  display:block;font-size:.9rem;color:var(--gris);margin-bottom:6px;
+}
+.calc__valeur{
+  display:block;
+  font-family:var(--titre);font-weight:800;
+  font-size:clamp(2.1rem,3.6vw,2.8rem);
+  letter-spacing:-.04em;line-height:1.05;
+  color:var(--bleu);
+  font-variant-numeric:tabular-nums;
+}
+.calc__valeur--vert{color:var(--vert)}
+.calc__details{
+  margin:22px 0 0;padding-top:18px;
+  border-top:1px solid var(--trait);
+  display:grid;gap:11px;
+}
+.calc__details > div{
+  display:flex;justify-content:space-between;align-items:baseline;gap:16px;
+}
+.calc__details dt{font-size:.92rem;color:var(--gris)}
+.calc__details dd{
+  margin:0;font-weight:600;font-size:.98rem;
+  font-variant-numeric:tabular-nums;white-space:nowrap;
+}
+.calc__note{
+  margin-top:16px;font-size:.86rem;line-height:1.5;
+  color:rgba(26,26,26,.7);
+}
+.calc__note.est-avertissement{color:#8a4b12}
+
+/* --- Pied --- */
+.calc__pied{
+  margin-top:clamp(24px,3vw,32px);
+  display:flex;justify-content:space-between;align-items:flex-end;
+  gap:clamp(20px,3vw,40px);flex-wrap:wrap;
+}
+.calc__pied p{
+  font-size:.79rem;line-height:1.55;color:var(--gris);max-width:66ch;
+}
+.calc__pied .bouton{flex:none}
+
 /* ---------- Méthode ---------- */
-.methode{display:grid;gap:0;margin-top:14px}
+.methode{display:grid;gap:0;margin-top:clamp(28px,3vw,40px)}
 .etape{
   display:grid;grid-template-columns:clamp(88px,9vw,124px) minmax(0,1fr);
   gap:clamp(18px,3vw,32px);align-items:center;
@@ -589,8 +753,16 @@ details p{padding:0 8px 23px 0;color:rgba(26,26,26,.78);max-width:60ch}
   .hero__portrait img{object-position:50% 66%}
   .hero__interieur{margin-left:0;max-width:none}
   .hero__texte{padding:52px 24px 60px}
-  .approche,.questions{grid-template-columns:1fr}
+  .approche,.questions,.calc__grille{grid-template-columns:1fr}
+  .calc__onglet{flex:1 1 46%;font-size:.86rem;padding:11px 10px}
+  .calc__pied{flex-direction:column;align-items:stretch}
+  .calc__pied .bouton{text-align:center}
+  .chiffres{grid-template-columns:1fr;gap:30px}
+  .chiffre p{max-width:none}
+  .chiffres{grid-template-columns:1fr;gap:30px}
+  .chiffre p{max-width:none}
   .bloc{padding:66px 0}
+  section[id]{scroll-margin-top:136px}
 }
 @media (max-width:760px){
   .entete__droite{gap:12px}
@@ -673,6 +845,7 @@ html{scroll-behavior:smooth}
         </summary>
         <nav class="menu__panneau">
           <a href="#taux">Les taux d'aujourd'hui</a>
+          <a href="#calculatrices">Calculatrices</a>
           <a href="#approche">Mon approche</a>
           <a href="#methode">Ma méthode</a>
           <a href="#questions">Foire aux questions</a>
@@ -781,6 +954,241 @@ html{scroll-behavior:smooth}
     </div>
   </section>
 
+  <!-- ============ Calculatrices ============ -->
+  <section class="bloc bloc--brume" id="calculatrices">
+    <div class="enveloppe">
+      <h2>Vos calculs, en quelques secondes</h2>
+      <p class="calc__intro">Des estimations pour vous situer avant le premier
+         appel. Votre dossier réel peut donner un résultat différent.</p>
+
+      <div class="calc">
+        <div class="calc__onglets" role="tablist" aria-label="Calculatrices">
+          <button class="calc__onglet est-actif" role="tab" aria-selected="true"
+                  data-cible="calc-paiement">Paiements</button>
+          <button class="calc__onglet" role="tab" aria-selected="false"
+                  data-cible="calc-capacite">Capacité d'emprunt</button>
+          <button class="calc__onglet" role="tab" aria-selected="false"
+                  data-cible="calc-comparaison">Comparer deux taux</button>
+          <button class="calc__onglet" role="tab" aria-selected="false"
+                  data-cible="calc-mise">Mise de fonds</button>
+        </div>
+
+        <!-- ---------- Paiements ---------- -->
+        <div class="calc__panneau est-actif" id="calc-paiement" role="tabpanel">
+          <div class="calc__grille">
+            <div class="calc__champs">
+              <label class="champ">
+                <span>Montant du prêt</span>
+                <div class="champ__boite">
+                  <span class="champ__unite">$</span>
+                  <input type="number" id="p-montant" value="400000" min="0" step="1000" inputmode="numeric">
+                </div>
+              </label>
+              <label class="champ">
+                <span>Taux d'intérêt annuel</span>
+                <div class="champ__boite">
+                  <input type="number" id="p-taux" value="4.39" min="0" max="25" step="0.01" inputmode="decimal">
+                  <span class="champ__unite">%</span>
+                </div>
+              </label>
+              <label class="champ">
+                <span>Amortissement</span>
+                <div class="champ__boite">
+                  <select id="p-amort">
+                    <option value="15">15 ans</option>
+                    <option value="20">20 ans</option>
+                    <option value="25" selected>25 ans</option>
+                    <option value="30">30 ans</option>
+                  </select>
+                </div>
+              </label>
+              <label class="champ">
+                <span>Fréquence des paiements</span>
+                <div class="champ__boite">
+                  <select id="p-freq">
+                    <option value="12" selected>Mensuelle</option>
+                    <option value="26">Aux deux semaines</option>
+                    <option value="52">Hebdomadaire</option>
+                  </select>
+                </div>
+              </label>
+            </div>
+
+            <div class="calc__resultat">
+              <span class="calc__etiquette">Votre paiement</span>
+              <span class="calc__valeur" id="p-paiement">—</span>
+              <dl class="calc__details">
+                <div><dt>Intérêts sur l'amortissement</dt><dd id="p-interets">—</dd></div>
+                <div><dt>Total remboursé</dt><dd id="p-total">—</dd></div>
+              </dl>
+            </div>
+          </div>
+        </div>
+
+        <!-- ---------- Capacité d'emprunt ---------- -->
+        <div class="calc__panneau" id="calc-capacite" role="tabpanel" hidden>
+          <div class="calc__grille">
+            <div class="calc__champs">
+              <label class="champ">
+                <span>Revenu brut du ménage, par année</span>
+                <div class="champ__boite">
+                  <span class="champ__unite">$</span>
+                  <input type="number" id="c-revenu" value="95000" min="0" step="1000" inputmode="numeric">
+                </div>
+              </label>
+              <label class="champ">
+                <span>Paiements de dettes, par mois
+                  <small>auto, cartes, prêt étudiant, marge</small></span>
+                <div class="champ__boite">
+                  <span class="champ__unite">$</span>
+                  <input type="number" id="c-dettes" value="400" min="0" step="25" inputmode="numeric">
+                </div>
+              </label>
+              <label class="champ">
+                <span>Mise de fonds disponible</span>
+                <div class="champ__boite">
+                  <span class="champ__unite">$</span>
+                  <input type="number" id="c-mise" value="40000" min="0" step="1000" inputmode="numeric">
+                </div>
+              </label>
+              <label class="champ">
+                <span>Taux d'intérêt envisagé</span>
+                <div class="champ__boite">
+                  <input type="number" id="c-taux" value="4.39" min="0" max="25" step="0.01" inputmode="decimal">
+                  <span class="champ__unite">%</span>
+                </div>
+              </label>
+              <label class="champ">
+                <span>Amortissement</span>
+                <div class="champ__boite">
+                  <select id="c-amort">
+                    <option value="20">20 ans</option>
+                    <option value="25" selected>25 ans</option>
+                    <option value="30">30 ans</option>
+                  </select>
+                </div>
+              </label>
+            </div>
+
+            <div class="calc__resultat">
+              <span class="calc__etiquette">Prix d'achat envisageable</span>
+              <span class="calc__valeur" id="c-prix">—</span>
+              <dl class="calc__details">
+                <div><dt>Prêt hypothécaire</dt><dd id="c-pret">—</dd></div>
+                <div><dt>Paiement mensuel estimé</dt><dd id="c-paiement">—</dd></div>
+                <div><dt>Taux utilisé pour la qualification</dt><dd id="c-tauxadm">—</dd></div>
+              </dl>
+              <p class="calc__note" id="c-note"></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ---------- Comparer deux taux ---------- -->
+        <div class="calc__panneau" id="calc-comparaison" role="tabpanel" hidden>
+          <div class="calc__grille">
+            <div class="calc__champs">
+              <label class="champ">
+                <span>Montant du prêt</span>
+                <div class="champ__boite">
+                  <span class="champ__unite">$</span>
+                  <input type="number" id="t-montant" value="400000" min="0" step="1000" inputmode="numeric">
+                </div>
+              </label>
+              <label class="champ">
+                <span>Taux affiché par la banque</span>
+                <div class="champ__boite">
+                  <input type="number" id="t-tauxa" value="4.56" min="0" max="25" step="0.01" inputmode="decimal">
+                  <span class="champ__unite">%</span>
+                </div>
+              </label>
+              <label class="champ">
+                <span>Taux négocié</span>
+                <div class="champ__boite">
+                  <input type="number" id="t-tauxb" value="4.39" min="0" max="25" step="0.01" inputmode="decimal">
+                  <span class="champ__unite">%</span>
+                </div>
+              </label>
+              <label class="champ">
+                <span>Amortissement</span>
+                <div class="champ__boite">
+                  <select id="t-amort">
+                    <option value="20">20 ans</option>
+                    <option value="25" selected>25 ans</option>
+                    <option value="30">30 ans</option>
+                  </select>
+                </div>
+              </label>
+              <label class="champ">
+                <span>Durée du terme</span>
+                <div class="champ__boite">
+                  <select id="t-terme">
+                    <option value="1">1 an</option>
+                    <option value="2">2 ans</option>
+                    <option value="3">3 ans</option>
+                    <option value="5" selected>5 ans</option>
+                  </select>
+                </div>
+              </label>
+            </div>
+
+            <div class="calc__resultat">
+              <span class="calc__etiquette">Économies pendant le terme</span>
+              <span class="calc__valeur calc__valeur--vert" id="t-economie">—</span>
+              <dl class="calc__details">
+                <div><dt>Paiement au taux affiché</dt><dd id="t-pa">—</dd></div>
+                <div><dt>Paiement au taux négocié</dt><dd id="t-pb">—</dd></div>
+                <div><dt>Différence par mois</dt><dd id="t-ecart">—</dd></div>
+              </dl>
+            </div>
+          </div>
+        </div>
+
+        <!-- ---------- Mise de fonds ---------- -->
+        <div class="calc__panneau" id="calc-mise" role="tabpanel" hidden>
+          <div class="calc__grille">
+            <div class="calc__champs">
+              <label class="champ">
+                <span>Prix d'achat de la propriété</span>
+                <div class="champ__boite">
+                  <span class="champ__unite">$</span>
+                  <input type="number" id="m-prix" value="450000" min="0" step="5000" inputmode="numeric">
+                </div>
+              </label>
+              <label class="champ">
+                <span>Mise de fonds prévue
+                  <small>laissez vide pour voir le minimum</small></span>
+                <div class="champ__boite">
+                  <span class="champ__unite">$</span>
+                  <input type="number" id="m-mise" placeholder="0" min="0" step="1000" inputmode="numeric">
+                </div>
+              </label>
+            </div>
+
+            <div class="calc__resultat">
+              <span class="calc__etiquette">Mise de fonds minimale</span>
+              <span class="calc__valeur" id="m-min">—</span>
+              <dl class="calc__details">
+                <div><dt>Pourcentage du prix</dt><dd id="m-pct">—</dd></div>
+                <div><dt>Assurance prêt hypothécaire</dt><dd id="m-prime">—</dd></div>
+                <div><dt>Prêt total, prime incluse</dt><dd id="m-pret">—</dd></div>
+              </dl>
+              <p class="calc__note" id="m-note"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="calc__pied">
+        <p>Ces résultats sont des estimations fondées sur les règles fédérales
+           en vigueur et sur la composition semestrielle des intérêts propre aux
+           prêts hypothécaires canadiens. Les taxes foncières sont estimées à
+           1 % de la valeur par année et le chauffage à 100 $ par mois. Les
+           critères varient d'un prêteur à l'autre.</p>
+        <a class="bouton js-conversion" href="tel:+15142484361">Valider mes chiffres avec vous</a>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ Approche ============ -->
   <section class="bloc bloc--brume" id="approche">
     <div class="enveloppe approche">
@@ -823,34 +1231,55 @@ html{scroll-behavior:smooth}
         </article>
       </div>
     </div>
+
+    <div class="enveloppe">
+      <div class="chiffres">
+        <div class="chiffre">
+          <span class="chiffre__valeur">90 +</span>
+          <p>institutions financières comparées pour trouver la meilleure offre
+             pour votre situation</p>
+        </div>
+        <div class="chiffre">
+          <span class="chiffre__valeur chiffre__valeur--vert">9 à 13 k$</span>
+          <p>d'économies potentielles sur 5 ans en négociant plutôt qu'en
+             acceptant l'offre initiale d'une banque</p>
+        </div>
+        <div class="chiffre">
+          <span class="chiffre__valeur">24 h</span>
+          <p>maximum pour recevoir un premier appel après votre demande</p>
+        </div>
+      </div>
+      <p class="chiffres__source">Économies estimées à partir d'analyses de
+         l'industrie du courtage hypothécaire québécois, sur un solde de
+         400 000 $. Les résultats varient selon chaque dossier.</p>
+    </div>
   </section>
 
   <!-- ============ Méthode ============ -->
   <section class="bloc" id="methode">
     <div class="enveloppe" style="max-width:900px">
       <h2>Une méthode en quatre étapes</h2>
-      <p style="margin-top:14px;color:var(--gris);max-width:46ch">
-        Un parcours clair, du premier échange jusqu'à la signature.
-      </p>
 
       <div class="methode">
         <div class="etape">
           <div class="etape__rang" aria-hidden="true">01</div>
-          <p>Votre situation est analysée en profondeur.</p>
+          <p>Un premier échange pour comprendre votre projet, votre situation
+             financière et votre réalité familiale.</p>
         </div>
         <div class="etape">
           <div class="etape__rang" aria-hidden="true">02</div>
-          <p>Vos options vous sont expliquées clairement, pour que vous
-             compreniez ce que vous signez.</p>
+          <p>Votre dossier est analysé en profondeur pour identifier les
+             possibilités qui s'offrent à vous.</p>
         </div>
         <div class="etape">
           <div class="etape__rang" aria-hidden="true">03</div>
-          <p>Les meilleures conditions disponibles sont négociées pour vous.</p>
+          <p>Une sélection d'options est présentée, puis étudiée ensemble pour
+             retenir la solution la plus adaptée.</p>
         </div>
         <div class="etape">
           <div class="etape__rang" aria-hidden="true">04</div>
-          <p>L'accompagnement se poursuit jusqu'à la signature, sans jamais
-             vous laisser sans réponse.</p>
+          <p>Les meilleures conditions sont négociées auprès des prêteurs, et
+             l'accompagnement se poursuit jusqu'à la signature.</p>
         </div>
       </div>
     </div>
@@ -1193,6 +1622,290 @@ var LIEN_FORMULAIRE = "";
   });
 })();
 
+
+/* ===========================================================
+   4. Calculatrices hypothecaires
+   -----------------------------------------------------------
+   Au Canada, les prets hypothecaires sont composes
+   SEMESTRIELLEMENT. Le taux periodique se derive donc de
+   (1 + taux/2) et non de (1 + taux/12) comme aux Etats-Unis.
+
+   Regles federales appliquees (en vigueur en 2026) :
+   - Mise de fonds : 5 % sur la 1re tranche de 500 000 $,
+     10 % de 500 000 $ a 1 499 999 $, 20 % des 1 500 000 $.
+   - Prime d'assurance pret hypothecaire : 4,00 %, 3,10 % ou
+     2,80 % du pret selon la mise de fonds.
+   - Taux admissible : le plus eleve entre le taux + 2 % et
+     5,25 % (test de tension du BSIF).
+   - Ratios ABD 39 % et ATD 44 %.
+   =========================================================== */
+(function () {
+  var racine = document.getElementById("calculatrices");
+  if (!racine) return;
+
+  function id(n) { return document.getElementById(n); }
+
+  function val(n, defaut) {
+    var e = id(n);
+    if (!e) return defaut || 0;
+    var v = parseFloat(e.value);
+    return isNaN(v) ? (defaut || 0) : v;
+  }
+
+  var argent = new Intl.NumberFormat("fr-CA", {
+    style: "currency", currency: "CAD", maximumFractionDigits: 0
+  });
+  var argentPrecis = new Intl.NumberFormat("fr-CA", {
+    style: "currency", currency: "CAD", minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  });
+
+  function pct(v) {
+    return v.toFixed(2).replace(".", ",") + " %";
+  }
+
+  /* --- Coeur du calcul --- */
+  function tauxPeriodique(tauxAnnuel, parAn) {
+    // Composition semestrielle convertie a la frequence demandee
+    return Math.pow(1 + tauxAnnuel / 200, 2 / parAn) - 1;
+  }
+
+  function paiement(capital, tauxAnnuel, annees, parAn) {
+    parAn = parAn || 12;
+    var i = tauxPeriodique(tauxAnnuel, parAn);
+    var n = annees * parAn;
+    if (capital <= 0 || n <= 0) return 0;
+    if (i === 0) return capital / n;
+    return capital * i / (1 - Math.pow(1 + i, -n));
+  }
+
+  function miseDeFondsMin(prix) {
+    if (prix <= 0) return 0;
+    if (prix >= 1500000) return prix * 0.20;
+    if (prix <= 500000) return prix * 0.05;
+    return 500000 * 0.05 + (prix - 500000) * 0.10;
+  }
+
+  function primeAssurance(pret, prix) {
+    if (prix <= 0 || pret <= 0) return 0;
+    var part = (prix - pret) / prix;
+    if (part >= 0.20) return 0;
+    if (part >= 0.15) return pret * 0.028;
+    if (part >= 0.10) return pret * 0.031;
+    return pret * 0.04;
+  }
+
+  /* ================= Onglets ================= */
+  var onglets = racine.querySelectorAll(".calc__onglet");
+  for (var i = 0; i < onglets.length; i++) {
+    onglets[i].addEventListener("click", function () {
+      for (var j = 0; j < onglets.length; j++) {
+        onglets[j].classList.remove("est-actif");
+        onglets[j].setAttribute("aria-selected", "false");
+        var p = id(onglets[j].getAttribute("data-cible"));
+        if (p) { p.hidden = true; p.classList.remove("est-actif"); }
+      }
+      this.classList.add("est-actif");
+      this.setAttribute("aria-selected", "true");
+      var cible = id(this.getAttribute("data-cible"));
+      if (cible) { cible.hidden = false; cible.classList.add("est-actif"); }
+    });
+  }
+
+  /* ================= 1. Paiements ================= */
+  function calculPaiement() {
+    var montant = val("p-montant");
+    var taux = val("p-taux");
+    var annees = val("p-amort", 25);
+    var parAn = val("p-freq", 12);
+
+    var p = paiement(montant, taux, annees, parAn);
+    var total = p * annees * parAn;
+
+    var mots = { 12: "par mois", 26: "aux deux semaines", 52: "par semaine" };
+    id("p-paiement").textContent = argentPrecis.format(p);
+    id("p-paiement").setAttribute("title", mots[parAn] || "");
+    id("p-interets").textContent = argent.format(Math.max(0, total - montant));
+    id("p-total").textContent = argent.format(total);
+
+    var etiq = racine.querySelector("#calc-paiement .calc__etiquette");
+    if (etiq) etiq.textContent = "Votre paiement " + (mots[parAn] || "");
+  }
+
+  /* ================= 2. Capacite d'emprunt ================= */
+  function calculCapacite() {
+    var revenu = val("c-revenu");
+    var dettes = val("c-dettes");
+    var mise = val("c-mise");
+    var taux = val("c-taux");
+    var annees = val("c-amort", 25);
+
+    var tauxAdm = Math.max(taux + 2, 5.25);
+    var revenuMois = revenu / 12;
+    var plafondAbd = revenuMois * 0.39;
+    var plafondAtd = revenuMois * 0.44 - dettes;
+    var plafond = Math.min(plafondAbd, plafondAtd);
+
+    var note = id("c-note");
+    note.classList.remove("est-avertissement");
+
+    if (plafond <= 0 || revenu <= 0) {
+      id("c-prix").textContent = "—";
+      id("c-pret").textContent = "—";
+      id("c-paiement").textContent = "—";
+      id("c-tauxadm").textContent = "—";
+      note.textContent = "Avec ces montants, les dettes mensuelles absorbent " +
+        "déjà la capacité disponible. Un appel permet de regarder les options.";
+      note.classList.add("est-avertissement");
+      return;
+    }
+
+    // Recherche par dichotomie du prix maximal admissible
+    var bas = mise, haut = mise + 5000000;
+    for (var k = 0; k < 60; k++) {
+      var prix = (bas + haut) / 2;
+      var pret = prix - mise;
+      var minRequis = miseDeFondsMin(prix);
+      if (mise < minRequis) { haut = prix; continue; }
+      var pretTotal = pret + primeAssurance(pret, prix);
+      var cout = paiement(pretTotal, tauxAdm, annees, 12)
+               + prix * 0.01 / 12   // taxes foncieres estimees
+               + 100;               // chauffage
+      if (cout > plafond) haut = prix; else bas = prix;
+    }
+
+    var prixMax = bas;
+    var pretMax = Math.max(0, prixMax - mise);
+    var prime = primeAssurance(pretMax, prixMax);
+
+    id("c-prix").textContent = argent.format(prixMax);
+    id("c-pret").textContent = argent.format(pretMax + prime);
+    id("c-paiement").textContent =
+      argent.format(paiement(pretMax + prime, taux, annees, 12));
+    id("c-tauxadm").textContent = pct(tauxAdm);
+
+    var messages = [];
+    if (tauxAdm > taux) {
+      messages.push("Les prêteurs doivent vérifier que vous pourriez payer à " +
+                    pct(tauxAdm) + ", même si votre taux réel est plus bas.");
+    }
+    if (prime > 0) {
+      messages.push("Une assurance prêt hypothécaire de " +
+                    argent.format(prime) + " s'ajoute au prêt.");
+    }
+    if (annees > 25 && prime > 0) {
+      messages.push("Un amortissement de 30 ans avec assurance est réservé " +
+                    "aux premiers acheteurs et aux constructions neuves.");
+    }
+    note.textContent = messages.join(" ");
+  }
+
+  /* ================= 3. Comparer deux taux ================= */
+  function calculComparaison() {
+    var montant = val("t-montant");
+    var tauxA = val("t-tauxa");
+    var tauxB = val("t-tauxb");
+    var annees = val("t-amort", 25);
+    var terme = val("t-terme", 5);
+
+    var pa = paiement(montant, tauxA, annees, 12);
+    var pb = paiement(montant, tauxB, annees, 12);
+    var ecart = pa - pb;
+
+    id("t-pa").textContent = argentPrecis.format(pa);
+    id("t-pb").textContent = argentPrecis.format(pb);
+    id("t-ecart").textContent = argentPrecis.format(Math.abs(ecart));
+    id("t-economie").textContent = argent.format(Math.abs(ecart) * terme * 12);
+
+    var etiq = racine.querySelector("#calc-comparaison .calc__etiquette");
+    var valeur = id("t-economie");
+    if (ecart >= 0) {
+      if (etiq) etiq.textContent = "Économies sur " + terme +
+        (terme > 1 ? " ans" : " an");
+      valeur.classList.add("calc__valeur--vert");
+    } else {
+      if (etiq) etiq.textContent = "Coût supplémentaire sur " + terme +
+        (terme > 1 ? " ans" : " an");
+      valeur.classList.remove("calc__valeur--vert");
+    }
+  }
+
+  /* ================= 4. Mise de fonds ================= */
+  function calculMise() {
+    var prix = val("m-prix");
+    var champMise = id("m-mise");
+    var saisie = champMise.value.trim();
+    var minimum = miseDeFondsMin(prix);
+    var mise = saisie === "" ? minimum : val("m-mise");
+
+    var note = id("m-note");
+    note.classList.remove("est-avertissement");
+
+    if (prix <= 0) {
+      id("m-min").textContent = "—";
+      id("m-pct").textContent = "—";
+      id("m-prime").textContent = "—";
+      id("m-pret").textContent = "—";
+      note.textContent = "";
+      return;
+    }
+
+    var etiq = racine.querySelector("#calc-mise .calc__etiquette");
+    if (saisie === "") {
+      if (etiq) etiq.textContent = "Mise de fonds minimale";
+      id("m-min").textContent = argent.format(minimum);
+    } else {
+      if (etiq) etiq.textContent = "Votre mise de fonds";
+      id("m-min").textContent = argent.format(mise);
+    }
+
+    var pret = Math.max(0, prix - mise);
+    var prime = primeAssurance(pret, prix);
+
+    id("m-pct").textContent = pct(mise / prix * 100);
+    id("m-prime").textContent = prime > 0 ? argent.format(prime) : "Aucune";
+    id("m-pret").textContent = argent.format(pret + prime);
+
+    var messages = [];
+    if (saisie !== "" && mise < minimum) {
+      messages.push("Le minimum exigé pour ce prix est de " +
+                    argent.format(minimum) + ", soit " +
+                    pct(minimum / prix * 100) + " du prix.");
+      note.classList.add("est-avertissement");
+    }
+    if (prix >= 1500000) {
+      messages.push("À partir de 1 500 000 $, l'assurance prêt hypothécaire " +
+                    "n'est plus offerte : la mise de fonds doit atteindre 20 %.");
+    } else if (prime > 0) {
+      messages.push("Sous 20 % de mise de fonds, l'assurance prêt " +
+                    "hypothécaire est obligatoire et s'ajoute au montant emprunté.");
+    } else {
+      messages.push("À 20 % ou plus, aucune assurance prêt hypothécaire " +
+                    "n'est requise.");
+    }
+    note.textContent = messages.join(" ");
+  }
+
+  /* ================= Branchements ================= */
+  var groupes = [
+    { champs: ["p-montant", "p-taux", "p-amort", "p-freq"], calcul: calculPaiement },
+    { champs: ["c-revenu", "c-dettes", "c-mise", "c-taux", "c-amort"], calcul: calculCapacite },
+    { champs: ["t-montant", "t-tauxa", "t-tauxb", "t-amort", "t-terme"], calcul: calculComparaison },
+    { champs: ["m-prix", "m-mise"], calcul: calculMise }
+  ];
+
+  for (var g = 0; g < groupes.length; g++) {
+    (function (groupe) {
+      for (var c = 0; c < groupe.champs.length; c++) {
+        var e = id(groupe.champs[c]);
+        if (!e) continue;
+        e.addEventListener("input", groupe.calcul);
+        e.addEventListener("change", groupe.calcul);
+      }
+      groupe.calcul();
+    })(groupes[g]);
+  }
+})();
 </script>
 
 </body>
