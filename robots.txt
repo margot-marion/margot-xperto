@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://site-ch-eht.pages.dev/sitemap.xml
