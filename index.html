@@ -354,17 +354,20 @@ section[id]{scroll-margin-top:104px}
 
 /* ---------- Hero ---------- */
 .hero{
-  display:grid;
-  grid-template-columns:1.52fr .48fr;
-  align-items:stretch;
-  min-height:clamp(430px,54vh,570px);
-}
-.hero__texte{
   background:var(--brume);
-  display:flex;flex-direction:column;justify-content:center;
-  padding:52px clamp(28px,5vw,72px);
+  padding:clamp(40px,5vw,64px) 0;
 }
-.hero__interieur{max-width:560px;margin-left:auto;width:100%}
+/* Le contenu suit la meme largeur et le meme centrage que les autres
+   sections de la page, d'ou l'alignement coherent du haut en bas. */
+.hero__grille{
+  width:100%;max-width:var(--large);margin:0 auto;padding:0 24px;
+  display:grid;
+  grid-template-columns:minmax(0,1.28fr) minmax(0,.72fr);
+  gap:clamp(32px,5vw,64px);
+  align-items:center;
+}
+.hero__texte{min-width:0}
+.hero__interieur{width:100%}
 .hero h1 .tournant{color:var(--bleu);display:block}
 .hero__soutien{
   margin-top:26px;
@@ -386,24 +389,16 @@ section[id]{scroll-margin-top:104px}
 .carte-perso__nom{font-family:var(--titre);font-weight:700;font-size:1.04rem;letter-spacing:-.01em}
 .carte-perso__role{font-size:.9rem;color:var(--gris);line-height:1.4}
 
-.hero__portrait{
-  position:relative;
-  background:var(--brume);
-  padding:clamp(34px,5vw,76px);
-  padding-left:0;
-  display:flex;align-items:center;
-}
+.hero__portrait{min-width:0}
 .hero__portrait picture{
-  position:relative;
+  position:relative;display:block;
   width:100%;
   aspect-ratio:4/5;
-  max-height:100%;
-  margin:auto;
   border-radius:20px;overflow:hidden;
   box-shadow:0 18px 44px rgba(26,26,26,.12);
 }
 /* L'image est sortie du flux : sinon ses proportions imposaient la hauteur
-   de tout le hero, d'ou un espace excessif au-dessus du texte. */
+   de tout le hero. */
 .hero__portrait img{
   position:absolute;inset:0;
   width:100%;height:100%;object-fit:cover;object-position:50% 55%;
@@ -794,11 +789,10 @@ details p{padding:0 8px 23px 0;color:rgba(26,26,26,.78);max-width:60ch}
 
 /* ---------- Adaptations ---------- */
 @media (max-width:900px){
-  .hero{grid-template-columns:1fr;min-height:0}
-  .hero__portrait{order:-1;height:min(46vh,340px);padding:20px;padding-bottom:0}
-  .hero__portrait img{object-position:50% 66%}
-  .hero__interieur{margin-left:0;max-width:none}
-  .hero__texte{padding:52px 24px 60px}
+  .hero__grille{grid-template-columns:1fr;gap:30px}
+  .hero__portrait{order:-1;max-width:400px;margin:0 auto;width:100%}
+  .hero__portrait picture{aspect-ratio:5/4}
+  .hero__portrait img{object-position:50% 58%}
   .approche,.questions,.calc__grille,.methode-bloc{grid-template-columns:1fr}
   .methode__image{max-width:340px;margin:0 auto}
   .calc__onglet{flex:1 1 46%;font-size:.86rem;padding:11px 10px}
@@ -908,6 +902,7 @@ html{scroll-behavior:smooth}
 
   <!-- ============ Hero ============ -->
   <section class="hero">
+   <div class="hero__grille">
     <div class="hero__texte">
       <div class="hero__interieur">
         <div class="carte-perso">
@@ -946,6 +941,7 @@ html{scroll-behavior:smooth}
              width="1200" height="1500" fetchpriority="high">
       </picture>
     </div>
+   </div>
   </section>
 
   <!-- ============ Taux ============ -->
