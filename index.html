@@ -714,6 +714,24 @@ tr.vedette td{background:rgba(76,176,127,.075)}
 }
 .etape p{font-size:1.11rem;max-width:56ch}
 
+.methode-bloc{
+  display:grid;
+  grid-template-columns:minmax(0,.62fr) minmax(0,1fr);
+  gap:clamp(34px,5vw,66px);
+  align-items:center;
+}
+.methode__image{
+  margin:0;
+  border-radius:20px;overflow:hidden;
+  box-shadow:0 16px 40px rgba(26,26,26,.14);
+  position:relative;
+}
+.methode__image::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:6px;
+  background:var(--vert);
+}
+.methode__image img{width:100%;height:auto;display:block}
+
 /* ---------- Questions ---------- */
 .questions{display:grid;grid-template-columns:minmax(0,.72fr) minmax(0,1fr);gap:clamp(34px,6vw,74px);align-items:start}
 .questions__liste{border-top:1px solid var(--trait)}
@@ -781,7 +799,8 @@ details p{padding:0 8px 23px 0;color:rgba(26,26,26,.78);max-width:60ch}
   .hero__portrait img{object-position:50% 66%}
   .hero__interieur{margin-left:0;max-width:none}
   .hero__texte{padding:52px 24px 60px}
-  .approche,.questions,.calc__grille{grid-template-columns:1fr}
+  .approche,.questions,.calc__grille,.methode-bloc{grid-template-columns:1fr}
+  .methode__image{max-width:340px;margin:0 auto}
   .calc__onglet{flex:1 1 46%;font-size:.86rem;padding:11px 10px}
   .calc__pied{flex-direction:column;align-items:stretch}
   .calc__pied .bouton{text-align:center}
@@ -1293,7 +1312,17 @@ html{scroll-behavior:smooth}
 
   <!-- ============ Méthode ============ -->
   <section class="bloc" id="methode">
-    <div class="enveloppe" style="max-width:900px">
+    <div class="enveloppe methode-bloc">
+      <figure class="methode__image">
+        <picture>
+          <source srcset="img/famille-bonheur.webp" type="image/webp">
+          <img src="img/famille-bonheur.jpg"
+               alt="Une famille réunie et souriante, après la conclusion de son projet hypothécaire"
+               width="800" height="1000" loading="lazy">
+        </picture>
+      </figure>
+
+      <div class="methode__texte">
       <h2>Une méthode en quatre étapes</h2>
 
       <div class="methode">
@@ -1317,6 +1346,7 @@ html{scroll-behavior:smooth}
           <p>Les meilleures conditions sont négociées auprès des prêteurs, et
              l'accompagnement se poursuit jusqu'à la signature.</p>
         </div>
+      </div>
       </div>
     </div>
   </section>
