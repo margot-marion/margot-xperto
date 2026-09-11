@@ -355,7 +355,7 @@ section[id]{scroll-margin-top:104px}
 /* ---------- Hero ---------- */
 .hero{
   display:grid;
-  grid-template-columns:1.06fr .94fr;
+  grid-template-columns:1.18fr .82fr;
   align-items:stretch;
   min-height:clamp(430px,54vh,570px);
 }
@@ -386,9 +386,24 @@ section[id]{scroll-margin-top:104px}
 .carte-perso__nom{font-family:var(--titre);font-weight:700;font-size:1.04rem;letter-spacing:-.01em}
 .carte-perso__role{font-size:.9rem;color:var(--gris);line-height:1.4}
 
-.hero__portrait{position:relative;background:var(--brume);overflow:hidden}
-/* L'image est sortie du flux : sinon ses proportions (960x1220) imposaient
-   la hauteur de tout le hero, d'ou l'espace excessif au-dessus du texte. */
+.hero__portrait{
+  position:relative;
+  background:var(--brume);
+  padding:clamp(24px,3vw,44px);
+  padding-left:0;
+  display:flex;align-items:center;
+}
+.hero__portrait picture{
+  position:relative;
+  width:100%;
+  aspect-ratio:4/5;
+  max-height:100%;
+  margin:auto;
+  border-radius:20px;overflow:hidden;
+  box-shadow:0 18px 44px rgba(26,26,26,.12);
+}
+/* L'image est sortie du flux : sinon ses proportions imposaient la hauteur
+   de tout le hero, d'ou un espace excessif au-dessus du texte. */
 .hero__portrait img{
   position:absolute;inset:0;
   width:100%;height:100%;object-fit:cover;object-position:50% 55%;
@@ -498,6 +513,19 @@ tr.vedette td{background:rgba(76,176,127,.075)}
   gap:clamp(38px,6vw,80px);align-items:start;
 }
 .approche__intro p+p{margin-top:18px}
+
+.portrait{
+  margin:0 0 28px;
+  width:clamp(190px,26vw,250px);
+  border-radius:18px;overflow:hidden;
+  box-shadow:0 12px 30px rgba(26,26,26,.13);
+  position:relative;
+}
+.portrait::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:5px;
+  background:var(--vert);
+}
+.portrait img{width:100%;height:auto;display:block}
 .approche__intro strong{font-weight:600}
 
 .atouts{display:grid;gap:14px}
@@ -749,7 +777,7 @@ details p{padding:0 8px 23px 0;color:rgba(26,26,26,.78);max-width:60ch}
 /* ---------- Adaptations ---------- */
 @media (max-width:900px){
   .hero{grid-template-columns:1fr;min-height:0}
-  .hero__portrait{order:-1;height:min(42vh,320px)}
+  .hero__portrait{order:-1;height:min(46vh,340px);padding:20px;padding-bottom:0}
   .hero__portrait img{object-position:50% 66%}
   .hero__interieur{margin-left:0;max-width:none}
   .hero__texte{padding:52px 24px 60px}
@@ -1193,6 +1221,14 @@ html{scroll-behavior:smooth}
   <section class="bloc bloc--brume" id="approche">
     <div class="enveloppe approche">
       <div class="approche__intro">
+        <figure class="portrait">
+          <picture>
+            <source srcset="img/margot-portrait.webp" type="image/webp">
+            <img src="img/margot-portrait.jpg"
+                 alt="Margot Marion, courtière hypothécaire au Québec"
+                 width="720" height="900" loading="lazy">
+          </picture>
+        </figure>
         <h2>Une approche centrée sur la transparence et l'accompagnement</h2>
         <p style="margin-top:22px">
           Taux fixe ou variable, admissibilité, mise de fonds, pénalités de
