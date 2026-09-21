@@ -143,6 +143,15 @@
 }
 </script>
 
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8RLKGKP7ZV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8RLKGKP7ZV');
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
@@ -1959,6 +1968,133 @@ html{scroll-behavior:smooth}
       }
       groupe.calcul();
     })(groupes[g]);
+  }
+})();
+/* ===========================================================
+   Suivi des campagnes (UTM)
+   -----------------------------------------------------------
+   Les parametres UTM presents a l'arrivee du visiteur sont
+   conserves pendant toute sa visite, puis transmis au
+   formulaire Typeform en champs caches. Ils remontent ainsi
+   jusqu'au dossier Velocity.
+
+   Important : Microsoft Bookings refuse les parametres de
+   requete. Les liens de prise de rendez-vous ne sont donc
+   jamais modifies, sous peine de les casser.
+   =========================================================== */
+(function () {
+  var CLES = ["utm_source", "utm_medium", "utm_campaign", "utm_term",
+              "utm_content", "gclid", "fbclid"];
+  var MEMOIRE = "mm_campagne";
+
+  function lireUrl() {
+    var p = new URLSearchParams(window.location.search);
+    var trouve = {};
+    for (var i = 0; i < CLES.length; i++) {
+      var v = p.get(CLES[i]);
+      if (v) trouve[CLES[i]] = v.slice(0, 120);
+    }
+    return trouve;
+  }
+
+  function memoriser(donnees) {
+    try {
+      sessionStorage.setItem(MEMOIRE, JSON.stringify(donnees));
+    } catch (e) {}
+  }
+
+  function rappeler() {
+    try {
+      var s = sessionStorage.getItem(MEMOIRE);
+      return s ? JSON.parse(s) : {};
+    } catch (e) { return {}; }
+  }
+
+  // La campagne d'arrivee a priorite ; sinon on garde celle memorisee
+  var campagne = lireUrl();
+  if (Object.keys(campagne).length) {
+    // Premiere page vue : on note aussi la provenance
+    if (document.referrer && !campagne.referrer) {
+      try {
+        var h = new URL(document.referrer).hostname;
+        if (h && h !== window.location.hostname) campagne.referrer = h;
+      } catch (e) {}
+    }
+    memoriser(campagne);
+  } else {
+    campagne = rappeler();
+  }
+
+  // Transmission au formulaire, en champs caches
+  var liens = document.querySelectorAll('a[href*="form.typeform.com"]');
+  if (!liens.length || !Object.keys(campagne).length) return;
+
+  for (var j = 0; j < liens.length; j++) {
+    var base = liens[j].getAttribute("href").split("#")[0].split("?")[0];
+    var params = [];
+    for (var cle in campagne) {
+      if (campagne.hasOwnProperty(cle)) {
+        params.push(encodeURIComponent(cle) + "=" + encodeURIComponent(campagne[cle]));
+      }
+    }
+    liens[j].setAttribute("href", base + "#" + params.join("&"));
+  }
+})();
+/* ===========================================================
+   Suivi des conversions
+   -----------------------------------------------------------
+   Bookings ne permet pas de transmettre les parametres de
+   campagne. On enregistre donc le clic AVANT la redirection :
+   la campagne d'origine est ainsi connue, meme si Bookings
+   l'ignore de son cote.
+   =========================================================== */
+(function () {
+  if (typeof gtag !== "function") return;
+
+  function campagne() {
+    try {
+      var s = sessionStorage.getItem("mm_campagne");
+      return s ? JSON.parse(s) : {};
+    } catch (e) { return {}; }
+  }
+
+  function suivre(nom, destination) {
+    var c = campagne();
+    gtag("event", nom, {
+      destination: destination,
+      emplacement: this && this.dataset ? (this.dataset.zone || "") : "",
+      campagne_source: c.utm_source || "direct",
+      campagne_medium: c.utm_medium || "",
+      campagne_nom: c.utm_campaign || ""
+    });
+  }
+
+  var liens = document.querySelectorAll("a[href]");
+  for (var i = 0; i < liens.length; i++) {
+    var h = liens[i].getAttribute("href") || "";
+    var nom = null, dest = null;
+
+    if (h.indexOf("bookings.cloud.microsoft") !== -1) { nom = "prise_rendez_vous"; dest = "bookings"; }
+    else if (h.indexOf("form.typeform.com") !== -1)   { nom = "formulaire_ouvert"; dest = "typeform"; }
+    else if (h.indexOf("tel:") === 0)                 { nom = "appel_telephone";   dest = "telephone"; }
+    else if (h.indexOf("mailto:") === 0)              { nom = "courriel_ouvert";   dest = "courriel"; }
+
+    if (nom) {
+      (function (el, n, d) {
+        el.addEventListener("click", function () { suivre.call(el, n, d); });
+      })(liens[i], nom, dest);
+    }
+  }
+
+  // Utilisation des calculatrices : un signal d'interet fort
+  var calcSuivi = false;
+  var champs = document.querySelectorAll("#calculatrices input, #calculatrices select");
+  for (var j = 0; j < champs.length; j++) {
+    champs[j].addEventListener("change", function () {
+      if (calcSuivi) return;
+      calcSuivi = true;
+      gtag("event", "calculatrice_utilisee", { campagne_source: campagne().utm_source || "direct" });
+    });
   }
 })();
 </script>

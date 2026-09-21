@@ -38,7 +38,10 @@ const MOTS_CLES = [
   ["ville",          /ville|municipalite/i],
   ["langue",         /langue/i],
   ["consentement",   /consentement|accepte.*communicat|autorise.*joindre/i],
-  ["message",        /autre\s+chose|partager|objectifs|situation\s+actuelle|precision/i]
+  ["message",        /autre\s+chose|partager|objectifs|situation\s+actuelle|precision/i],
+  ["utm_source",     /utm_source/i],
+  ["utm_medium",     /utm_medium/i],
+  ["utm_campaign",   /utm_campaign/i]
 ];
 
 // Enumerations de Velocity
@@ -244,7 +247,7 @@ function construireDossier(lu) {
   }
 
   const dossier = {
-    customSource: "site-web",
+    customSource: sourceVelocity(c),
     mortgageRequest: { purpose: devinerObjet(c.projet) },
     borrowers: [emprunteur]
   };
@@ -296,6 +299,20 @@ function separerNom(complet) {
     prenom: bouts[0].slice(0, 20),
     nom: bouts.slice(1).join(" ").slice(0, 40)
   };
+}
+
+// La source apparait dans Velocity et permet de filtrer les dossiers.
+// Velocity limite ce champ a 30 caracteres alphanumeriques, tirets et
+// traits de soulignement.
+function sourceVelocity(c) {
+  const base = "site-web";
+  const src = (c.utm_source || "").toString().trim();
+  if (!src) return base;
+  const propre = sansAccents(src.toLowerCase())
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+  if (!propre) return base;
+  return (base + "-" + propre).slice(0, 30).replace(/-+$/, "");
 }
 
 function devinerObjet(v) {
