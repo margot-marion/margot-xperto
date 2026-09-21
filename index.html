@@ -756,17 +756,16 @@ details p{padding:0 8px 23px 0;color:rgba(26,26,26,.78);max-width:60ch}
 .invitation__actions{
   display:flex;gap:16px;justify-content:center;align-items:center;flex-wrap:wrap;
 }
-.lien-rdv{
-  display:inline-flex;align-items:center;gap:9px;
-  padding:17px 26px;border-radius:10px;
+.bouton--contour{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:17px 28px;border-radius:10px;
   border:1px solid rgba(255,255,255,.55);
   color:var(--blanc);text-decoration:none;
   font-family:var(--titre);font-weight:700;font-size:1.02rem;
   letter-spacing:-.01em;
   transition:background .18s ease,border-color .18s ease;
 }
-.lien-rdv:hover{background:rgba(255,255,255,.14);border-color:var(--blanc)}
-.lien-rdv svg{flex:none}
+.bouton--contour:hover{background:rgba(255,255,255,.14);border-color:var(--blanc)}
 
 .invitation__coord{
   margin-top:34px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;
@@ -851,7 +850,6 @@ details p{padding:0 8px 23px 0;color:rgba(26,26,26,.78);max-width:60ch}
   }
   .etape{grid-template-columns:72px minmax(0,1fr);gap:14px;padding:24px 0}
   .invitation__actions{flex-direction:column;align-items:stretch}
-  .invitation__actions .bouton,.lien-rdv{text-align:center;justify-content:center}
   .pied__rang{gap:20px}
   .pied__coord{gap:12px;flex-direction:column;align-items:flex-start}
   .identite__logos{gap:9px;padding-right:12px}
@@ -894,7 +892,7 @@ html{scroll-behavior:smooth}
         </a>
       </span>
 
-      <a class="bouton js-conversion" href="tel:+15142484361">Comparer mes options</a>
+      <a class="bouton" href="https://bookings.cloud.microsoft/book/XpertoHypothque@xperto.ca/" target="_blank" rel="noopener">Prendre rendez-vous</a>
 
       <details class="menu">
         <summary aria-label="Ouvrir le menu">
@@ -941,7 +939,7 @@ html{scroll-behavior:smooth}
         </p>
 
         <div class="hero__actions">
-          <a class="bouton js-conversion" href="tel:+15142484361">Comparer mes options de financement</a>
+          <a class="bouton" href="https://bookings.cloud.microsoft/book/XpertoHypothque@xperto.ca/" target="_blank" rel="noopener">Prendre rendez-vous</a>
           <p class="assurance">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
             Service gratuit &middot; Premier appel dans les 24&nbsp;h
@@ -1244,7 +1242,7 @@ html{scroll-behavior:smooth}
            prêts hypothécaires canadiens. Les taxes foncières sont estimées à
            1 % de la valeur par année et le chauffage à 100 $ par mois. Les
            critères varient d'un prêteur à l'autre.</p>
-        <a class="bouton js-conversion" href="tel:+15142484361">Valider mes chiffres avec vous</a>
+        <a class="bouton" href="https://form.typeform.com/to/ZOG80jWL" target="_blank" rel="noopener">Valider mon scénario</a>
       </div>
     </div>
   </section>
@@ -1396,15 +1394,11 @@ html{scroll-behavior:smooth}
   <section class="bloc invitation" id="contact">
     <div class="enveloppe">
       <h2>Prêt à voir ce qui est possible pour vous&nbsp;?</h2>
-      <p>Choisissez le type de rencontre qui correspond à votre projet, ou
-         remplissez le formulaire et je vous reviens.</p>
+      <p>Réservez une rencontre, ou décrivez votre projet et je vous
+         reviens rapidement.</p>
       <div class="invitation__actions">
-        <a class="bouton bouton--clair js-conversion" href="tel:+15142484361">Comparer mes options de financement</a>
-        <a class="lien-rdv" href="https://bookings.cloud.microsoft/book/XpertoHypothque@xperto.ca/"
-           target="_blank" rel="noopener">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-          Prendre rendez-vous
-        </a>
+        <a class="bouton bouton--clair" href="https://bookings.cloud.microsoft/book/XpertoHypothque@xperto.ca/" target="_blank" rel="noopener">Prendre rendez-vous</a>
+        <a class="bouton--contour" href="https://form.typeform.com/to/ZOG80jWL" target="_blank" rel="noopener">Comparer mes options de financement</a>
       </div>
 
       <div class="invitation__coord">
@@ -1447,25 +1441,6 @@ html{scroll-behavior:smooth}
 </footer>
 
 <script>
-/* ===========================================================
-   1. Destination des boutons de conversion
-   -----------------------------------------------------------
-   Colle ici le lien de ton formulaire Typeform, entre les
-   guillemets. Tant que la ligne reste vide, les boutons
-   lancent un appel téléphonique.
-   =========================================================== */
-var LIEN_FORMULAIRE = "https://form.typeform.com/to/ZOG80jWL";
-
-(function () {
-  if (!LIEN_FORMULAIRE) return;
-  var boutons = document.querySelectorAll(".js-conversion");
-  for (var i = 0; i < boutons.length; i++) {
-    boutons[i].setAttribute("href", LIEN_FORMULAIRE);
-    boutons[i].setAttribute("target", "_blank");
-    boutons[i].setAttribute("rel", "noopener");
-  }
-})();
-
 /* ===========================================================
    2. Tableau des taux
    -----------------------------------------------------------
