@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Courtière hypothécaire stagiaire à Laval | Margot Marion</title>
-<meta name="description" content="Courtière hypothécaire stagiaire à Laval. Achat, refinancement, renouvellement : plus de 25 prêteurs comparés. Service gratuit, premier appel en 24 h.">
+<title>Courtière hypothécaire stagiaire au Québec | Margot Marion</title>
+<meta name="description" content="Courtière hypothécaire stagiaire, partout au Québec. Achat, refinancement, renouvellement : plus de 25 prêteurs comparés. Service gratuit, premier appel en 24 h.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="author" content="Margot Marion">
 <meta name="theme-color" content="#0066CC">
@@ -14,18 +14,18 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
 <meta name="geo.region" content="CA-QC">
-<meta name="geo.placename" content="Laval">
+<meta name="geo.placename" content="Québec">
 
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_CA">
 <meta property="og:site_name" content="Margot Marion, courtière hypothécaire stagiaire">
 <meta property="og:url" content="https://margotmarion.ca/">
-<meta property="og:title" content="Courtière hypothécaire stagiaire à Laval | Margot Marion">
-<meta property="og:description" content="Vos options hypothécaires expliquées clairement et vos conditions négociées à votre avantage, à Laval et partout au Québec. Service gratuit.">
-<meta property="og:image" content="https://margotmarion.ca/img/partage-margot-marion-1200x630.jpg">
+<meta property="og:title" content="Courtière hypothécaire stagiaire au Québec | Margot Marion">
+<meta property="og:description" content="Vos options hypothécaires expliquées clairement et vos conditions négociées à votre avantage, partout au Québec. Service gratuit.">
+<meta property="og:image" content="https://margotmarion.ca/img/partage-margot-marion-quebec-1200x630.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Margot Marion, courtière hypothécaire stagiaire à Laval, Xperto Groupe Héritage">
+<meta property="og:image:alt" content="Margot Marion, courtière hypothécaire stagiaire, Xperto Groupe Héritage et Centres Hypothécaires Dominion National">
 <meta name="twitter:card" content="summary_large_image">
 
 <script type="application/ld+json">
@@ -39,27 +39,21 @@
       ],
       "@id": "https://margotmarion.ca/#entreprise",
       "name": "Margot Marion, courtière hypothécaire stagiaire",
-      "description": "Courtage hypothécaire à Laval et partout au Québec : achat, préapprobation, refinancement et renouvellement. Options expliquées clairement et conditions négociées auprès de plusieurs prêteurs.",
+      "description": "Courtage hypothécaire partout au Québec : achat, préapprobation, refinancement et renouvellement. Options expliquées clairement et conditions négociées auprès de plusieurs prêteurs.",
       "logo": "https://margotmarion.ca/icone-512.png",
       "url": "https://margotmarion.ca/",
       "telephone": "+1-514-248-4361",
       "email": "mmarion@xperto.ca",
       "image": "https://margotmarion.ca/img/conseil-client.jpg",
       "priceRange": "Gratuit pour le client",
-      "areaServed": [
-        {
-          "@type": "City",
-          "name": "Laval"
-        },
-        {
-          "@type": "State",
-          "name": "Québec",
-          "containedInPlace": {
-            "@type": "Country",
-            "name": "Canada"
-          }
+      "areaServed": {
+        "@type": "State",
+        "name": "Québec",
+        "containedInPlace": {
+          "@type": "Country",
+          "name": "Canada"
         }
-      ],
+      },
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "203-3899, autoroute des Laurentides",
@@ -96,7 +90,7 @@
       "@id": "https://margotmarion.ca/#margot",
       "name": "Margot Marion",
       "jobTitle": "Courtière hypothécaire stagiaire",
-      "description": "Courtière hypothécaire stagiaire inscrite auprès de l'Autorité des marchés financiers (AMF), exerçant pour le compte de Dominion Lending Centres National Ltd., au sein de l'équipe Xperto Groupe Héritage à Laval.",
+      "description": "Courtière hypothécaire stagiaire inscrite auprès de l'Autorité des marchés financiers (AMF), exerçant pour le compte de Dominion Lending Centres National Ltd., au sein de l'équipe Xperto Groupe Héritage.",
       "identifier": {
         "@type": "PropertyValue",
         "propertyID": "Numéro de client AMF",
@@ -118,7 +112,7 @@
       "@type": "WebSite",
       "@id": "https://margotmarion.ca/#site",
       "url": "https://margotmarion.ca/",
-      "name": "Margot Marion, courtière hypothécaire stagiaire à Laval",
+      "name": "Margot Marion, courtière hypothécaire stagiaire au Québec",
       "inLanguage": "fr-CA",
       "publisher": {
         "@id": "https://margotmarion.ca/#entreprise"
@@ -219,7 +213,8 @@
     'analytics_storage': 'denied'
   });
   gtag('js', new Date());
-  gtag('config', 'G-8RLKGKP7ZV');
+  // Témoins Analytics limités à 13 mois, comme l'indique la politique de confidentialité
+  gtag('config', 'G-8RLKGKP7ZV', { 'cookie_expires': 34164000 });
   gtag('config', 'AW-18455736571');
 
   var MM_CONSENT_CLE = 'mm_consentement';
@@ -232,14 +227,36 @@
     s.src = 'https://www.googletagmanager.com/gtag/js?id=G-8RLKGKP7ZV';
     document.head.appendChild(s);
   }
+  // « Accepter » active la mesure (Analytics et conversions Google Ads),
+  // jamais la publicité personnalisée : ad_personalization reste refusé.
   function mmAccorder() {
     gtag('consent', 'update', {
       'ad_storage': 'granted',
       'ad_user_data': 'granted',
-      'ad_personalization': 'granted',
+      'ad_personalization': 'denied',
       'analytics_storage': 'granted'
     });
     mmChargerGtag();
+  }
+  // « Refuser » (même après avoir accepté) coupe la mesure tout de suite
+  // et efface les témoins Google déjà déposés.
+  function mmRetirer() {
+    gtag('consent', 'update', {
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'analytics_storage': 'denied'
+    });
+    var h = location.hostname.replace('www.', '');
+    var portees = ['', '; domain=' + h, '; domain=.' + h];
+    document.cookie.split(';').forEach(function (c) {
+      var n = c.split('=')[0].trim();
+      if (/^(_ga|_gid|_gcl)/.test(n)) {
+        portees.forEach(function (p) {
+          document.cookie = n + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/' + p;
+        });
+      }
+    });
   }
   try {
     if (localStorage.getItem(MM_CONSENT_CLE) === 'accepte') { mmAccorder(); }
@@ -554,7 +571,7 @@ section[id]{scroll-margin-top:104px}
   color:var(--gris);padding:16px 22px;background:var(--brume);
   border-bottom:1px solid var(--trait);
 }
-.grille-taux th small{display:block;font-weight:400;font-size:.79rem;opacity:.75}
+.grille-taux th small{display:block;font-weight:400;font-size:.79rem}
 .grille-taux th:last-child,.grille-taux td:last-child{text-align:right}
 .grille-taux td{
   padding:15px 22px;border-bottom:1px solid var(--trait-fin);
@@ -690,7 +707,7 @@ tr.vedette td{background:rgba(76,176,127,.075)}
   padding:12px 16px;border-radius:9px;
   background:transparent;
   font-family:var(--titre);font-weight:700;font-size:.92rem;
-  letter-spacing:-.01em;color:rgba(26,26,26,.6);
+  letter-spacing:-.01em;color:var(--gris);
   transition:background .16s ease,color .16s ease;
 }
 .calc__onglet:hover{color:var(--bleu)}
@@ -1034,6 +1051,12 @@ details p{padding:0 8px 23px 0;color:rgba(26,26,26,.78);max-width:60ch}
   .services{grid-template-columns:1fr}
   .etape p{font-size:1.02rem}
 }
+@media (max-width:359px){
+  .entete__num{display:none}
+  .entete__coord a{min-width:44px;justify-content:center}
+  .entete__droite{gap:8px}
+  .entete__rang{padding:8px 12px}
+}
 @media (prefers-reduced-motion:reduce){
   *{transition:none!important;animation:none!important;scroll-behavior:auto!important}
 }
@@ -1059,9 +1082,9 @@ html{scroll-behavior:smooth}
     </div>
     <div class="entete__droite">
       <span class="entete__coord">
-        <a href="tel:+15142484361">
+        <a href="tel:+15142484361" aria-label="Appeler le 514-248-4361">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.9.36 1.8.7 2.65a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.43-1.27a2 2 0 0 1 2.11-.45c.85.34 1.75.57 2.65.7A2 2 0 0 1 22 16.92z"/></svg>
-          514-248-4361
+          <span class="entete__num">514-248-4361</span>
         </a>
         <a href="mailto:mmarion@xperto.ca">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
@@ -1108,7 +1131,7 @@ html{scroll-behavior:smooth}
     <div class="hero__texte">
       <div class="hero__interieur">
         <div class="carte-perso">
-          <img src="img/margot-marion.jpg" alt="Margot Marion, courtière hypothécaire stagiaire à Laval" width="104" height="104">
+          <img src="img/margot-marion.jpg" alt="Margot Marion, courtière hypothécaire stagiaire au Québec" width="104" height="104">
           <div>
             <div class="carte-perso__nom">Margot Marion</div>
             <div class="carte-perso__role">Courtière hypothécaire stagiaire<br>Xperto Groupe Héritage · Centres Hypothécaires Dominion National</div>
@@ -1482,7 +1505,7 @@ html{scroll-behavior:smooth}
           <picture>
             <source srcset="img/margot-portrait.webp" type="image/webp">
             <img src="img/margot-portrait.jpg"
-                 alt="Margot Marion, courtière hypothécaire stagiaire à Laval"
+                 alt="Margot Marion, courtière hypothécaire stagiaire au Québec"
                  width="720" height="900" loading="lazy">
           </picture>
         </figure>
@@ -1504,7 +1527,7 @@ html{scroll-behavior:smooth}
         <article class="atout">
           <h3>Une négociation sur mesure pour vous</h3>
           <p>Votre projet, vos besoins et vos critères sont pris en compte pour
-             négocier les conditions les plus avantageuses pour vous.</p>
+             négocier des conditions adaptées à votre situation.</p>
         </article>
         <article class="atout">
           <h3>Un accompagnement partout au Québec</h3>
@@ -1529,8 +1552,8 @@ html{scroll-behavior:smooth}
       <div class="chiffres">
         <div class="chiffre">
           <span class="chiffre__valeur">25 +</span>
-          <p>institutions financières comparées pour trouver la meilleure offre
-             pour votre situation</p>
+          <p>institutions financières auxquelles votre dossier peut
+             être présenté</p>
         </div>
         <div class="chiffre">
           <span class="chiffre__valeur chiffre__valeur--vert">9 à 13 k$</span>
@@ -1547,8 +1570,7 @@ html{scroll-behavior:smooth}
          à l'offre initiale, par exemple 4,34&nbsp;% au lieu de 4,84&nbsp;% à 5,04&nbsp;%,
          représente environ 9&nbsp;600&nbsp;$ à 13&nbsp;400&nbsp;$ d'intérêts en moins sur
          5&nbsp;ans (calcul canadien, intérêts composés deux fois par année).
-         Refaites le calcul avec vos chiffres grâce à l'outil «&nbsp;Comparer deux
-         taux&nbsp;». Les résultats varient selon chaque dossier.</p>
+         Les résultats varient selon chaque dossier.</p>
     </div>
   </section>
 
@@ -1585,7 +1607,7 @@ html{scroll-behavior:smooth}
         </div>
         <div class="etape">
           <div class="etape__rang" aria-hidden="true">04</div>
-          <p>Les meilleures conditions sont négociées auprès des prêteurs, et
+          <p>Les conditions sont négociées auprès des prêteurs, et
              l'accompagnement se poursuit jusqu'à la signature.</p>
         </div>
       </div>
@@ -1625,15 +1647,15 @@ html{scroll-behavior:smooth}
         </details>
         <details>
           <summary>Quels documents dois-je préparer&nbsp;?</summary>
-          <p>Généralement : une pièce d'identité avec photo, vos deux derniers talons de paie et une lettre d'emploi (ou vos deux derniers avis de cotisation si vous êtes travailleur autonome), une preuve de votre mise de fonds sur 90 jours et, pour un renouvellement ou un refinancement, votre dernier relevé hypothécaire et votre compte de taxes municipales. La liste exacte vous est confirmée après le premier appel.</p>
+          <p>Généralement&nbsp;: une pièce d'identité avec photo, vos deux derniers talons de paie et une lettre d'emploi (ou vos deux derniers avis de cotisation si vous êtes travailleur autonome), une preuve de votre mise de fonds sur 90 jours et, pour un renouvellement ou un refinancement, votre dernier relevé hypothécaire et votre compte de taxes municipales. La liste exacte vous est confirmée après le premier appel.</p>
         </details>
         <details>
           <summary>Taux fixe ou taux variable&nbsp;: lequel choisir&nbsp;?</summary>
-          <p>Le taux fixe reste le même pendant tout le terme. Le taux variable suit l'évolution du taux préférentiel des prêteurs et peut monter ou baisser. Le bon choix dépend de votre budget, de votre tolérance au risque et de vos projets : on compare les deux scénarios ensemble, chiffres à l'appui.</p>
+          <p>Le taux fixe reste le même pendant tout le terme. Le taux variable suit l'évolution du taux préférentiel des prêteurs et peut monter ou baisser. Le bon choix dépend de votre budget, de votre tolérance au risque et de vos projets&nbsp;: on compare les deux scénarios ensemble, chiffres à l'appui.</p>
         </details>
         <details>
           <summary>Ma cote de crédit n'est pas parfaite. Est-ce possible quand même&nbsp;?</summary>
-          <p>Souvent, oui. En plus des grandes banques, certains prêteurs analysent les dossiers au cas par cas. Les conditions peuvent être différentes : on regarde ensemble ce qui est réaliste et, au besoin, comment renforcer votre dossier avant de faire une demande.</p>
+          <p>Souvent, oui. En plus des grandes banques, certains prêteurs analysent les dossiers au cas par cas. Les conditions peuvent être différentes&nbsp;: on regarde ensemble ce qui est réaliste et, au besoin, comment renforcer votre dossier avant de faire une demande.</p>
         </details>
         <details>
           <summary>Je suis travailleur autonome. Puis-je obtenir un prêt hypothécaire&nbsp;?</summary>
@@ -1788,12 +1810,25 @@ html{scroll-behavior:smooth}
     return t;
   }
 
+  /* Le tableau s'affiche apres le chargement et pousse la page vers le bas.
+     Si le visiteur arrive par un lien vers une section plus bas
+     (#calculatrices, #contact...), on le ramene sur cette section, une
+     seule fois et seulement dans les premieres secondes. */
+  var ancreDepart = location.hash, debutPage = Date.now();
+  function recentrer() {
+    if (!ancreDepart || ancreDepart === "#taux" || Date.now() - debutPage > 6000) return;
+    var cible = document.getElementById(ancreDepart.slice(1));
+    ancreDepart = "";
+    if (cible) cible.scrollIntoView();
+  }
+
   function secours() {
     id("etat-taux").hidden = true;
     id("grille-taux").hidden = true;
     var s = id("sommaire-taux");
     if (s) s.hidden = true;
     id("cadre-secours").hidden = false;
+    recentrer();
   }
 
   function afficher(data) {
@@ -1840,7 +1875,7 @@ html{scroll-behavior:smooth}
       if (l === meilleur) {
         var f = document.createElement("span");
         f.className = "fanion";
-        f.textContent = "Meilleur taux";
+        f.textContent = "Taux le plus bas";
         c1.appendChild(f);
       }
 
@@ -1856,7 +1891,7 @@ html{scroll-behavior:smooth}
       if (eco && eco > 0) {
         var s = document.createElement("span");
         s.className = "epargne";
-        s.textContent = "\u2212 " + eco.toFixed(0) + " $ par mois";
+        s.textContent = "\u2212 " + eco.toFixed(0) + " $/mois par 100\u00a0000 $";
         c3.appendChild(s);
       }
 
@@ -1885,11 +1920,14 @@ html{scroll-behavior:smooth}
         : date;
       texte += " Taux en vigueur le " + lisible_date + ".";
     }
-    texte += " Propuls\u00e9 par Centres hypoth\u00e9caires Dominion.";
+    texte += " \u00c9conomies mensuelles calcul\u00e9es pour un pr\u00eat de 100\u00a0000\u00a0$ " +
+             "amorti sur 25\u00a0ans, par rapport au taux affich\u00e9 par les banques.";
+    texte += " Propuls\u00e9 par Centres Hypoth\u00e9caires Dominion.";
     id("mentions-taux").textContent = texte;
 
     id("etat-taux").hidden = true;
     id("grille-taux").hidden = false;
+    recentrer();
   }
 
   /* Deux tentatives avant de basculer sur le tableau de Dominion : un seul
@@ -2389,7 +2427,7 @@ html{scroll-behavior:smooth}
     enregistrer("accepte"); mmAccorder(); boite.hidden = true;
   });
   document.getElementById("mm-temoins-refuser").addEventListener("click", function () {
-    enregistrer("refuse"); boite.hidden = true;
+    enregistrer("refuse"); mmRetirer(); boite.hidden = true;
   });
   var gerer = document.getElementById("mm-gerer-temoins");
   if (gerer) gerer.addEventListener("click", function (e) {
