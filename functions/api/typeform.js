@@ -27,7 +27,9 @@ const MOTS_CLES = [
   ["nom",            /nom\s+complet|votre\s+nom|prenom/i],
   ["courriel",       /courriel|adresse\s+courriel|e-?mail/i],
   ["telephone",      /telephone|numero\s+de\s+tel/i],
-  ["projet",         /votre\s+besoin|type\s+de\s+projet|besoin/i],
+  // « service optimal » : titre de la 1re question du formulaire actuel
+  // (« Pour un service optimal, répondez aux questions suivantes : »)
+  ["projet",         /votre\s+besoin|type\s+de\s+projet|besoin|service\s+optimal|decrit\s+le\s+mieux/i],
   ["prix",           /prix\s+d.achat|prix\s+de\s+la\s+propriete/i],
   ["mise_de_fonds",  /mise\s+de\s+fonds/i],
   ["premier_achat",  /premiere\s+propriete|premier\s+achat/i],
@@ -75,6 +77,13 @@ export async function onRequest(context) {
     charge = JSON.parse(corps);
   } catch (e) {
     return json({ erreur: "json_illisible" }, 400);
+  }
+
+  // Typeform peut aussi envoyer les reponses incompletes (« partielles »).
+  // Seule une reponse terminee doit ouvrir un dossier dans Velocity :
+  // sinon, doublons ou dossiers vides.
+  if (charge && charge.event_type && charge.event_type !== "form_response") {
+    return json({ ok: true, ignore: charge.event_type }, 200);
   }
 
   const lu = lireFormulaire(charge);
@@ -318,6 +327,8 @@ function sourceVelocity(c) {
 function devinerObjet(v) {
   const s = sansAccents((v || "").toString().toLowerCase());
   if (/refinanc/.test(s)) return PURPOSE.refinancement;
+  // Rachat de la part d'un ex-conjoint : se fait par un refinancement
+  if (/rachat|separation/.test(s)) return PURPOSE.refinancement;
   if (/renouvel|renew/.test(s)) return PURPOSE.renouvellement;
   return PURPOSE.achat;
 }
