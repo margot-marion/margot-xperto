@@ -16,7 +16,7 @@
 body{margin:0;min-height:100vh;display:flex;flex-direction:column;background:var(--brume);color:var(--encre);font-family:"Source Sans 3","Segoe UI",Roboto,Arial,sans-serif;font-size:17px;line-height:1.6}
 main{flex:1;display:flex;align-items:center;justify-content:center;padding:48px 24px}
 .carte{max-width:560px;width:100%;background:var(--blanc);border-radius:18px;padding:40px 32px;text-align:center;box-shadow:0 16px 40px rgba(26,26,26,.08)}
-.carte img{height:64px;width:auto;margin:0 auto 26px;display:block}
+.carte picture{display:block;margin:0 auto 26px}.carte img{height:72px;width:auto;margin:0 auto;display:block}
 h1{font-family:"Archivo","Helvetica Neue",Arial,sans-serif;font-weight:800;letter-spacing:-.02em;font-size:1.7rem;line-height:1.2;margin:0 0 12px}
 p{margin:0 0 26px;color:rgba(26,26,26,.75)}
 .actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
@@ -29,7 +29,7 @@ footer{text-align:center;font-size:.85rem;color:var(--gris);padding:0 24px 28px}
 <body>
 <main>
   <div class="carte">
-    <img src="/img/logo-xperto-groupe-heritage.png" alt="Xperto Groupe Héritage" width="440" height="215">
+    <picture><source srcset="/img/logo-xperto-dominion.webp" type="image/webp"><img src="/img/logo-xperto-dominion.png" alt="Xperto Groupe Héritage et Centres Hypothécaires Dominion National" width="640" height="276"></picture>
     <h1>Cette page est introuvable</h1>
     <p>L'adresse a peut-être changé ou contient une faute de frappe.
        Vous trouverez tout ce qu'il vous faut sur la page d'accueil.</p>

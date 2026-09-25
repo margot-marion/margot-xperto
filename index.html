@@ -157,7 +157,7 @@
           "name": "Est-ce que ma région est couverte ?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Oui. Le bureau est à Laval, et l'accompagnement se fait partout au Québec : au bureau, par téléphone ou en visioconférence."
+            "text": "Oui, l'accompagnement se fait partout au Québec, par téléphone ou en visioconférence."
           }
         },
         {
@@ -923,7 +923,6 @@ details p{padding:0 8px 23px 0;color:rgba(26,26,26,.78);max-width:60ch}
 }
 
 /* ---------- Services ---------- */
-.services__intro{margin-top:14px;max-width:60ch;color:rgba(26,26,26,.75)}
 .services{
   display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
   gap:16px;margin-top:34px;
@@ -935,19 +934,9 @@ details p{padding:0 8px 23px 0;color:rgba(26,26,26,.78);max-width:60ch}
 .service h3{margin:0 0 8px;font-size:1.12rem}
 .service p{margin:0;font-size:.98rem;color:rgba(26,26,26,.75);line-height:1.55}
 
-/* ---------- Zones desservies ---------- */
-/* Services et Zones sont sur fond blanc, comme la section qui les suit ou
-   les precede : un filet fin marque la separation. */
-#taux,#zones{border-top:1px solid var(--trait-fin)}
-.zones__intro{margin-top:14px;max-width:62ch;color:rgba(26,26,26,.75)}
-.zones{
-  list-style:none;margin:26px 0 0;padding:0;
-  display:flex;flex-wrap:wrap;gap:10px;
-}
-.zones li{
-  padding:9px 16px;border-radius:30px;background:var(--brume);
-  font-size:.96rem;color:var(--encre);
-}
+/* La section Services est sur fond blanc, comme celle des taux qui suit :
+   un filet fin marque la separation. */
+#taux{border-top:1px solid var(--trait-fin)}
 
 /* ---------- Distinction, adresse, mentions legales ---------- */
 .distinction{
@@ -957,7 +946,9 @@ details p{padding:0 8px 23px 0;color:rgba(26,26,26,.78);max-width:60ch}
 }
 .distinction img{width:78px;height:auto;flex:none}
 .distinction figcaption{font-size:.95rem;color:rgba(26,26,26,.78);line-height:1.5}
-.invitation .invitation__adresse{margin:26px auto 0;max-width:60ch;font-size:.95rem;color:rgba(255,255,255,.88)}
+/* Logo combine Xperto + Dominion (une seule image) */
+.identite__logos picture,.pied__identite picture{display:block;flex:none}
+.pied__identite img.pied__logo{height:46px}
 .pied__legal{
   margin-top:28px;padding-top:22px;border-top:1px solid var(--trait-fin);
   font-size:.84rem;line-height:1.6;
@@ -1033,7 +1024,7 @@ details p{padding:0 8px 23px 0;color:rgba(26,26,26,.78);max-width:60ch}
   .pied__rang{gap:20px}
   .pied__coord{gap:12px;flex-direction:column;align-items:flex-start}
   .identite__logos{gap:9px;padding-right:12px}
-  .identite__logos img{height:40px}
+  .identite__logos img{height:44px}
   .identite{gap:12px}
   .marque span{display:none}
   .entete__rang{padding:8px 16px;gap:10px 16px;min-height:0}
@@ -1055,10 +1046,12 @@ html{scroll-behavior:smooth}
   <div class="entete__rang">
     <div class="identite">
       <span class="identite__logos">
-        <img src="img/logo-xperto-groupe-heritage.png" alt="Xperto Groupe Héritage"
-             width="440" height="215">
-        <img src="img/logo-dominion.png" alt="Centres Hypothécaires Dominion National"
-             width="300" height="205">
+        <picture>
+          <source srcset="img/logo-xperto-dominion.webp" type="image/webp">
+          <img src="img/logo-xperto-dominion.png"
+               alt="Xperto Groupe Héritage et Centres Hypothécaires Dominion National"
+               width="640" height="276">
+        </picture>
       </span>
       <a class="marque" href="#">Margot Marion
         <span>Courtière hypothécaire stagiaire</span>
@@ -1089,7 +1082,6 @@ html{scroll-behavior:smooth}
           <a href="#calculatrices">Calculatrices</a>
           <a href="#approche">Mon approche</a>
           <a href="#methode">Ma méthode</a>
-          <a href="#zones">Zones desservies</a>
           <a href="#questions">Foire aux questions</a>
           <a href="#contact">Me joindre</a>
         </nav>
@@ -1102,7 +1094,6 @@ html{scroll-behavior:smooth}
     <a href="#calculatrices">Calculatrices</a>
     <a href="#approche">Mon approche</a>
     <a href="#methode">Ma méthode</a>
-    <a href="#zones">Zones desservies</a>
     <a href="#questions">Foire aux questions</a>
     <a href="#contact">Me joindre</a>
   </nav>
@@ -1125,13 +1116,13 @@ html{scroll-behavior:smooth}
         </div>
 
         <h1><span class="tournant">À vos côtés</span>
-          à chaque étape de votre projet hypothécaire à Laval
+          à chaque étape de votre projet hypothécaire
         </h1>
 
         <p class="hero__soutien">
           Achat, refinancement, renouvellement&nbsp;: vos options hypothécaires
           expliquées clairement, vos conditions négociées à votre avantage,
-          à Laval et partout au Québec.
+          partout au Québec.
         </p>
 
         <div class="hero__actions">
@@ -1159,9 +1150,7 @@ html{scroll-behavior:smooth}
   <!-- ============ Services ============ -->
   <section class="bloc" id="services">
     <div class="enveloppe">
-      <h2>Comment je peux vous aider</h2>
-      <p class="services__intro">Chaque projet est différent. Voici les situations
-         que j'accompagne le plus souvent, à Laval et partout au Québec.</p>
+      <h2>Des solutions hypothécaires adaptées à vos besoins</h2>
       <div class="services">
         <article class="service">
           <h3>Premier achat</h3>
@@ -1503,17 +1492,6 @@ html{scroll-behavior:smooth}
           d'accompagner, et de vous donner ce qu'il faut pour décider par
           vous-même.
         </p>
-        <p>
-          <strong>Qui je suis.</strong> Avant de devenir courtière hypothécaire
-          stagiaire, j'ai passé plus de dix ans en vente, en conseil client et en
-          marketing, dont six ans au sein d'une plateforme québécoise de mise en
-          relation en immobilier. J'y analysais chaque jour des projets d'acheteurs
-          et de propriétaires, en lien étroit avec des courtiers hypothécaires, des
-          courtiers immobiliers et des notaires. Titulaire d'une maîtrise en
-          entrepreneuriat et gestion d'entreprise, j'exerce aujourd'hui avec
-          l'équipe Xperto Groupe Héritage, à Laval. Je vous accompagne en français
-          ou en anglais.
-        </p>
         <figure class="distinction">
           <img src="img/choix-du-consommateur-2026-laval.png"
                alt="Sceau Choix du consommateur 2026, Laval" width="120" height="143" loading="lazy">
@@ -1530,8 +1508,8 @@ html{scroll-behavior:smooth}
         </article>
         <article class="atout">
           <h3>Un accompagnement partout au Québec</h3>
-          <p>Depuis le bureau de Laval ou à distance, je vous accompagne du
-             premier appel jusqu'à la signature, où que vous soyez dans la province.</p>
+          <p>Où que vous soyez dans la province, je vous accompagne du premier
+             appel jusqu'à la signature.</p>
         </article>
         <article class="atout">
           <h3>Une explication claire à chaque étape</h3>
@@ -1555,9 +1533,9 @@ html{scroll-behavior:smooth}
              pour votre situation</p>
         </div>
         <div class="chiffre">
-          <span class="chiffre__valeur chiffre__valeur--vert">≈&nbsp;4&nbsp;800&nbsp;$</span>
-          <p>d'intérêts en moins sur un terme de 5 ans quand le taux obtenu
-             est inférieur de 0,25&nbsp;point (voir l'exemple ci-dessous)</p>
+          <span class="chiffre__valeur chiffre__valeur--vert">9 à 13 k$</span>
+          <p>d'intérêts économisés sur 5 ans en négociant plutôt qu'en
+             acceptant l'offre initiale d'une banque (voir l'exemple ci-dessous)</p>
         </div>
         <div class="chiffre">
           <span class="chiffre__valeur">24 h</span>
@@ -1565,10 +1543,12 @@ html{scroll-behavior:smooth}
         </div>
       </div>
       <p class="chiffres__source">Exemple&nbsp;: prêt de 400&nbsp;000&nbsp;$ amorti sur
-         25&nbsp;ans, paiements mensuels, taux de 4,59&nbsp;% comparé à 4,34&nbsp;%
-         (calcul canadien, intérêts composés deux fois par année). Refaites le
-         calcul avec vos chiffres grâce à l'outil «&nbsp;Comparer deux taux&nbsp;».
-         Les résultats varient selon chaque dossier.</p>
+         25&nbsp;ans, paiements mensuels. Un taux inférieur de 0,5 à 0,7&nbsp;point
+         à l'offre initiale, par exemple 4,34&nbsp;% au lieu de 4,84&nbsp;% à 5,04&nbsp;%,
+         représente environ 9&nbsp;600&nbsp;$ à 13&nbsp;400&nbsp;$ d'intérêts en moins sur
+         5&nbsp;ans (calcul canadien, intérêts composés deux fois par année).
+         Refaites le calcul avec vos chiffres grâce à l'outil «&nbsp;Comparer deux
+         taux&nbsp;». Les résultats varient selon chaque dossier.</p>
     </div>
   </section>
 
@@ -1613,25 +1593,6 @@ html{scroll-behavior:smooth}
     </div>
   </section>
 
-  <!-- ============ Zones desservies ============ -->
-  <section class="bloc" id="zones">
-    <div class="enveloppe">
-      <h2>Zones desservies</h2>
-      <p class="zones__intro">Le bureau est situé à Laval, au 203-3899, autoroute
-         des Laurentides. Les rencontres se font au bureau, par téléphone ou en
-         visioconférence, ce qui permet d'accompagner des clients partout au Québec.</p>
-      <ul class="zones">
-        <li>Laval</li>
-        <li>Montréal</li>
-        <li>Rive-Nord&nbsp;: Blainville, Boisbriand, Terrebonne, Mirabel, Saint-Eustache</li>
-        <li>Laurentides</li>
-        <li>Lanaudière</li>
-        <li>Rive-Sud</li>
-        <li>Partout au Québec, à distance</li>
-      </ul>
-    </div>
-  </section>
-
   <!-- ============ Questions ============ -->
   <section class="bloc bloc--brume" id="questions">
     <div class="enveloppe questions">
@@ -1660,7 +1621,7 @@ html{scroll-behavior:smooth}
         </details>
         <details>
           <summary>Est-ce que ma région est couverte&nbsp;?</summary>
-          <p>Oui. Le bureau est à Laval, et l'accompagnement se fait partout au Québec : au bureau, par téléphone ou en visioconférence.</p>
+          <p>Oui, l'accompagnement se fait partout au Québec, par téléphone ou en visioconférence.</p>
         </details>
         <details>
           <summary>Quels documents dois-je préparer&nbsp;?</summary>
@@ -1707,9 +1668,6 @@ html{scroll-behavior:smooth}
           mmarion@xperto.ca
         </a>
       </div>
-      <p class="invitation__adresse">Bureau&nbsp;: 203-3899, autoroute des Laurentides,
-         Laval (Québec) H7L&nbsp;3H7. Rencontres au bureau, par téléphone ou en
-         visioconférence.</p>
     </div>
   </section>
 
@@ -1718,10 +1676,12 @@ html{scroll-behavior:smooth}
 <footer class="pied">
   <div class="enveloppe pied__rang">
     <div class="pied__identite">
-      <img class="pied__xperto" src="img/logo-xperto-groupe-heritage.png"
-           alt="Xperto Groupe Héritage" width="440" height="215" loading="lazy">
-      <img class="pied__dominion" src="img/logo-dominion.png"
-           alt="Centres Hypothécaires Dominion National" width="300" height="205" loading="lazy">
+      <picture>
+        <source srcset="img/logo-xperto-dominion.webp" type="image/webp">
+        <img src="img/logo-xperto-dominion.png"
+             alt="Xperto Groupe Héritage et Centres Hypothécaires Dominion National"
+             width="640" height="276" class="pied__logo" loading="lazy">
+      </picture>
       <span>Margot Marion, courtière hypothécaire stagiaire</span>
     </div>
 
@@ -1734,7 +1694,7 @@ html{scroll-behavior:smooth}
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
         mmarion@xperto.ca
       </a>
-      <span class="pied__zone">Bureau à Laval · Service offert partout au Québec</span>
+      <span class="pied__zone">Service offert partout au Québec</span>
     </div>
   </div>
   <div class="enveloppe pied__legal">
