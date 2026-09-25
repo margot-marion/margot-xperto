@@ -1,0 +1,7 @@
+/*
+  Strict-Transport-Security: max-age=31536000
+  X-Frame-Options: SAMEORIGIN
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+/img/*
+  Cache-Control: public, max-age=2592000
