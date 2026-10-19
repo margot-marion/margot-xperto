@@ -123,6 +123,39 @@ a{color:var(--bleu)}
 .portrait{width:104px;height:104px;border-radius:50%;overflow:hidden;border:3px solid var(--blanc);box-shadow:0 6px 20px rgba(0,61,122,.15)}
 .portrait img{width:100%;height:100%;object-fit:cover;object-position:50% 25%}
 
+/* Taux du jour (meme mecanisme que la page d'accueil : /api/rates, puis widget Dominion en secours) */
+:root{--titre:"Poppins","Segoe UI",Roboto,Helvetica,Arial,sans-serif;--texte:"Poppins","Segoe UI",Roboto,Helvetica,Arial,sans-serif;--trait-fin:rgba(26,26,26,.07)}
+.taux{padding:30px 0 6px}
+.taux__entete{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:18px}
+.taux__entete p{color:var(--gris);font-size:.95rem;margin-top:4px}
+.sommaire{display:flex;gap:12px;flex-wrap:wrap}
+.sommaire__bloc{background:var(--brume);border:1px solid var(--trait);border-radius:12px;padding:12px 18px;min-width:140px;border-top:4px solid var(--vert)}
+.sommaire__etiquette{font-size:.82rem;color:var(--gris);display:block}
+.sommaire__valeur{font-weight:700;font-size:1.5rem;letter-spacing:-.02em;color:var(--bleu);display:block;line-height:1.15}
+#etat-taux{padding:18px 0;color:var(--gris);font-size:.95rem}
+.grille-taux{width:100%;border-collapse:collapse;background:var(--blanc);border:1px solid var(--trait);border-radius:14px;overflow:hidden}
+.grille-taux caption{caption-side:bottom;text-align:left;font-size:.76rem;line-height:1.5;color:var(--gris);padding:12px 4px 0}
+.grille-taux th{text-align:left;font-weight:600;font-size:.84rem;color:var(--gris);padding:13px 18px;background:var(--brume);border-bottom:1px solid var(--trait)}
+.grille-taux th small{display:block;font-weight:400;font-size:.76rem}
+.grille-taux th:last-child,.grille-taux td:last-child{text-align:right}
+.grille-taux td{padding:12px 18px;border-bottom:1px solid var(--trait-fin);font-variant-numeric:tabular-nums}
+.grille-taux tr:last-child td{border-bottom:none}
+.cellule-terme{font-weight:600}
+.cellule-banque{color:var(--gris)}
+.cellule-nous{font-weight:700;font-size:1.05rem;color:var(--bleu);white-space:nowrap}
+.epargne{display:block;font-weight:600;font-size:.76rem;color:var(--vert-texte);margin-top:1px}
+tr.vedette td{background:rgba(76,176,127,.075)}
+.fanion{display:inline-block;margin-left:8px;padding:2px 8px;border-radius:20px;background:var(--vert-texte);color:var(--blanc);font-size:.66rem;font-weight:600;vertical-align:2px;white-space:nowrap}
+.cadre-taux{background:var(--blanc);border:1px solid var(--trait);border-radius:14px;padding:12px;width:fit-content;max-width:100%;overflow:hidden}
+.cadre-taux iframe{display:block;width:540px;max-width:100%;height:375px;border:0}
+
+/* Appel a l'action au-dessus du formulaire */
+.formulaire__titre{font-size:clamp(1.35rem,3.2vw,1.8rem);color:var(--bleu-nuit);margin:0 0 6px}
+.formulaire__sous{color:var(--gris);font-size:.98rem;margin:0 0 16px;max-width:64ch}
+.appel{display:none}
+.appel-bureau{font-size:.95rem;color:var(--gris);margin:0 0 14px}
+.appel-bureau a{font-weight:600;text-decoration:none}
+
 /* Formulaire */
 .formulaire{padding:26px 0 40px}
 .formulaire__cadre{border:1px solid var(--trait);border-radius:16px;overflow:hidden;background:var(--blanc);box-shadow:0 10px 30px rgba(26,26,26,.06)}
@@ -162,6 +195,13 @@ a{color:var(--bleu)}
   .portrait{display:none}
   .confiance .enveloppe{grid-template-columns:1fr}
   #mm-typeform{height:min(82vh,680px)}
+  .grille-taux th,.grille-taux td{padding-left:12px;padding-right:12px}
+  .grille-taux th small{display:none}
+  .sommaire__bloc{min-width:0;flex:1 1 40%}
+  /* Gros bouton d'appel, mobile seulement */
+  .appel{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;margin:0 0 16px;padding:16px 18px;border-radius:12px;background:var(--vert-texte);color:var(--blanc);font-weight:600;font-size:1.05rem;text-decoration:none;box-shadow:0 6px 18px rgba(31,122,77,.25)}
+  .appel svg{flex:none}
+  .appel-bureau{display:none}
 }
 </style>
 </head>
@@ -208,15 +248,66 @@ a{color:var(--bleu)}
     </div>
   </section>
 
+  <section class="taux" aria-label="Les taux d'aujourd'hui">
+    <div class="enveloppe">
+      <div class="taux__entete">
+        <div>
+          <h2>Les taux d'aujourd'hui</h2>
+          <p>Le taux affiché par les banques et celui obtenu par notre réseau de prêteurs.</p>
+        </div>
+        <div class="sommaire" id="sommaire-taux">
+          <div class="sommaire__bloc">
+            <span class="sommaire__etiquette">Taux variable</span>
+            <span class="sommaire__valeur" id="taux-variable">&mdash;</span>
+          </div>
+          <div class="sommaire__bloc">
+            <span class="sommaire__etiquette">Taux préférentiel</span>
+            <span class="sommaire__valeur" id="taux-prime">&mdash;</span>
+          </div>
+        </div>
+      </div>
+
+      <p id="etat-taux">Chargement des taux…</p>
+
+      <table class="grille-taux" id="grille-taux" hidden>
+        <caption id="mentions-taux"></caption>
+        <thead>
+          <tr>
+            <th scope="col">Terme</th>
+            <th scope="col">Taux affiché <small>par les banques</small></th>
+            <th scope="col">Notre taux</th>
+          </tr>
+        </thead>
+        <tbody id="corps-taux"></tbody>
+      </table>
+
+      <div class="cadre-taux" id="cadre-secours" hidden>
+        <iframe
+          src="https://centralhost.dominionlending.ca/websites/current-rates/rates/fr_large.php"
+          title="Taux hypothécaires courants — Centres hypothécaires Dominion"
+          height="375" width="100%" scrolling="no" loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+
   <section class="formulaire" aria-label="Formulaire de demande">
     <div class="enveloppe">
+      <h2 class="formulaire__titre">Obtenez votre taux personnalisé en 2 minutes</h2>
+      <p class="formulaire__sous">Les taux ci-dessus sont des taux de référence. Le vôtre dépend de votre situation :
+         répondez à quelques questions et je vous reviens avec vos options.</p>
+      <a class="appel" href="tel:+15142484361">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.9.36 1.8.7 2.65a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.43-1.27a2 2 0 0 1 2.11-.45c.85.34 1.75.57 2.65.7A2 2 0 0 1 22 16.92z"/></svg>
+        Appelez-moi : 514-248-4361
+      </a>
+      <p class="appel-bureau">Vous préférez parler ? Appelez-moi au <a href="tel:+15142484361">514-248-4361</a>.</p>
       <div class="formulaire__cadre">
         <!-- Formulaire Typeform integre. Les parametres de l'adresse (gclid, utm_*,
              matchtype, network) sont transmis au formulaire en champs caches,
              ce qui alimente le suivi des conversions Google Ads. -->
+        <!-- Sur mobile, le formulaire s'ouvre en plein ecran au premier tapotement
+             (comportement par defaut du widget Typeform), ce qui evite le double defilement. -->
         <div id="mm-typeform"
              data-tf-widget="ZOG80jWL"
-             data-tf-inline-on-mobile
              data-tf-transitive-search-params="gclid,gbraid,wbraid,utm_source,utm_medium,utm_campaign,utm_term,utm_content,matchtype,network,fbclid"
              data-tf-iframe-props="title=Formulaire de demande hypothécaire"
              data-tf-medium="snippet"></div>
@@ -273,6 +364,156 @@ a{color:var(--bleu)}
 </div>
 
 <script src="https://embed.typeform.com/next/embed.js" async></script>
+<script>
+/* ===========================================================
+   Tableau des taux (copie du mecanisme de la page d'accueil)
+   Les donnees arrivent par /api/rates, une fonction qui tourne sur les
+   serveurs de Cloudflare. Si elle ne repond pas, le widget officiel de
+   Dominion s'affiche a la place.
+   =========================================================== */
+(function () {
+  function id(n) { return document.getElementById(n); }
+  function champ(o) {
+    for (var i = 1; i < arguments.length; i++) {
+      var v = o ? o[arguments[i]] : null;
+      if (v !== undefined && v !== null && v !== "") return v;
+    }
+    return null;
+  }
+  function liste(d) {
+    for (var i = 1; i < arguments.length; i++) {
+      if (Object.prototype.toString.call(d[arguments[i]]) === "[object Array]") return d[arguments[i]];
+    }
+    return [];
+  }
+  function reglage(vars, noms) {
+    for (var n = 0; n < noms.length; n++) {
+      for (var i = 0; i < vars.length; i++) {
+        if (champ(vars[i], "Name", "Nom") === noms[n]) {
+          var v = champ(vars[i], "Value", "Valeur");
+          if (v) return v;
+        }
+      }
+    }
+    return null;
+  }
+  function chiffre(s) {
+    if (!s) return null;
+    var n = parseFloat(String(s).replace(",", "."));
+    return isNaN(n) ? null : n;
+  }
+  function lisible(s) {
+    if (!s) return "";
+    var z = document.createElement("textarea");
+    z.innerHTML = String(s).replace(/&é;/g, "&eacute;");
+    return z.value;
+  }
+  function pourcent(v) {
+    var n = chiffre(v);
+    return n === null ? "—" : n.toFixed(2).replace(".", ",") + " %";
+  }
+  function terme(s) {
+    var t = lisible(s);
+    if (!t) return "";
+    t = t.replace(/Années|Année/g, "an").replace(/Ans/g, "ans").replace(/Mois/g, "mois").replace(/^1 ans$/, "1 an");
+    return t;
+  }
+  function secours() {
+    id("etat-taux").hidden = true;
+    id("grille-taux").hidden = true;
+    var s = id("sommaire-taux");
+    if (s) s.hidden = true;
+    id("cadre-secours").hidden = false;
+  }
+  function afficher(data) {
+    var taux = liste(data, "Rates", "Tarifs");
+    var vars = liste(data, "RatesVariables", "RateVariables", "Variables de taux");
+    var lignes = [];
+    for (var i = 0; i < taux.length; i++) {
+      var mois = chiffre(champ(taux[i], "TermsMonth", "TermsMonths", "TermsMois"));
+      var nous = chiffre(champ(taux[i], "OurRate", "NotreTaux"));
+      if (mois && mois > 0 && nous) lignes.push(taux[i]);
+    }
+    if (!lignes.length) { secours(); return; }
+    lignes.sort(function (a, b) {
+      return chiffre(champ(a, "TermsMonth", "TermsMonths", "TermsMois")) -
+             chiffre(champ(b, "TermsMonth", "TermsMonths", "TermsMois"));
+    });
+    var meilleur = lignes[0];
+    for (var j = 1; j < lignes.length; j++) {
+      if (chiffre(champ(lignes[j], "OurRate", "NotreTaux")) < chiffre(champ(meilleur, "OurRate", "NotreTaux"))) meilleur = lignes[j];
+    }
+    var variable = reglage(vars, ["VariableRateFr", "VariableRate"]);
+    var prime    = reglage(vars, ["PrimeRateFr", "PrimeRate"]);
+    if (variable) id("taux-variable").textContent = pourcent(variable);
+    if (prime)    id("taux-prime").textContent    = pourcent(prime);
+    var corps = id("corps-taux");
+    corps.innerHTML = "";
+    for (var k = 0; k < lignes.length; k++) {
+      var l = lignes[k];
+      var tr = document.createElement("tr");
+      if (l === meilleur) tr.className = "vedette";
+      var c1 = document.createElement("td");
+      c1.className = "cellule-terme";
+      c1.textContent = terme(champ(l, "TermsFr", "Terms", "Term"));
+      if (l === meilleur) {
+        var f = document.createElement("span");
+        f.className = "fanion";
+        f.textContent = "Taux le plus bas";
+        c1.appendChild(f);
+      }
+      var c2 = document.createElement("td");
+      c2.className = "cellule-banque";
+      c2.textContent = pourcent(champ(l, "BankRate"));
+      var c3 = document.createElement("td");
+      c3.className = "cellule-nous";
+      c3.textContent = pourcent(champ(l, "OurRate", "NotreTaux"));
+      var eco = chiffre(champ(l, "Savings", "Économies"));
+      if (eco && eco > 0) {
+        var s = document.createElement("span");
+        s.className = "epargne";
+        s.textContent = "− " + eco.toFixed(0) + " $/mois par 100 000 $";
+        c3.appendChild(s);
+      }
+      tr.appendChild(c1); tr.appendChild(c2); tr.appendChild(c3);
+      corps.appendChild(tr);
+    }
+    var conditions = reglage(vars, ["ConditionsFr"]);
+    var texte = conditions
+      ? lisible(conditions)
+      : "Certaines conditions peuvent s'appliquer. Les taux varient d'une province à l'autre et peuvent changer sans préavis. Sur approbation de crédit. Sauf erreur ou omission.";
+    var date = reglage(vars, ["ChangeDateFr", "ChangeDate"]);
+    if (date) {
+      var moisNoms = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
+      var m = String(date).match(/^(\d{4})-(\d{2})-(\d{2})/);
+      var lisibleDate = m ? (parseInt(m[3], 10) + " " + moisNoms[parseInt(m[2], 10) - 1] + " " + m[1]) : date;
+      texte += " Taux en vigueur le " + lisibleDate + ".";
+    }
+    texte += " Économies mensuelles calculées pour un prêt de 100 000 $ amorti sur 25 ans, par rapport au taux affiché par les banques.";
+    texte += " Propulsé par Centres Hypothécaires Dominion.";
+    id("mentions-taux").textContent = texte;
+    id("etat-taux").hidden = true;
+    id("grille-taux").hidden = false;
+  }
+  function demander(essai) {
+    var r = new XMLHttpRequest();
+    r.open("GET", "/api/rates?t=" + Date.now(), true);
+    r.timeout = 12000;
+    function rate() {
+      if (essai < 2) { setTimeout(function () { demander(essai + 1); }, 900); }
+      else { secours(); }
+    }
+    r.onload = function () {
+      if (r.status < 200 || r.status >= 300) { rate(); return; }
+      try { afficher(JSON.parse(r.responseText)); } catch (e) { rate(); }
+    };
+    r.onerror = rate;
+    r.ontimeout = rate;
+    r.send();
+  }
+  demander(1);
+})();
+</script>
 <script>
 /* Lien de secours : on y recopie les parametres de campagne presents dans
    l'adresse, pour que le suivi fonctionne aussi dans un nouvel onglet. */
