@@ -149,19 +149,18 @@ tr.vedette td{background:rgba(76,176,127,.075)}
 .cadre-taux{background:var(--blanc);border:1px solid var(--trait);border-radius:14px;padding:12px;width:fit-content;max-width:100%;overflow:hidden}
 .cadre-taux iframe{display:block;width:540px;max-width:100%;height:375px;border:0}
 
-/* Appel a l'action au-dessus du formulaire */
-.formulaire__titre{font-size:clamp(1.35rem,3.2vw,1.8rem);color:var(--bleu-nuit);margin:0 0 6px}
+/* Formulaire : la piece maitresse de la page, mise en valeur */
+.formulaire{padding:28px 0 34px;background:linear-gradient(180deg,var(--brume) 0,var(--blanc) 100%)}
+.formulaire__titre{font-size:clamp(1.45rem,3.4vw,1.95rem);color:var(--bleu-nuit);margin:0 0 6px}
 .formulaire__sous{color:var(--gris);font-size:.98rem;margin:0 0 16px;max-width:64ch}
-.appel{display:none}
-.appel-bureau{font-size:.95rem;color:var(--gris);margin:0 0 14px}
-.appel-bureau a{font-weight:600;text-decoration:none}
-
-/* Formulaire */
-.formulaire{padding:26px 0 40px}
-.formulaire__cadre{border:1px solid var(--trait);border-radius:16px;overflow:hidden;background:var(--blanc);box-shadow:0 10px 30px rgba(26,26,26,.06)}
+.formulaire__cadre{border:2px solid var(--bleu);border-radius:16px;overflow:hidden;background:var(--blanc);box-shadow:0 14px 40px rgba(0,61,122,.16)}
 #mm-typeform{width:100%;height:min(78vh,720px);min-height:520px}
 #mm-typeform iframe{display:block}
-.formulaire__secours{padding:14px 16px;font-size:.92rem;color:var(--gris);text-align:center;border-top:1px solid var(--trait)}
+.formulaire__secours{padding:12px 16px;font-size:.9rem;color:var(--gris);text-align:center;border-top:1px solid var(--trait)}
+.appel{display:none}
+.appel-bureau{font-size:.95rem;color:var(--gris);margin:16px 0 0}
+.appel-bureau a{font-weight:600;text-decoration:none}
+.formulaire .promesses{margin-top:14px}
 
 /* Confiance */
 .confiance{padding:8px 0 44px}
@@ -194,14 +193,26 @@ tr.vedette td{background:rgba(76,176,127,.075)}
   .intro .enveloppe{grid-template-columns:1fr}
   .portrait{display:none}
   .confiance .enveloppe{grid-template-columns:1fr}
-  #mm-typeform{height:min(82vh,680px)}
+  .intro{padding:20px 0 14px}
+  .intro p.sous{font-size:1rem}
+  .formulaire{padding:18px 0 28px}
+  /* Le formulaire occupe presque tout l'ecran du telephone, questions visibles */
+  #mm-typeform{height:calc(100vh - 150px);min-height:560px;max-height:760px}
+  /* Tableau des taux : sur telephone, on garde le terme et notre taux (la colonne
+     « taux affiche par les banques » deborde a cette largeur) */
+  .grille-taux th:nth-child(2),.grille-taux td:nth-child(2){display:none}
   .grille-taux th,.grille-taux td{padding-left:12px;padding-right:12px}
   .grille-taux th small{display:none}
+  .cellule-nous{white-space:normal}
   .sommaire__bloc{min-width:0;flex:1 1 40%}
-  /* Gros bouton d'appel, mobile seulement */
-  .appel{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;margin:0 0 16px;padding:16px 18px;border-radius:12px;background:var(--vert-texte);color:var(--blanc);font-weight:600;font-size:1.05rem;text-decoration:none;box-shadow:0 6px 18px rgba(31,122,77,.25)}
+  /* Gros bouton d'appel, mobile seulement, juste sous le formulaire */
+  .appel{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;margin:16px 0 0;padding:16px 18px;border-radius:12px;background:var(--vert-texte);color:var(--blanc);font-weight:600;font-size:1.05rem;text-decoration:none;box-shadow:0 6px 18px rgba(31,122,77,.25)}
   .appel svg{flex:none}
   .appel-bureau{display:none}
+  /* Bandeau temoins plus compact sur telephone */
+  .temoins{left:10px;right:10px;bottom:10px;padding:12px 14px}
+  .temoins p{font-size:.84rem;margin-bottom:10px}
+  .temoins button{padding:9px 16px;font-size:.9rem}
 }
 </style>
 </head>
@@ -233,11 +244,6 @@ tr.vedette td{background:rgba(76,176,127,.075)}
         <h1>Chaque projet hypothécaire mérite le bon accompagnement</h1>
         <p class="sous">Répondez à quelques questions pour nous permettre de mieux comprendre votre situation
            et de vous proposer des solutions hypothécaires adaptées à vos besoins.</p>
-        <ul class="promesses" aria-label="Ce que vous obtenez">
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Service 100 % gratuit</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Plus de 20 prêteurs comparés</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Partout au Québec</li>
-        </ul>
       </div>
       <div class="portrait" aria-hidden="true">
         <picture>
@@ -245,6 +251,38 @@ tr.vedette td{background:rgba(76,176,127,.075)}
           <img src="/img/margot-portrait.jpg" alt="" width="104" height="104" loading="lazy">
         </picture>
       </div>
+    </div>
+  </section>
+
+  <section class="formulaire" aria-label="Formulaire de demande">
+    <div class="enveloppe">
+      <h2 class="formulaire__titre">Obtenez votre taux personnalisé en 2 minutes</h2>
+      <p class="formulaire__sous">Votre taux dépend de votre situation. Répondez aux questions ci-dessous et je vous
+         reviens avec vos options. Les taux du jour sont affichés plus bas.</p>
+      <div class="formulaire__cadre">
+        <!-- Formulaire Typeform integre, questions visibles directement, aussi sur mobile.
+             Les parametres de l'adresse (gclid, utm_*, matchtype, network) sont transmis
+             au formulaire en champs caches, ce qui alimente le suivi des conversions Google Ads. -->
+        <div id="mm-typeform"
+             data-tf-widget="ZOG80jWL"
+             data-tf-inline-on-mobile
+             data-tf-transitive-search-params="gclid,gbraid,wbraid,utm_source,utm_medium,utm_campaign,utm_term,utm_content,matchtype,network,fbclid"
+             data-tf-iframe-props="title=Formulaire de demande hypothécaire"
+             data-tf-medium="snippet"></div>
+        <p class="formulaire__secours">Le formulaire ne s'affiche pas ?
+          <a id="mm-typeform-lien" href="https://form.typeform.com/to/ZOG80jWL" target="_blank" rel="noopener">Ouvrez-le dans un nouvel onglet</a>
+          ou appelez le <a href="tel:+15142484361">514-248-4361</a>.</p>
+      </div>
+      <a class="appel" href="tel:+15142484361">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.9.36 1.8.7 2.65a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.43-1.27a2 2 0 0 1 2.11-.45c.85.34 1.75.57 2.65.7A2 2 0 0 1 22 16.92z"/></svg>
+        Appelez-moi : 514-248-4361
+      </a>
+      <p class="appel-bureau">Vous préférez parler ? Appelez-moi au <a href="tel:+15142484361">514-248-4361</a>.</p>
+      <ul class="promesses" aria-label="Ce que vous obtenez">
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Service 100 % gratuit</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Plus de 20 prêteurs comparés</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Partout au Québec</li>
+      </ul>
     </div>
   </section>
 
@@ -286,34 +324,6 @@ tr.vedette td{background:rgba(76,176,127,.075)}
           src="https://centralhost.dominionlending.ca/websites/current-rates/rates/fr_large.php"
           title="Taux hypothécaires courants — Centres hypothécaires Dominion"
           height="375" width="100%" scrolling="no" loading="lazy"></iframe>
-      </div>
-    </div>
-  </section>
-
-  <section class="formulaire" aria-label="Formulaire de demande">
-    <div class="enveloppe">
-      <h2 class="formulaire__titre">Obtenez votre taux personnalisé en 2 minutes</h2>
-      <p class="formulaire__sous">Les taux ci-dessus sont des taux de référence. Le vôtre dépend de votre situation :
-         répondez à quelques questions et je vous reviens avec vos options.</p>
-      <a class="appel" href="tel:+15142484361">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.9.36 1.8.7 2.65a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.43-1.27a2 2 0 0 1 2.11-.45c.85.34 1.75.57 2.65.7A2 2 0 0 1 22 16.92z"/></svg>
-        Appelez-moi : 514-248-4361
-      </a>
-      <p class="appel-bureau">Vous préférez parler ? Appelez-moi au <a href="tel:+15142484361">514-248-4361</a>.</p>
-      <div class="formulaire__cadre">
-        <!-- Formulaire Typeform integre. Les parametres de l'adresse (gclid, utm_*,
-             matchtype, network) sont transmis au formulaire en champs caches,
-             ce qui alimente le suivi des conversions Google Ads. -->
-        <!-- Sur mobile, le formulaire s'ouvre en plein ecran au premier tapotement
-             (comportement par defaut du widget Typeform), ce qui evite le double defilement. -->
-        <div id="mm-typeform"
-             data-tf-widget="ZOG80jWL"
-             data-tf-transitive-search-params="gclid,gbraid,wbraid,utm_source,utm_medium,utm_campaign,utm_term,utm_content,matchtype,network,fbclid"
-             data-tf-iframe-props="title=Formulaire de demande hypothécaire"
-             data-tf-medium="snippet"></div>
-        <p class="formulaire__secours">Le formulaire ne s'affiche pas ?
-          <a id="mm-typeform-lien" href="https://form.typeform.com/to/ZOG80jWL" target="_blank" rel="noopener">Ouvrez-le dans un nouvel onglet</a>
-          ou appelez le <a href="tel:+15142484361">514-248-4361</a>.</p>
       </div>
     </div>
   </section>
