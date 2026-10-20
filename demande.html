@@ -152,6 +152,11 @@ tr.vedette td{background:rgba(76,176,127,.075)}
 /* Formulaire : la piece maitresse de la page, mise en valeur */
 .formulaire{padding:28px 0 34px;background:linear-gradient(180deg,var(--brume) 0,var(--blanc) 100%)}
 .formulaire__titre{font-size:clamp(1.45rem,3.4vw,1.95rem);color:var(--bleu-nuit);margin:0 0 14px}
+/* Fleche collee au titre, qui pointe vers le formulaire, avec un leger mouvement */
+.fleche{display:inline-block;vertical-align:middle;color:var(--bleu);width:30px;height:30px;margin-left:10px;animation:mm-fleche 1.5s ease-in-out infinite}
+.fleche svg{display:block}
+@keyframes mm-fleche{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
+@media (prefers-reduced-motion:reduce){.fleche{animation:none}}
 .formulaire__sous{color:var(--gris);font-style:italic;font-size:.86rem;line-height:1.4;margin:0 0 14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .formulaire__cadre{border:2px solid var(--bleu);border-radius:16px;overflow:hidden;background:var(--blanc);box-shadow:0 14px 40px rgba(0,61,122,.16)}
 #mm-typeform{width:100%;height:min(78vh,720px);min-height:520px}
@@ -257,7 +262,7 @@ tr.vedette td{background:rgba(76,176,127,.075)}
 
   <section class="formulaire" aria-label="Formulaire de demande">
     <div class="enveloppe">
-      <h2 class="formulaire__titre">Obtenez votre taux personnalisé en 2 minutes</h2>
+      <h2 class="formulaire__titre">Obtenez votre taux personnalisé en 2 minutes<span class="fleche" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v15"/><path d="m5 12 7 7 7-7"/></svg></span></h2>
       <div class="formulaire__cadre">
         <!-- Formulaire Typeform integre, questions visibles directement, aussi sur mobile.
              Les parametres de l'adresse (gclid, utm_*, matchtype, network) sont transmis
@@ -286,16 +291,6 @@ tr.vedette td{background:rgba(76,176,127,.075)}
         <div>
           <h2>Les taux d'aujourd'hui</h2>
           <p>Le taux affiché par les banques et celui obtenu par notre réseau de prêteurs.</p>
-        </div>
-        <div class="sommaire" id="sommaire-taux">
-          <div class="sommaire__bloc">
-            <span class="sommaire__etiquette">Taux variable</span>
-            <span class="sommaire__valeur" id="taux-variable">&mdash;</span>
-          </div>
-          <div class="sommaire__bloc">
-            <span class="sommaire__etiquette">Taux préférentiel</span>
-            <span class="sommaire__valeur" id="taux-prime">&mdash;</span>
-          </div>
         </div>
       </div>
 
@@ -461,9 +456,7 @@ tr.vedette td{background:rgba(76,176,127,.075)}
       if (chiffre(champ(lignes[j], "OurRate", "NotreTaux")) < chiffre(champ(meilleur, "OurRate", "NotreTaux"))) meilleur = lignes[j];
     }
     var variable = reglage(vars, ["VariableRateFr", "VariableRate"]);
-    var prime    = reglage(vars, ["PrimeRateFr", "PrimeRate"]);
-    if (variable) id("taux-variable").textContent = pourcent(variable);
-    if (prime)    id("taux-prime").textContent    = pourcent(prime);
+    var seulementCinq = cinqAns.length > 0;
     var corps = id("corps-taux");
     corps.innerHTML = "";
     for (var k = 0; k < lignes.length; k++) {
@@ -472,7 +465,7 @@ tr.vedette td{background:rgba(76,176,127,.075)}
       if (l === meilleur && lignes.length > 1) tr.className = "vedette";
       var c1 = document.createElement("td");
       c1.className = "cellule-terme";
-      c1.textContent = terme(champ(l, "TermsFr", "Terms", "Term"));
+      c1.textContent = seulementCinq ? "5 ans fixe" : terme(champ(l, "TermsFr", "Terms", "Term"));
       if (l === meilleur && lignes.length > 1) {
         var f = document.createElement("span");
         f.className = "fanion";
@@ -494,6 +487,21 @@ tr.vedette td{background:rgba(76,176,127,.075)}
       }
       tr.appendChild(c1); tr.appendChild(c2); tr.appendChild(c3);
       corps.appendChild(tr);
+    }
+    /* Deuxieme ligne : le taux variable 5 ans, fourni separement par l'API */
+    if (seulementCinq && variable) {
+      var trv = document.createElement("tr");
+      var v1 = document.createElement("td");
+      v1.className = "cellule-terme";
+      v1.textContent = "5 ans variable";
+      var v2 = document.createElement("td");
+      v2.className = "cellule-banque";
+      v2.textContent = "—";
+      var v3 = document.createElement("td");
+      v3.className = "cellule-nous";
+      v3.textContent = pourcent(variable);
+      trv.appendChild(v1); trv.appendChild(v2); trv.appendChild(v3);
+      corps.appendChild(trv);
     }
     var conditions = reglage(vars, ["ConditionsFr"]);
     var texte = conditions
