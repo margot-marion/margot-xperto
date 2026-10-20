@@ -151,14 +151,14 @@ tr.vedette td{background:rgba(76,176,127,.075)}
 
 /* Formulaire : la piece maitresse de la page, mise en valeur */
 .formulaire{padding:28px 0 34px;background:linear-gradient(180deg,var(--brume) 0,var(--blanc) 100%)}
-.formulaire__titre{font-size:clamp(1.45rem,3.4vw,1.95rem);color:var(--bleu-nuit);margin:0 0 6px}
+.formulaire__titre{font-size:clamp(1.45rem,3.4vw,1.95rem);color:var(--bleu-nuit);margin:0 0 14px}
 .formulaire__sous{color:var(--gris);font-style:italic;font-size:.86rem;line-height:1.4;margin:0 0 14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .formulaire__cadre{border:2px solid var(--bleu);border-radius:16px;overflow:hidden;background:var(--blanc);box-shadow:0 14px 40px rgba(0,61,122,.16)}
 #mm-typeform{width:100%;height:min(78vh,720px);min-height:520px}
 #mm-typeform iframe{display:block}
 .formulaire__secours{padding:12px 16px;font-size:.9rem;color:var(--gris);text-align:center;border-top:1px solid var(--trait)}
 .appel{display:none}
-.appel-bureau{font-size:.95rem;color:var(--gris);margin:16px 0 0}
+.appel-bureau{font-size:.95rem;color:var(--gris);margin:18px 0 0}
 .appel-bureau a{font-weight:600;text-decoration:none}
 .formulaire .promesses{margin-top:14px}
 
@@ -258,7 +258,6 @@ tr.vedette td{background:rgba(76,176,127,.075)}
   <section class="formulaire" aria-label="Formulaire de demande">
     <div class="enveloppe">
       <h2 class="formulaire__titre">Obtenez votre taux personnalisé en 2 minutes</h2>
-      <p class="formulaire__sous">Deux minutes, sans engagement. Je vous rappelle dans les 24 heures.</p>
       <div class="formulaire__cadre">
         <!-- Formulaire Typeform integre, questions visibles directement, aussi sur mobile.
              Les parametres de l'adresse (gclid, utm_*, matchtype, network) sont transmis
@@ -273,11 +272,6 @@ tr.vedette td{background:rgba(76,176,127,.075)}
           <a id="mm-typeform-lien" href="https://form.typeform.com/to/ZOG80jWL" target="_blank" rel="noopener">Ouvrez-le dans un nouvel onglet</a>
           ou appelez le <a href="tel:+15142484361">514-248-4361</a>.</p>
       </div>
-      <a class="appel" href="tel:+15142484361">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.9.36 1.8.7 2.65a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.43-1.27a2 2 0 0 1 2.11-.45c.85.34 1.75.57 2.65.7A2 2 0 0 1 22 16.92z"/></svg>
-        Appelez-moi : 514-248-4361
-      </a>
-      <p class="appel-bureau">Vous préférez parler ? Appelez-moi au <a href="tel:+15142484361">514-248-4361</a>.</p>
       <ul class="promesses" aria-label="Ce que vous obtenez">
         <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Service 100 % gratuit</li>
         <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Plus de 20 prêteurs comparés</li>
@@ -325,6 +319,12 @@ tr.vedette td{background:rgba(76,176,127,.075)}
           title="Taux hypothécaires courants — Centres hypothécaires Dominion"
           height="375" width="100%" scrolling="no" loading="lazy"></iframe>
       </div>
+
+      <a class="appel" href="tel:+15142484361">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.9.36 1.8.7 2.65a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.43-1.27a2 2 0 0 1 2.11-.45c.85.34 1.75.57 2.65.7A2 2 0 0 1 22 16.92z"/></svg>
+        Appelez-moi : 514-248-4361
+      </a>
+      <p class="appel-bureau">Vous préférez parler ? Appelez-moi au <a href="tel:+15142484361">514-248-4361</a>.</p>
     </div>
   </section>
 
@@ -445,6 +445,13 @@ tr.vedette td{background:rgba(76,176,127,.075)}
       if (mois && mois > 0 && nous) lignes.push(taux[i]);
     }
     if (!lignes.length) { secours(); return; }
+    /* Sur cette page, on ne montre que le terme de 5 ans (le plus courant).
+       Si l'API ne le fournit pas, on garde la liste complete. */
+    var cinqAns = [];
+    for (var c5 = 0; c5 < lignes.length; c5++) {
+      if (chiffre(champ(lignes[c5], "TermsMonth", "TermsMonths", "TermsMois")) === 60) cinqAns.push(lignes[c5]);
+    }
+    if (cinqAns.length) lignes = cinqAns;
     lignes.sort(function (a, b) {
       return chiffre(champ(a, "TermsMonth", "TermsMonths", "TermsMois")) -
              chiffre(champ(b, "TermsMonth", "TermsMonths", "TermsMois"));
@@ -462,11 +469,11 @@ tr.vedette td{background:rgba(76,176,127,.075)}
     for (var k = 0; k < lignes.length; k++) {
       var l = lignes[k];
       var tr = document.createElement("tr");
-      if (l === meilleur) tr.className = "vedette";
+      if (l === meilleur && lignes.length > 1) tr.className = "vedette";
       var c1 = document.createElement("td");
       c1.className = "cellule-terme";
       c1.textContent = terme(champ(l, "TermsFr", "Terms", "Term"));
-      if (l === meilleur) {
+      if (l === meilleur && lignes.length > 1) {
         var f = document.createElement("span");
         f.className = "fanion";
         f.textContent = "Taux le plus bas";
