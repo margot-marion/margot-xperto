@@ -152,7 +152,7 @@ tr.vedette td{background:rgba(76,176,127,.075)}
 /* Formulaire : la piece maitresse de la page, mise en valeur */
 .formulaire{padding:28px 0 34px;background:linear-gradient(180deg,var(--brume) 0,var(--blanc) 100%)}
 .formulaire__titre{font-size:clamp(1.45rem,3.4vw,1.95rem);color:var(--bleu-nuit);margin:0 0 6px}
-.formulaire__sous{color:var(--gris);font-size:.98rem;margin:0 0 16px;max-width:64ch}
+.formulaire__sous{color:var(--gris);font-style:italic;font-size:.86rem;line-height:1.4;margin:0 0 14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .formulaire__cadre{border:2px solid var(--bleu);border-radius:16px;overflow:hidden;background:var(--blanc);box-shadow:0 14px 40px rgba(0,61,122,.16)}
 #mm-typeform{width:100%;height:min(78vh,720px);min-height:520px}
 #mm-typeform iframe{display:block}
@@ -196,6 +196,7 @@ tr.vedette td{background:rgba(76,176,127,.075)}
   .intro{padding:20px 0 14px}
   .intro p.sous{font-size:1rem}
   .formulaire{padding:18px 0 28px}
+  .formulaire__sous{white-space:normal;font-size:.8rem}
   /* Le formulaire occupe presque tout l'ecran du telephone, questions visibles */
   #mm-typeform{height:calc(100vh - 150px);min-height:560px;max-height:760px}
   /* Tableau des taux : sur telephone, on garde le terme et notre taux (la colonne
@@ -257,8 +258,7 @@ tr.vedette td{background:rgba(76,176,127,.075)}
   <section class="formulaire" aria-label="Formulaire de demande">
     <div class="enveloppe">
       <h2 class="formulaire__titre">Obtenez votre taux personnalisé en 2 minutes</h2>
-      <p class="formulaire__sous">Votre taux dépend de votre situation. Répondez aux questions ci-dessous et je vous
-         reviens avec vos options. Les taux du jour sont affichés plus bas.</p>
+      <p class="formulaire__sous">Votre taux dépend de votre situation. Répondez aux questions ci-dessous et je vous reviens avec vos options.</p>
       <div class="formulaire__cadre">
         <!-- Formulaire Typeform integre, questions visibles directement, aussi sur mobile.
              Les parametres de l'adresse (gclid, utm_*, matchtype, network) sont transmis
