@@ -150,7 +150,7 @@ tr.vedette td{background:rgba(76,176,127,.075)}
 .cadre-taux iframe{display:block;width:540px;max-width:100%;height:375px;border:0}
 
 /* Formulaire : la piece maitresse de la page, mise en valeur */
-.formulaire{padding:28px 0 34px;background:linear-gradient(180deg,var(--brume) 0,var(--blanc) 100%)}
+.formulaire{padding:34px 0 34px;background:linear-gradient(180deg,var(--brume) 0,var(--blanc) 100%)}
 .formulaire__titre{font-size:clamp(1.45rem,3.4vw,1.95rem);color:var(--bleu-nuit);margin:0 0 14px}
 /* Fleche collee au titre, qui pointe vers le formulaire, avec un leger mouvement */
 .fleche{display:inline-block;vertical-align:middle;color:var(--bleu);width:30px;height:30px;margin-left:10px;animation:mm-fleche 1.5s ease-in-out infinite}
@@ -241,25 +241,9 @@ tr.vedette td{background:rgba(76,176,127,.075)}
 </header>
 
 <main>
-  <section class="intro">
-    <div class="enveloppe">
-      <div>
-        <h1>Chaque projet hypothécaire mérite le bon accompagnement</h1>
-        <p class="sous">Répondez à quelques questions pour nous permettre de mieux comprendre votre situation
-           et de vous proposer des solutions hypothécaires adaptées à vos besoins.</p>
-      </div>
-      <div class="portrait" aria-hidden="true">
-        <picture>
-          <source srcset="/img/margot-portrait.webp" type="image/webp">
-          <img src="/img/margot-portrait.jpg" alt="" width="104" height="104" loading="lazy">
-        </picture>
-      </div>
-    </div>
-  </section>
-
   <section class="formulaire" aria-label="Formulaire de demande">
     <div class="enveloppe">
-      <h2 class="formulaire__titre">Obtenez votre taux personnalisé en 2 minutes<span class="fleche" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v15"/><path d="m5 12 7 7 7-7"/></svg></span></h2>
+      <h1 class="formulaire__titre">Obtenez votre taux personnalisé en 2 minutes<span class="fleche" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v15"/><path d="m5 12 7 7 7-7"/></svg></span></h1>
       <div class="formulaire__cadre">
         <!-- Formulaire Typeform integre, questions visibles directement, aussi sur mobile.
              Les parametres de l'adresse (gclid, utm_*, matchtype, network) sont transmis
