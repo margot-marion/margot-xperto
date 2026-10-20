@@ -123,7 +123,7 @@ a{color:var(--bleu)}
 .portrait{width:104px;height:104px;border-radius:50%;overflow:hidden;border:3px solid var(--blanc);box-shadow:0 6px 20px rgba(0,61,122,.15)}
 .portrait img{width:100%;height:100%;object-fit:cover;object-position:50% 25%}
 
-/* Taux du jour (meme mecanisme que la page d'accueil : /api/rates, puis widget Dominion en secours) */
+/* Taux du jour (lus dans /taux.json, mis a jour chaque matin) */
 :root{--titre:"Poppins","Segoe UI",Roboto,Helvetica,Arial,sans-serif;--texte:"Poppins","Segoe UI",Roboto,Helvetica,Arial,sans-serif;--trait-fin:rgba(26,26,26,.07)}
 .taux{padding:30px 0 6px}
 .taux__entete{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:18px}
@@ -290,7 +290,7 @@ tr.vedette td{background:rgba(76,176,127,.075)}
       <div class="taux__entete">
         <div>
           <h2>Les taux d'aujourd'hui</h2>
-          <p>Le taux affiché par les banques et celui obtenu par notre réseau de prêteurs.</p>
+          <p>Les meilleurs taux obtenus par notre réseau de prêteurs, terme de 5 ans.</p>
         </div>
       </div>
 
@@ -301,19 +301,11 @@ tr.vedette td{background:rgba(76,176,127,.075)}
         <thead>
           <tr>
             <th scope="col">Terme</th>
-            <th scope="col">Taux affiché <small>par les banques</small></th>
             <th scope="col">Notre taux</th>
           </tr>
         </thead>
         <tbody id="corps-taux"></tbody>
       </table>
-
-      <div class="cadre-taux" id="cadre-secours" hidden>
-        <iframe
-          src="https://centralhost.dominionlending.ca/websites/current-rates/rates/fr_large.php"
-          title="Taux hypothécaires courants — Centres hypothécaires Dominion"
-          height="375" width="100%" scrolling="no" loading="lazy"></iframe>
-      </div>
 
       <a class="appel" href="tel:+15142484361">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.9.36 1.8.7 2.65a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.43-1.27a2 2 0 0 1 2.11-.45c.85.34 1.75.57 2.65.7A2 2 0 0 1 22 16.92z"/></svg>
@@ -371,172 +363,73 @@ tr.vedette td{background:rgba(76,176,127,.075)}
 <script src="https://embed.typeform.com/next/embed.js" async></script>
 <script>
 /* ===========================================================
-   Tableau des taux (copie du mecanisme de la page d'accueil)
-   Les donnees arrivent par /api/rates, une fonction qui tourne sur les
-   serveurs de Cloudflare. Si elle ne repond pas, le widget officiel de
-   Dominion s'affiche a la place.
+   Taux du jour
+   -----------------------------------------------------------
+   Les deux taux (5 ans fixe, 5 ans variable) sont lus dans le
+   fichier /taux.json du site, mis a jour chaque matin par une
+   tache automatique a partir de l'outil Heritage de l'agence.
+   Si le fichier manque ou date de plus de 14 jours, la section
+   est masquee plutot que d'afficher un taux perime.
    =========================================================== */
 (function () {
   function id(n) { return document.getElementById(n); }
-  function champ(o) {
-    for (var i = 1; i < arguments.length; i++) {
-      var v = o ? o[arguments[i]] : null;
-      if (v !== undefined && v !== null && v !== "") return v;
-    }
-    return null;
-  }
-  function liste(d) {
-    for (var i = 1; i < arguments.length; i++) {
-      if (Object.prototype.toString.call(d[arguments[i]]) === "[object Array]") return d[arguments[i]];
-    }
-    return [];
-  }
-  function reglage(vars, noms) {
-    for (var n = 0; n < noms.length; n++) {
-      for (var i = 0; i < vars.length; i++) {
-        if (champ(vars[i], "Name", "Nom") === noms[n]) {
-          var v = champ(vars[i], "Value", "Valeur");
-          if (v) return v;
-        }
-      }
-    }
-    return null;
-  }
-  function chiffre(s) {
-    if (!s) return null;
-    var n = parseFloat(String(s).replace(",", "."));
-    return isNaN(n) ? null : n;
-  }
-  function lisible(s) {
-    if (!s) return "";
-    var z = document.createElement("textarea");
-    z.innerHTML = String(s).replace(/&é;/g, "&eacute;");
-    return z.value;
-  }
   function pourcent(v) {
-    var n = chiffre(v);
-    return n === null ? "—" : n.toFixed(2).replace(".", ",") + " %";
+    var n = parseFloat(String(v).replace(",", "."));
+    return isNaN(n) ? null : n.toFixed(2).replace(".", ",") + " %";
   }
-  function terme(s) {
-    var t = lisible(s);
-    if (!t) return "";
-    t = t.replace(/Années|Année/g, "an").replace(/Ans/g, "ans").replace(/Mois/g, "mois").replace(/^1 ans$/, "1 an");
-    return t;
+  function dateLisible(iso) {
+    var m = String(iso || "").match(/^(\d{4})-(\d{2})-(\d{2})/);
+    if (!m) return null;
+    var mois = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
+    var j = parseInt(m[3], 10);
+    return (j === 1 ? "1er" : j) + " " + mois[parseInt(m[2], 10) - 1] + " " + m[1];
   }
-  function secours() {
+  function masquer() {
+    var section = document.querySelector("section.taux");
+    var titre = id("grille-taux");
     id("etat-taux").hidden = true;
-    id("grille-taux").hidden = true;
-    var s = id("sommaire-taux");
-    if (s) s.hidden = true;
-    id("cadre-secours").hidden = false;
+    if (titre) titre.hidden = true;
+    var entete = document.querySelector(".taux__entete");
+    if (entete) entete.hidden = true;
   }
-  function afficher(data) {
-    var taux = liste(data, "Rates", "Tarifs");
-    var vars = liste(data, "RatesVariables", "RateVariables", "Variables de taux");
-    var lignes = [];
-    for (var i = 0; i < taux.length; i++) {
-      var mois = chiffre(champ(taux[i], "TermsMonth", "TermsMonths", "TermsMois"));
-      var nous = chiffre(champ(taux[i], "OurRate", "NotreTaux"));
-      if (mois && mois > 0 && nous) lignes.push(taux[i]);
-    }
-    if (!lignes.length) { secours(); return; }
-    /* Sur cette page, on ne montre que le terme de 5 ans (le plus courant).
-       Si l'API ne le fournit pas, on garde la liste complete. */
-    var cinqAns = [];
-    for (var c5 = 0; c5 < lignes.length; c5++) {
-      if (chiffre(champ(lignes[c5], "TermsMonth", "TermsMonths", "TermsMois")) === 60) cinqAns.push(lignes[c5]);
-    }
-    if (cinqAns.length) lignes = cinqAns;
-    lignes.sort(function (a, b) {
-      return chiffre(champ(a, "TermsMonth", "TermsMonths", "TermsMois")) -
-             chiffre(champ(b, "TermsMonth", "TermsMonths", "TermsMois"));
-    });
-    var meilleur = lignes[0];
-    for (var j = 1; j < lignes.length; j++) {
-      if (chiffre(champ(lignes[j], "OurRate", "NotreTaux")) < chiffre(champ(meilleur, "OurRate", "NotreTaux"))) meilleur = lignes[j];
-    }
-    var variable = reglage(vars, ["VariableRateFr", "VariableRate"]);
-    var seulementCinq = cinqAns.length > 0;
+  function ligne(terme, taux) {
+    var tr = document.createElement("tr");
+    var c1 = document.createElement("td");
+    c1.className = "cellule-terme";
+    c1.textContent = terme;
+    var c2 = document.createElement("td");
+    c2.className = "cellule-nous";
+    c2.textContent = taux;
+    tr.appendChild(c1); tr.appendChild(c2);
+    return tr;
+  }
+  function afficher(d) {
+    var fixe = pourcent(d.fixe5), variable = pourcent(d.variable5);
+    if (!fixe && !variable) { masquer(); return; }
+    var age = (Date.now() - new Date(d.date + "T12:00:00").getTime()) / 86400000;
+    if (isNaN(age) || age > 14) { masquer(); return; }
     var corps = id("corps-taux");
     corps.innerHTML = "";
-    for (var k = 0; k < lignes.length; k++) {
-      var l = lignes[k];
-      var tr = document.createElement("tr");
-      if (l === meilleur && lignes.length > 1) tr.className = "vedette";
-      var c1 = document.createElement("td");
-      c1.className = "cellule-terme";
-      c1.textContent = seulementCinq ? "5 ans fixe" : terme(champ(l, "TermsFr", "Terms", "Term"));
-      if (l === meilleur && lignes.length > 1) {
-        var f = document.createElement("span");
-        f.className = "fanion";
-        f.textContent = "Taux le plus bas";
-        c1.appendChild(f);
-      }
-      var c2 = document.createElement("td");
-      c2.className = "cellule-banque";
-      c2.textContent = pourcent(champ(l, "BankRate"));
-      var c3 = document.createElement("td");
-      c3.className = "cellule-nous";
-      c3.textContent = pourcent(champ(l, "OurRate", "NotreTaux"));
-      var eco = chiffre(champ(l, "Savings", "Économies"));
-      if (eco && eco > 0) {
-        var s = document.createElement("span");
-        s.className = "epargne";
-        s.textContent = "− " + eco.toFixed(0) + " $/mois par 100 000 $";
-        c3.appendChild(s);
-      }
-      tr.appendChild(c1); tr.appendChild(c2); tr.appendChild(c3);
-      corps.appendChild(tr);
-    }
-    /* Deuxieme ligne : le taux variable 5 ans, fourni separement par l'API */
-    if (seulementCinq && variable) {
-      var trv = document.createElement("tr");
-      var v1 = document.createElement("td");
-      v1.className = "cellule-terme";
-      v1.textContent = "5 ans variable";
-      var v2 = document.createElement("td");
-      v2.className = "cellule-banque";
-      v2.textContent = "—";
-      var v3 = document.createElement("td");
-      v3.className = "cellule-nous";
-      v3.textContent = pourcent(variable);
-      trv.appendChild(v1); trv.appendChild(v2); trv.appendChild(v3);
-      corps.appendChild(trv);
-    }
-    var conditions = reglage(vars, ["ConditionsFr"]);
-    var texte = conditions
-      ? lisible(conditions)
-      : "Certaines conditions peuvent s'appliquer. Les taux varient d'une province à l'autre et peuvent changer sans préavis. Sur approbation de crédit. Sauf erreur ou omission.";
-    var date = reglage(vars, ["ChangeDateFr", "ChangeDate"]);
-    if (date) {
-      var moisNoms = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
-      var m = String(date).match(/^(\d{4})-(\d{2})-(\d{2})/);
-      var lisibleDate = m ? (parseInt(m[3], 10) + " " + moisNoms[parseInt(m[2], 10) - 1] + " " + m[1]) : date;
-      texte += " Taux en vigueur le " + lisibleDate + ".";
-    }
-    texte += " Économies mensuelles calculées pour un prêt de 100 000 $ amorti sur 25 ans, par rapport au taux affiché par les banques.";
-    texte += " Propulsé par Centres Hypothécaires Dominion.";
-    id("mentions-taux").textContent = texte;
+    if (fixe) corps.appendChild(ligne("5 ans fixe", fixe));
+    if (variable) corps.appendChild(ligne("5 ans variable", variable));
+    var quand = dateLisible(d.date);
+    id("mentions-taux").textContent =
+      "* Taux offerts pour un achat avec assurance prêt hypothécaire, terme de 5 ans, " +
+      "sous réserve de l'approbation du prêteur. Le taux obtenu dépend de votre dossier " +
+      "et les taux peuvent changer sans préavis." + (quand ? " En vigueur le " + quand + "." : "");
     id("etat-taux").hidden = true;
     id("grille-taux").hidden = false;
   }
-  function demander(essai) {
-    var r = new XMLHttpRequest();
-    r.open("GET", "/api/rates?t=" + Date.now(), true);
-    r.timeout = 12000;
-    function rate() {
-      if (essai < 2) { setTimeout(function () { demander(essai + 1); }, 900); }
-      else { secours(); }
-    }
-    r.onload = function () {
-      if (r.status < 200 || r.status >= 300) { rate(); return; }
-      try { afficher(JSON.parse(r.responseText)); } catch (e) { rate(); }
-    };
-    r.onerror = rate;
-    r.ontimeout = rate;
-    r.send();
-  }
-  demander(1);
+  var r = new XMLHttpRequest();
+  r.open("GET", "/taux.json?t=" + Date.now(), true);
+  r.timeout = 10000;
+  r.onload = function () {
+    if (r.status < 200 || r.status >= 300) { masquer(); return; }
+    try { afficher(JSON.parse(r.responseText)); } catch (e) { masquer(); }
+  };
+  r.onerror = masquer;
+  r.ontimeout = masquer;
+  r.send();
 })();
 </script>
 <script>
