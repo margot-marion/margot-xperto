@@ -152,6 +152,10 @@ tr.vedette td{background:rgba(76,176,127,.075)}
 /* Formulaire : la piece maitresse de la page, mise en valeur */
 .formulaire{padding:34px 0 34px;background:linear-gradient(180deg,var(--brume) 0,var(--blanc) 100%)}
 .formulaire__titre{font-size:clamp(1.45rem,3.4vw,1.95rem);color:var(--bleu-nuit);margin:0 0 14px}
+.courtiere{display:flex;align-items:center;gap:12px;margin:0 0 16px}
+.courtiere__photo{width:64px;height:64px;border-radius:50%;object-fit:cover;flex:none;border:2px solid var(--blanc);box-shadow:0 4px 14px rgba(0,61,122,.18)}
+.courtiere__texte{margin:0;font-size:.9rem;line-height:1.45;color:var(--bleu-nuit)}
+.courtiere__texte strong{font-weight:700}
 /* Fleche collee au titre, qui pointe vers le formulaire, avec un leger mouvement */
 .fleche{display:inline-block;vertical-align:middle;color:var(--bleu);width:30px;height:30px;margin-left:10px;animation:mm-fleche 1.5s ease-in-out infinite}
 .fleche svg{display:block}
@@ -201,6 +205,9 @@ tr.vedette td{background:rgba(76,176,127,.075)}
   .intro{padding:20px 0 14px}
   .intro p.sous{font-size:1rem}
   .formulaire{padding:18px 0 28px}
+  .courtiere{gap:10px;margin-bottom:14px}
+  .courtiere__photo{width:56px;height:56px}
+  .courtiere__texte{font-size:.84rem}
   .formulaire__sous{white-space:normal;font-size:.8rem}
   /* Le formulaire occupe presque tout l'ecran du telephone, questions visibles */
   #mm-typeform{height:calc(100vh - 150px);min-height:560px;max-height:760px}
@@ -244,6 +251,10 @@ tr.vedette td{background:rgba(76,176,127,.075)}
   <section class="formulaire" aria-label="Formulaire de demande">
     <div class="enveloppe">
       <h1 class="formulaire__titre">Obtenez votre taux personnalisé en 2 minutes<span class="fleche" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v15"/><path d="m5 12 7 7 7-7"/></svg></span></h1>
+      <div class="courtiere" aria-label="Qui s'occupe de votre dossier">
+        <img class="courtiere__photo" src="/margot-marion.jpg" width="64" height="64" alt="Margot Marion, courtière hypothécaire">
+        <p class="courtiere__texte"><strong>Margot Marion</strong>, courtière hypothécaire stagiaire, inscrite auprès de l'AMF (n° 3003500998). Membre du réseau Dominion Lending Centres et du Groupe Xperto, appuyée par une équipe de plus de 20 ans d'expérience.</p>
+      </div>
       <div class="formulaire__cadre">
         <!-- Formulaire Typeform integre, questions visibles directement, aussi sur mobile.
              Les parametres de l'adresse (gclid, utm_*, matchtype, network) sont transmis
