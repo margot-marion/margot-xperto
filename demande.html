@@ -156,9 +156,11 @@ tr.vedette td{background:rgba(76,176,127,.075)}
 .formulaire__titre{font-size:clamp(1.45rem,3.4vw,1.95rem);color:var(--bleu-nuit);margin:0 0 14px}
 .titre-courtiere{display:flex;align-items:center;gap:16px;margin:0 0 16px}
 .titre-courtiere .formulaire__titre{margin:0}
-.titre-courtiere > div{flex:1;min-width:0}
-.courtiere__photo{width:76px;height:76px;border-radius:50%;object-fit:cover;flex:none;border:2px solid var(--blanc);box-shadow:0 4px 14px rgba(0,61,122,.18)}
-.courtiere__amf{margin:4px 0 0;font-size:.8rem;font-weight:300;font-style:italic;color:var(--gris);letter-spacing:.01em}
+.courtiere__titre{flex:1;min-width:0}
+.courtiere__col{flex:none;display:flex;flex-direction:column;align-items:center}
+.courtiere__photo{width:76px;height:76px;border-radius:50%;object-fit:cover;border:2px solid var(--blanc);box-shadow:0 4px 14px rgba(0,61,122,.18)}
+.courtiere__amf{margin:6px 0 0;font-size:.72rem;font-weight:300;font-style:italic;color:var(--gris);letter-spacing:.01em;white-space:nowrap;text-align:center}
+.amf-court{display:none}
 /* Fleche collee au titre, qui pointe vers le formulaire, avec un leger mouvement */
 .fleche{display:inline-block;vertical-align:middle;color:var(--bleu);width:30px;height:30px;margin-left:10px;animation:mm-fleche 1.5s ease-in-out infinite}
 .fleche svg{display:block}
@@ -210,7 +212,9 @@ tr.vedette td{background:rgba(76,176,127,.075)}
   .formulaire{padding:18px 0 28px}
   .titre-courtiere{gap:12px;margin-bottom:14px}
   .courtiere__photo{width:60px;height:60px}
-  .courtiere__amf{font-size:.74rem}
+  .courtiere__amf{font-size:.66rem;margin-top:4px}
+  .amf-long{display:none}
+  .amf-court{display:inline}
   .formulaire__sous{white-space:normal;font-size:.8rem}
   /* Le formulaire occupe presque tout l'ecran du telephone, questions visibles */
   #mm-typeform{height:calc(100vh - 150px);min-height:560px;max-height:760px}
@@ -254,11 +258,13 @@ tr.vedette td{background:rgba(76,176,127,.075)}
   <section class="formulaire" aria-label="Formulaire de demande">
     <div class="enveloppe">
       <div class="titre-courtiere">
-        <div>
+        <div class="courtiere__titre">
           <h1 class="formulaire__titre">Obtenez votre taux personnalisé en 2 minutes<span class="fleche" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v15"/><path d="m5 12 7 7 7-7"/></svg></span></h1>
-          <p class="courtiere__amf">Courtière inscrite auprès de l'AMF · n° 3003500998</p>
         </div>
-        <img class="courtiere__photo" src="/margot-marion.jpg" width="76" height="76" alt="Margot Marion, courtière hypothécaire">
+        <div class="courtiere__col">
+          <img class="courtiere__photo" src="/margot-marion.jpg" width="76" height="76" alt="Margot Marion, courtière hypothécaire">
+          <p class="courtiere__amf"><span class="amf-long">Inscrite auprès de l'AMF · n° 3003500998</span><span class="amf-court">AMF n° 3003500998</span></p>
+        </div>
       </div>
       <div class="formulaire__cadre">
         <!-- Formulaire Typeform integre, questions visibles directement, aussi sur mobile.
