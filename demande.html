@@ -175,8 +175,14 @@ tr.vedette td{background:rgba(76,176,127,.075)}
 .appel-bureau{font-size:.95rem;color:var(--gris);margin:18px 0 0}
 .appel-bureau a{font-weight:600;text-decoration:none}
 .formulaire .promesses{margin-top:14px}
-.preteurs{margin:12px 0 0;font-size:.82rem;line-height:1.55;color:var(--gris)}
-.preteurs strong{font-weight:600;color:var(--bleu-nuit)}
+.bandeau-preteurs{margin:18px 0 0}
+.bandeau-preteurs__titre{margin:0 0 10px;font-size:.74rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--gris)}
+.defile{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+.defile__piste{display:flex;align-items:center;width:max-content;animation:mm-defile 32s linear infinite}
+.defile__piste img{height:40px;width:auto;flex:none;margin-right:40px;background:var(--blanc);padding:7px 12px;border-radius:8px;box-shadow:0 1px 4px rgba(0,61,122,.08)}
+@keyframes mm-defile{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.defile__piste{animation:none;flex-wrap:wrap;width:auto}.defile__piste img{margin:0 10px 10px 0}}
+.preteurs{margin:10px 0 0;font-size:.8rem;line-height:1.55;color:var(--gris)}
 
 /* Confiance */
 .confiance{padding:8px 0 44px}
@@ -215,6 +221,7 @@ tr.vedette td{background:rgba(76,176,127,.075)}
   .titre-courtiere{gap:12px;margin-bottom:14px}
   .courtiere__photo{width:60px;height:60px}
   .courtiere__amf{font-size:.66rem;margin-top:4px}
+  .defile__piste img{height:32px;margin-right:28px;padding:6px 10px}
   .amf-long{display:none}
   .amf-court{display:inline}
   .formulaire__sous{white-space:normal;font-size:.8rem}
@@ -287,7 +294,30 @@ tr.vedette td{background:rgba(76,176,127,.075)}
         <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Plus de 25 prêteurs comparés</li>
         <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Partout au Québec</li>
       </ul>
-      <p class="preteurs"><strong>Parmi les prêteurs comparés :</strong> Banque Nationale · BMO · CIBC · Desjardins · Scotia · TD · B2B Banque · CMLS · First National · Home Trust · Manuvie · MCAP · Merix · Wiseday</p>
+      <div class="bandeau-preteurs" aria-label="Prêteurs avec lesquels nous travaillons">
+        <p class="bandeau-preteurs__titre">Parmi les prêteurs avec lesquels nous travaillons</p>
+        <div class="defile">
+          <div class="defile__piste">
+            <img src="/img/preteurs/scotia.png" alt="Banque Scotia" height="40" loading="lazy">
+            <img src="/img/preteurs/td.png" alt="TD" height="40" loading="lazy">
+            <img src="/img/preteurs/b2b.png" alt="B2B Banque" height="40" loading="lazy">
+            <img src="/img/preteurs/first-national.png" alt="First National" height="40" loading="lazy">
+            <img src="/img/preteurs/home-trust.png" alt="Home Trust" height="40" loading="lazy">
+            <img src="/img/preteurs/manuvie.png" alt="Manuvie" height="40" loading="lazy">
+            <img src="/img/preteurs/mcap.png" alt="MCAP" height="40" loading="lazy">
+            <img src="/img/preteurs/merix.png" alt="Merix" height="40" loading="lazy">
+            <img src="/img/preteurs/scotia.png" alt="" aria-hidden="true" height="40" loading="lazy">
+            <img src="/img/preteurs/td.png" alt="" aria-hidden="true" height="40" loading="lazy">
+            <img src="/img/preteurs/b2b.png" alt="" aria-hidden="true" height="40" loading="lazy">
+            <img src="/img/preteurs/first-national.png" alt="" aria-hidden="true" height="40" loading="lazy">
+            <img src="/img/preteurs/home-trust.png" alt="" aria-hidden="true" height="40" loading="lazy">
+            <img src="/img/preteurs/manuvie.png" alt="" aria-hidden="true" height="40" loading="lazy">
+            <img src="/img/preteurs/mcap.png" alt="" aria-hidden="true" height="40" loading="lazy">
+            <img src="/img/preteurs/merix.png" alt="" aria-hidden="true" height="40" loading="lazy">
+          </div>
+        </div>
+        <p class="preteurs">Et aussi : Banque Nationale · BMO · CIBC · Desjardins · CMLS · Wiseday</p>
+      </div>
     </div>
   </section>
 
