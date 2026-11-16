@@ -2147,6 +2147,10 @@ html{scroll-behavior:smooth}
         "currency": "CAD"
       });
     }
+    // Conversion Google Ads « Clic sur le numéro de téléphone (site) »
+    if (nom === "appel_telephone") {
+      gtag("event", "conversion", { "send_to": "AW-18455736571/nIYICOXl3rkdEPvhsOBE" });
+    }
     gtag("event", nom, {
       destination: destination,
       emplacement: this && this.dataset ? (this.dataset.zone || "") : "",

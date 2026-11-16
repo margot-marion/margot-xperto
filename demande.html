@@ -250,7 +250,7 @@ tr.vedette td{background:rgba(76,176,127,.075)}
         <source srcset="/img/logo-xperto-dominion.webp" type="image/webp">
         <img src="/img/logo-xperto-dominion.png" alt="Groupe Xperto Héritage et Centres Hypothécaires Dominion National" width="640" height="276">
       </picture>
-      <a class="marque" href="/">Margot Marion Hypothèque <span>Margot Marion, courtière hypothécaire</span></a>
+      <a class="marque" href="/">Margot Marion <span>Courtière hypothécaire</span></a>
     </div>
     <div class="entete__droite">
       <a class="entete__tel" href="tel:+15142484361" aria-label="Appeler le 514-248-4361">
@@ -423,6 +423,21 @@ tr.vedette td{background:rgba(76,176,127,.075)}
     boite.hidden = false;
   });
   if (!choix()) boite.hidden = false;
+})();
+</script>
+<script>
+/* Clic sur le numero de telephone : conversion Google Ads
+   « Clic sur le numéro de téléphone (site) » et evenement Google Analytics.
+   Rien n'est transmis a Google tant que le visiteur n'a pas accepte les temoins. */
+(function () {
+  if (typeof gtag !== "function") return;
+  var liens = document.querySelectorAll('a[href^="tel:"]');
+  for (var i = 0; i < liens.length; i++) {
+    liens[i].addEventListener("click", function () {
+      gtag("event", "conversion", { "send_to": "AW-18455736571/nIYICOXl3rkdEPvhsOBE" });
+      gtag("event", "appel_telephone", { destination: "telephone", emplacement: "page_demande" });
+    });
+  }
 })();
 </script>
 </body>
